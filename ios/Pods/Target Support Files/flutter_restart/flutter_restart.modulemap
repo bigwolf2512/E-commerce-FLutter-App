@@ -1,0 +1,6 @@
+framework module flutter_restart {
+  umbrella header "flutter_restart-umbrella.h"
+
+  export *
+  module * { export * }
+}

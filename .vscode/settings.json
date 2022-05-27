@@ -1,0 +1,19 @@
+{
+    "editor.autoIndent": "none",
+    "editor.guides.indentation": false,
+    "dart.analysisServerFolding": true,
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "off"
+    },
+    "dart.previewFlutterUiGuides": true,
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "editor.fontLigatures": true,
+    "editor.lineHeight": 16,
+    "workbench.tree.renderIndentGuides": "none",
+    "editor.cursorSmoothCaretAnimation": true,
+    "workbench.list.smoothScrolling": true,
+    "editor.smoothScrolling": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+}
