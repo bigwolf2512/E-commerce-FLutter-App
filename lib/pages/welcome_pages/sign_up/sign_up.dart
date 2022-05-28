@@ -15,10 +15,14 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final _name = TextEditingController();
-    final _email = TextEditingController();
-    final _phonenumber = TextEditingController();
-    final _password = TextEditingController();
+    // final _name = TextEditingController();
+    // final _email = TextEditingController();
+    // final _phonenumber = TextEditingController();
+    // final _password = TextEditingController();
+    String _name = '';
+    String _email = '';
+    String _phonenumber = '';
+    String _password = '';
     return Scaffold(
       body: SingleChildScrollView(
         child: signupBackground(
@@ -44,11 +48,11 @@ class SignUpPage extends StatelessWidget {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    controller: _name,
                     decoration: InputDecoration(
                         hintText: "Full Name",
                         icon: Icon(Icons.person, color: kPrimaryColor),
                         border: InputBorder.none),
+                    onChanged: (value) => _name = value,
                   )),
               Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
@@ -60,7 +64,7 @@ class SignUpPage extends StatelessWidget {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    controller: _email,
+                    onChanged: (value) => _email = value,
                     decoration: InputDecoration(
                         hintText: "Email",
                         icon: Icon(Icons.mail, color: kPrimaryColor),
@@ -75,7 +79,7 @@ class SignUpPage extends StatelessWidget {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    controller: _phonenumber,
+                    onChanged: (value) => _phonenumber = value,
                     decoration: InputDecoration(
                         hintText: "Phone number",
                         icon: Icon(Icons.phone, color: kPrimaryColor),
@@ -91,7 +95,7 @@ class SignUpPage extends StatelessWidget {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    controller: _password,
+                    onChanged: (value) => _password = value,
                     obscureText: true,
                     decoration: InputDecoration(
                         hintText: "Password",
@@ -108,11 +112,7 @@ class SignUpPage extends StatelessWidget {
                   color: kPrimaryColor,
                   onPressed: () {
                     Get.find<AuthController>().RegisterPress(
-                        context,
-                        _name.text,
-                        _email.text,
-                        _phonenumber.text,
-                        _password.text);
+                        context, _name, _email, _phonenumber, _password);
                   },
                   child: const Text(
                     "Sign Up",

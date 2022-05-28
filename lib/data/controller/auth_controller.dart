@@ -33,9 +33,8 @@ class AuthController extends GetxController {
     }
     return _TOKEN;
   }
-  
-  Future<void> LoginPress(
-      BuildContext context, String email, String password) async {
+
+  Future LoginPress(BuildContext context, String email, String password) async {
     if (email.isNotEmpty && password.isNotEmpty) {
       http.Response response = await apiClient.login(email, password);
       if (response.statusCode == 200) {
@@ -55,7 +54,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> RegisterPress(BuildContext context, String name, String email,
+  Future RegisterPress(BuildContext context, String name, String email,
       String phonenumber, String password) async {
     bool emailValid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
