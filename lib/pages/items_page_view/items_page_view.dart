@@ -394,7 +394,7 @@ class _ItemsPageViewState extends State<ItemsPageView> {
                                         color: Colors.deepOrange),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.find<CartController>().checkoutItem(
+                                        Get.find<CartController>().setcheckoutItem(
                                             widget.productId,
                                             popularController.incartItems == 0
                                                 ? Get.find<

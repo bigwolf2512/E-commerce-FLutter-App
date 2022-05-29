@@ -17,15 +17,15 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     Get.find<CartController>().initCheckOutItems();
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: buildAppbar(context),
-      body: CartPage_Body(),
-      bottomNavigationBar: CartPage_BottomBar(),
+      backgroundColor: Color.fromARGB(255, 241, 240, 240),
+      appBar: appBar(context),
+      body: body(),
+      bottomNavigationBar: bottom(),
     );
   }
 }
 
-AppBar buildAppbar(BuildContext context) {
+AppBar appBar(BuildContext context) {
   Size size = MediaQuery.of(context).size;
   return AppBar(
     shadowColor: Colors.transparent,

@@ -3,7 +3,6 @@ import 'package:ecommerceshop/data/controller/auth_controller.dart';
 import 'package:ecommerceshop/data/controller/cart_controller.dart';
 import 'package:ecommerceshop/data/controller/popular_product_controller.dart';
 import 'package:ecommerceshop/data/controller/product_controller.dart';
-import 'package:ecommerceshop/pages/history_page/history_page.dart';
 import 'package:ecommerceshop/pages/main_page/main_food_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

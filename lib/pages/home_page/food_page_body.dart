@@ -124,21 +124,6 @@ class FoodPageBody extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 10),
-                height: size.height * 0.12,
-                width: size.width,
-                padding: const EdgeInsets.only(right: 0),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListEventObject(
-                      pageID: index,
-                    );
-                  },
-                ),
-              ),
-              Container(
                 margin:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 child: Row(
@@ -284,6 +269,21 @@ class FoodPageBody extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return ListMostFinding(
                       size: size,
+                      pageID: index,
+                    );
+                  },
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 10),
+                height: size.height * 0.12,
+                width: size.width,
+                padding: const EdgeInsets.only(right: 0),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListEventObject(
                       pageID: index,
                     );
                   },

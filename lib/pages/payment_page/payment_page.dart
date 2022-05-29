@@ -17,8 +17,10 @@ class PaymentPage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
-          child: Column(
-        children: [body(size: size), bottom(size: size)],
+          child: SingleChildScrollView(
+        child: Column(
+          children: [body(size: size), bottom(size: size)],
+        ),
       )),
     );
   }

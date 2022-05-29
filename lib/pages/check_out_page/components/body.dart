@@ -25,7 +25,7 @@ class _bodyState extends State<body> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              height: widget.size.height * 0.1,
+              height: widget.size.height * 0.12,
               width: double.maxFinite,
               color: Colors.white,
               child: Column(
@@ -48,6 +48,7 @@ class _bodyState extends State<body> {
               ),
             ),
             Container(
+              padding: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                   border: Border(
                 top: BorderSide(
@@ -59,9 +60,9 @@ class _bodyState extends State<body> {
                   width: 1.9,
                 ),
               )),
-              height: widget.size.height * 0.5,
               width: double.maxFinite,
               child: ListView.builder(
+                shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemCount: Get.find<CartController>().getCheckOutLenght,
                 itemBuilder: (BuildContext context, int index) {
@@ -75,7 +76,7 @@ class _bodyState extends State<body> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              height: widget.size.height * 0.17,
+              height: widget.size.height * 0.19,
               width: double.maxFinite,
               child: Column(
                 children: [

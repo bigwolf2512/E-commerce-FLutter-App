@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import '../../../app_const/app_const.dart';
 import '../../../route_helper/route_helper.dart';
 
-class CartPage_BottomBar extends StatelessWidget {
-  const CartPage_BottomBar({
+class bottom extends StatelessWidget {
+  const bottom({
     Key? key,
   }) : super(key: key);
 
@@ -90,7 +90,7 @@ class CartPage_BottomBar extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.find<CartController>().checkoutItems;
+                  Get.find<CartController>().setcheckoutItems();
                   Get.find<CartController>().getCartItems.isNotEmpty
                       ? RouteHelper.getCheckOut(context)
                       : null;

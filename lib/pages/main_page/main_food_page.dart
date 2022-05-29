@@ -6,9 +6,9 @@ import 'package:ecommerceshop/data/controller/popular_product_controller.dart';
 import 'package:ecommerceshop/pages/personal_page/personal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../cart_home_page/carts_page.dart';
-import '../history_page/history_page.dart';
+import '../cart_home_page/carts_home_page.dart';
 import '../home_page/food_page_body.dart';
+import '../order_page/order_page.dart';
 
 class MainFoodPage extends StatefulWidget {
   const MainFoodPage({
@@ -25,7 +25,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
       child: FoodPageBody(),
     ),
     Container(
-      child: HistoryPage(),
+      child: OrderPage(),
     ),
     Container(
       child: CartHomePage(),
@@ -36,10 +36,12 @@ class _MainFoodPageState extends State<MainFoodPage> {
   ];
   int isSelected = 0;
   void _onItemTapped(int index) {
-    setState(() {
-      isSelected = index;
-      Get.find<PopularProductController>().getpopularproductList();
-    });
+    setState(
+      () {
+        isSelected = index;
+        Get.find<PopularProductController>().getpopularproductList();
+      },
+    );
   }
 
   @override
@@ -62,8 +64,8 @@ class _MainFoodPageState extends State<MainFoodPage> {
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history_sharp),
-            activeIcon: Icon(Icons.history_rounded),
+            icon: Icon(Icons.archive_outlined),
+            activeIcon: Icon(Icons.archive_rounded),
             label: "Order",
           ),
           BottomNavigationBarItem(

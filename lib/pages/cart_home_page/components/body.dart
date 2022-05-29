@@ -55,10 +55,15 @@ class _bodyState extends State<body> {
                           RouteHelper.getItemsPageView(context, productId);
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
                           margin: const EdgeInsets.only(
-                              left: 15, right: 10, top: 15),
-                          height: size.height * 0.14,
-                          color: Colors.white,
+                              left: 10, right: 10, top: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          height: size.height * 0.16,
+                          width: double.maxFinite,
                           child: Row(
                             children: [
                               Container(
@@ -75,7 +80,11 @@ class _bodyState extends State<body> {
                               ),
                               Expanded(
                                 child: Container(
-                                  color: Colors.white,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -103,21 +112,22 @@ class _bodyState extends State<body> {
                                                 Text.rich(
                                                   TextSpan(children: [
                                                     TextSpan(
-                                                        text:
-                                                            '\$ ${int.parse(cartController.getCartItems[index].price.toString())} x ${int.parse(cartController.getCartItems[index].quantity.toString())}',
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                size.height *
-                                                                    0.022,
-                                                            color:
-                                                                kAccentColor)),
+                                                      text:
+                                                          '\$ ${int.parse(cartController.getCartItems[index].price.toString())} x ${int.parse(cartController.getCartItems[index].quantity.toString())}',
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                              size.height *
+                                                                  0.022,
+                                                          color: kAccentColor),
+                                                    ),
                                                     TextSpan(
-                                                        text: ' items',
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                size.height *
-                                                                    0.02,
-                                                            color: kTextColor))
+                                                      text: ' items',
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                              size.height *
+                                                                  0.02,
+                                                          color: kTextColor),
+                                                    )
                                                   ]),
                                                 ),
                                               ],
@@ -146,11 +156,13 @@ class _bodyState extends State<body> {
                                                           .isSelect ??
                                                       false,
                                                   onChanged: (bool? value) {
-                                                    setState(() {
-                                                      cartController
-                                                          .setSelected(
-                                                              value!, index);
-                                                    });
+                                                    setState(
+                                                      () {
+                                                        cartController
+                                                            .setSelected(
+                                                                value!, index);
+                                                      },
+                                                    );
                                                   },
                                                 ),
                                                 Text(
@@ -184,69 +196,74 @@ class _bodyState extends State<body> {
                                                         .spaceBetween,
                                                 children: <Widget>[
                                                   GestureDetector(
-                                                      onTap: () {
-                                                        var product =
-                                                            getProductModel(
-                                                                productId);
-                                                        cartController.addItems(
-                                                            product, -1);
+                                                    onTap: () {
+                                                      var product =
+                                                          getProductModel(
+                                                              productId);
+                                                      cartController.addItems(
+                                                          product, -1);
 
-                                                        setState(() {
+                                                      setState(
+                                                        () {
                                                           cartController
                                                                   .removeAble
                                                               ? confirmAlertCartPage(
                                                                   context,
                                                                   index)
                                                               : null;
-                                                        });
-                                                        cartController
-                                                            .selectedPrice;
-                                                      },
-                                                      child: !isPush
-                                                          ? Icon(Icons.remove,
-                                                              color:
-                                                                  Colors.white)
-                                                          : Icon(Icons.remove,
-                                                              color: Colors
-                                                                  .transparent)),
+                                                        },
+                                                      );
+                                                      cartController
+                                                          .selectedPrice;
+                                                    },
+                                                    child: !isPush
+                                                        ? Icon(Icons.remove,
+                                                            color: Colors.white)
+                                                        : Icon(Icons.remove,
+                                                            color: Colors
+                                                                .transparent),
+                                                  ),
                                                   GetBuilder<
-                                                          PopularProductController>(
-                                                      builder:
-                                                          (popularController) {
-                                                    return popularController
-                                                                .checkRemove ==
-                                                            false
-                                                        ? Text(
-                                                            cartController
-                                                                .getCartItems[
-                                                                    index]
-                                                                .quantity
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize:
-                                                                    size.height *
-                                                                        0.022),
-                                                          )
-                                                        : Text('null');
-                                                  }),
+                                                      PopularProductController>(
+                                                    builder:
+                                                        (popularController) {
+                                                      return popularController
+                                                                  .checkRemove ==
+                                                              false
+                                                          ? Text(
+                                                              cartController
+                                                                  .getCartItems[
+                                                                      index]
+                                                                  .quantity
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: size
+                                                                          .height *
+                                                                      0.022),
+                                                            )
+                                                          : Text('null');
+                                                    },
+                                                  ),
                                                   GestureDetector(
-                                                      onTap: () {
-                                                        var product =
-                                                            getProductModel(
-                                                                productId);
-                                                        Timer(
-                                                            Duration(
-                                                                milliseconds:
-                                                                    500), () {
+                                                    onTap: () {
+                                                      var product =
+                                                          getProductModel(
+                                                              productId);
+                                                      Timer(
+                                                        Duration(
+                                                            milliseconds: 500),
+                                                        () {
                                                           cartController
                                                               .addItems(
                                                                   product, 1);
-                                                        });
-                                                      },
-                                                      child: Icon(Icons.add,
-                                                          color: Colors.white)),
+                                                        },
+                                                      );
+                                                    },
+                                                    child: Icon(Icons.add,
+                                                        color: Colors.white),
+                                                  ),
                                                 ],
                                               ),
                                             ),

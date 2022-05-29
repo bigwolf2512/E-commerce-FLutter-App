@@ -17,6 +17,7 @@ class bottom extends StatelessWidget {
         routePaymentPage(context);
       },
       child: Container(
+        margin: const EdgeInsets.only(bottom: 20),
         padding: const EdgeInsets.only(),
         height: size.height * 0.07,
         width: size.width * 0.55,

@@ -14,16 +14,16 @@ import '../../../data/controller/cart_controller.dart';
 import '../../../models/popular_product_model.dart';
 import '../../../route_helper/route_helper.dart';
 
-class CartPage_Body extends StatefulWidget {
-  const CartPage_Body({
+class body extends StatefulWidget {
+  const body({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<CartPage_Body> createState() => _CartPage_BodyState();
+  State<body> createState() => _bodyState();
 }
 
-class _CartPage_BodyState extends State<CartPage_Body> {
+class _bodyState extends State<body> {
   bool isChecked = false;
   bool isPush = false;
   @override
@@ -55,10 +55,15 @@ class _CartPage_BodyState extends State<CartPage_Body> {
                           RouteHelper.getItemsPageView(context, productId);
                         },
                         child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
                           margin: const EdgeInsets.only(
-                              left: 15, right: 10, top: 15),
-                          height: size.height * 0.14,
-                          color: Colors.white,
+                              left: 10, right: 10, top: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          height: size.height * 0.16,
+                          width: double.maxFinite,
                           child: Row(
                             children: [
                               Container(
@@ -75,7 +80,11 @@ class _CartPage_BodyState extends State<CartPage_Body> {
                               ),
                               Expanded(
                                 child: Container(
-                                  color: Colors.white,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -90,7 +99,7 @@ class _CartPage_BodyState extends State<CartPage_Body> {
                                               '${cartController.getCartItems[index].name}',
                                               maxLines: 1,
                                               style: TextStyle(
-                                                fontSize: size.height * 0.022,
+                                                fontSize: 15,
                                               ),
                                             ),
                                             SizedBox(

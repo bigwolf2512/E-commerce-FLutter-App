@@ -24,7 +24,7 @@ class _bodyState extends State<body> {
     return GetBuilder<CartController>(
       builder: (cartController) {
         final listTransactions = List<Row>.generate(
-          6,
+          3,
           (i) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -46,7 +46,7 @@ class _bodyState extends State<body> {
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                height: widget.size.height * 0.1,
+                height: widget.size.height * 0.12,
                 width: double.maxFinite,
                 color: Colors.white,
                 child: Column(
@@ -118,9 +118,9 @@ class _bodyState extends State<body> {
                 ),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                height: widget.size.height * 0.17,
                 width: double.maxFinite,
                 child: ListView.builder(
+                  shrinkWrap: true,
                   itemCount: listTransactions.length,
                   itemBuilder: ((context, index) {
                     return Column(
@@ -134,7 +134,7 @@ class _bodyState extends State<body> {
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                height: widget.size.height * 0.17,
+                height: widget.size.height * 0.19,
                 width: double.maxFinite,
                 child: Column(
                   children: [

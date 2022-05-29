@@ -36,7 +36,8 @@ class _buildAppBarDetailState extends State<buildAppBarDetail> {
                       SizedBox(height: widget.size.height * 0.01),
                       Text(
                         'Your Cart',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text('${cartController.lengthCart} products',
                           style: Theme.of(context).textTheme.caption)

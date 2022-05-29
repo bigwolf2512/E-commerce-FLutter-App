@@ -1,12 +1,9 @@
 import 'dart:async';
-
 import 'package:ecommerceshop/app_const/app_const.dart';
 import 'package:ecommerceshop/data/controller/auth_controller.dart';
 import 'package:ecommerceshop/data/controller/cart_controller.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../models/user_model.dart';
 import '../../route_helper/route_helper.dart';
 
@@ -40,34 +37,36 @@ class _PersonalPageState extends State<PersonalPage> {
           return CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
+                shadowColor: Colors.transparent,
+                automaticallyImplyLeading: false,
                 backgroundColor: Colors.transparent,
                 pinned: true,
                 expandedHeight: size.height * 0.4,
                 collapsedHeight: size.height * 0.1,
                 flexibleSpace: FlexibleSpaceBar(
-                    background: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(Get.find<AuthController>()
-                                      .TOKEN
-                                      .isEmpty
-                                  ? userAvatar
-                                  : "https://scontent.fsgn5-12.fna.fbcdn.net/v/t39.30808-6/275626876_3076796902573541_8189424536756048255_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=3S5z9NyLBRwAX8a56GW&_nc_ht=scontent.fsgn5-12.fna&oh=00_AT_f_rHLj0ww3eh6a2JMhTdtvQ5KMVl6xImUL-seIduR4A&oe=62991911"),
-                              fit: BoxFit.cover),
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
-                    ),
-                    title: Text(
-                      Get.find<AuthController>().TOKEN.isNotEmpty
-                          ? authController.userData.name!
-                          : 'Your Profile',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    )),
+                  background: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                Get.find<AuthController>().TOKEN.isEmpty
+                                    ? userAvatar
+                                    : admin),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                  ),
+                  // title: Text(
+                  //   Get.find<AuthController>().TOKEN.isNotEmpty
+                  //       ? authController.userData.name!
+                  //       : 'Your Profile',
+                  //   style: TextStyle(
+                  //       color: Colors.white, fontWeight: FontWeight.bold),
+                  // ),
+                ),
               ),
               SliverToBoxAdapter(
                 child: Container(
                   width: size.width,
-                  height: size.height,
+                  height: size.height * 0.8,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -86,7 +85,7 @@ class _PersonalPageState extends State<PersonalPage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   'User Name',
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 18),
                                 ),
                               ),
                               SizedBox(height: size.height * 0.02),
@@ -100,9 +99,24 @@ class _PersonalPageState extends State<PersonalPage> {
                                   width: size.width * 0.9,
                                   color: Color.fromRGBO(158, 158, 158, 1)
                                       .withOpacity(0.3),
-                                  child: Text(
-                                    authController.userData.name!,
-                                    style: TextStyle(fontSize: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(Icons.person),
+                                          SizedBox(
+                                            width: size.height * 0.01,
+                                          ),
+                                          Text(
+                                            authController.userData.name!,
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                        ],
+                                      ),
+                                      Icon(Icons.edit)
+                                    ],
                                   ),
                                 ),
                               ),
@@ -111,7 +125,7 @@ class _PersonalPageState extends State<PersonalPage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Email Address',
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 18),
                                 ),
                               ),
                               SizedBox(height: size.height * 0.02),
@@ -124,9 +138,24 @@ class _PersonalPageState extends State<PersonalPage> {
                                   height: size.height * 0.08,
                                   width: size.width * 0.9,
                                   color: Colors.grey.withOpacity(0.3),
-                                  child: Text(
-                                    authController.userData.email!,
-                                    style: TextStyle(fontSize: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(Icons.mail),
+                                          SizedBox(
+                                            width: size.height * 0.01,
+                                          ),
+                                          Text(
+                                            authController.userData.email!,
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                        ],
+                                      ),
+                                      Icon(Icons.edit)
+                                    ],
                                   ),
                                 ),
                               ),
@@ -135,7 +164,7 @@ class _PersonalPageState extends State<PersonalPage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Phone Number',
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 18),
                                 ),
                               ),
                               SizedBox(height: size.height * 0.02),
@@ -148,33 +177,25 @@ class _PersonalPageState extends State<PersonalPage> {
                                   height: size.height * 0.08,
                                   width: size.width * 0.9,
                                   color: Colors.grey.withOpacity(0.3),
-                                  child: Text(
-                                    authController.userData.phoneNumber!,
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: size.height * 0.02),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Created At',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ),
-                              SizedBox(height: size.height * 0.02),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(29),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 20),
-                                  alignment: Alignment.centerLeft,
-                                  height: size.height * 0.08,
-                                  width: size.width * 0.9,
-                                  color: Colors.grey.withOpacity(0.3),
-                                  child: Text(
-                                    authController.userData.createdAt!,
-                                    style: TextStyle(fontSize: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(Icons.phone_android),
+                                          SizedBox(
+                                            width: size.height * 0.01,
+                                          ),
+                                          Text(
+                                            authController
+                                                .userData.phoneNumber!,
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                        ],
+                                      ),
+                                      Icon(Icons.edit)
+                                    ],
                                   ),
                                 ),
                               ),
