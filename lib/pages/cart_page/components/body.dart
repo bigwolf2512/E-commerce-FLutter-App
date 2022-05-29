@@ -44,6 +44,7 @@ class _CartPage_BodyState extends State<CartPage_Body> {
                   height: size.height * 0.7,
                   width: double.maxFinite,
                   child: ListView.builder(
+                    shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemCount: cartController.lengthCart,
                     itemBuilder: ((context, index) {
@@ -154,8 +155,10 @@ class _CartPage_BodyState extends State<CartPage_Body> {
                                                 ),
                                                 Text(
                                                   cartController
-                                                          .getCartItems[index]
-                                                          .isSelect!
+                                                              .getCartItems[
+                                                                  index]
+                                                              .isSelect ??
+                                                          false
                                                       ? 'Selected'
                                                       : 'Select',
                                                   style: TextStyle(

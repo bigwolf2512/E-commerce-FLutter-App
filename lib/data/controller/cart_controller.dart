@@ -30,6 +30,8 @@ class CartController extends GetxController {
   bool _exist = false;
   List<CartModel> storageItems = [];
   List<CartModel> _checkoutItems = [];
+  List<CartModel> _historyItems = [];
+  //List<CartModel> get historyItems => _historyItems;
   int get lengthCart => items.length;
   bool _removeAble = false;
   bool get removeAble => _removeAble;
@@ -182,8 +184,15 @@ class CartController extends GetxController {
         print('true');
       }
     }
-
     return _checkoutItems;
+  }
+
+  List<List<CartModel>> tempt = [];
+  List<List<CartModel>> get historyItems {
+    _historyItems.addAll(_checkoutItems);
+    tempt.add(_historyItems);
+    print(tempt[0][0]);
+    return tempt;
   }
 
   int get getCheckOutLenght {

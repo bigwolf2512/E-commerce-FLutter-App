@@ -33,6 +33,15 @@ class ApiClient extends GetConnect implements GetxService {
     }
   }
 
+  Future<Response> postData(String uri, Map data) async {
+    try {
+      Response response = await post(uri, data);
+      return response;
+    } catch (e) {
+      return Response(statusCode: 1, statusText: e.toString());
+    }
+  }
+
   Future<http.Response> removeTransactions(int buyerId, int productId) async {
     Map data = {
       "buyerId": buyerId,

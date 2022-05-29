@@ -48,7 +48,11 @@ class _PersonalPageState extends State<PersonalPage> {
                     background: Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: NetworkImage(userAvatar),
+                              image: NetworkImage(Get.find<AuthController>()
+                                      .TOKEN
+                                      .isEmpty
+                                  ? userAvatar
+                                  : "https://scontent.fsgn5-12.fna.fbcdn.net/v/t39.30808-6/275626876_3076796902573541_8189424536756048255_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=3S5z9NyLBRwAX8a56GW&_nc_ht=scontent.fsgn5-12.fna&oh=00_AT_f_rHLj0ww3eh6a2JMhTdtvQ5KMVl6xImUL-seIduR4A&oe=62991911"),
                               fit: BoxFit.cover),
                           borderRadius: BorderRadius.all(Radius.circular(25))),
                     ),
@@ -57,7 +61,7 @@ class _PersonalPageState extends State<PersonalPage> {
                           ? authController.userData.name!
                           : 'Your Profile',
                       style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                          color: Colors.white, fontWeight: FontWeight.bold),
                     )),
               ),
               SliverToBoxAdapter(

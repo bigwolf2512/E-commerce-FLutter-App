@@ -3,13 +3,11 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:ecommerceshop/app_const/app_const.dart';
 import 'package:ecommerceshop/data/controller/popular_product_controller.dart';
-import 'package:ecommerceshop/data/controller/recommended_product_controller.dart';
 import 'package:ecommerceshop/pages/personal_page/personal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../data/controller/auth_controller.dart';
-import '../../data/controller/cart_controller.dart';
-import '../cart_page/carts_page.dart';
+import '../cart_home_page/carts_page.dart';
+import '../history_page/history_page.dart';
 import '../home_page/food_page_body.dart';
 
 class MainFoodPage extends StatefulWidget {
@@ -27,10 +25,10 @@ class _MainFoodPageState extends State<MainFoodPage> {
       child: FoodPageBody(),
     ),
     Container(
-      child: Center(child: Text("Cart Page")),
+      child: HistoryPage(),
     ),
     Container(
-      child: CartPage(),
+      child: CartHomePage(),
     ),
     Container(
       child: PersonalPage(),
@@ -66,7 +64,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.history_sharp),
             activeIcon: Icon(Icons.history_rounded),
-            label: "History",
+            label: "Order",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_outlined),

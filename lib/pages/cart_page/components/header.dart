@@ -23,7 +23,7 @@ class _buildAppBarDetailState extends State<buildAppBarDetail> {
     return GetBuilder<CartController>(
       builder: (cartController) {
         return Container(
-          margin: EdgeInsets.only(top: widget.size.height * 0.04, left: 20),
+          margin: EdgeInsets.only(left: 20, top: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -33,7 +33,7 @@ class _buildAppBarDetailState extends State<buildAppBarDetail> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: widget.size.height * 0.01),
                       Text(
                         'Your Cart',
                         style: TextStyle(fontSize: 20),
