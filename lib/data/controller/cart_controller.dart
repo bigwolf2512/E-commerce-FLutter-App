@@ -31,8 +31,7 @@ class CartController extends GetxController {
   List<CartModel> storageItems = [];
   List<CartModel> _checkoutItems = [];
   List<CartModel> get checkoutItems => _checkoutItems;
-  List<CartModel> _orderItems = [];
-  //List<CartModel> get historyItems => _historyItems;
+
   int get lengthCart => items.length;
   bool _removeAble = false;
   bool get removeAble => _removeAble;
@@ -154,19 +153,19 @@ class CartController extends GetxController {
   }
 
   List<CartModel> setcheckoutItems() {
-    for (int i = 0; i < getCartItems.length; i++) {
-      if (getCartItems[i].isSelect ?? false) {
-        _checkoutItems.add(getCartItems[i]);
+    _items.forEach((key, value) {
+      if (value.isSelect ?? false) {
+        _checkoutItems.add(value);
       }
-    }
-    print(_checkoutItems);
+    });
 
+    print(_checkoutItems);
     return _checkoutItems;
   }
 
   List<CartModel> setcheckoutItem(int productId, int quantity) {
     Map<int, CartModel> mapCarts = {};
-    productController.productList.forEach((e) {
+    for (var e in productController.productList) {
       mapCarts.putIfAbsent(
           e.id,
           () => CartModel(
@@ -179,7 +178,7 @@ class CartController extends GetxController {
                 isSelect: false,
                 time: TimeOfDay.now().toString(),
               ));
-    });
+    }
     List<CartModel> listCarts = mapCarts.entries.map((e) => e.value).toList();
     for (int i = 0; i < productController.productList.length; i++) {
       if (productController.productList[i].id == productId) {
@@ -189,16 +188,19 @@ class CartController extends GetxController {
     return _checkoutItems;
   }
 
-  List<List<CartModel>> tempt = [];
-  List<List<CartModel>> get orderItems {
-    _orderItems = [];
-    if (_checkoutItems.isNotEmpty) {
-      _orderItems.addAll(_checkoutItems);
-      tempt.add(_orderItems);
-    }
-    print(_checkoutItems);
-    print(tempt);
-    return tempt;
+  final Map<int, List<CartModel>> _orderItems = {};
+  Map<int, List<CartModel>> get orderItems => _orderItems;
+  int orderId = 1;
+  setOrderItems() {
+    _orderItems.putIfAbsent(orderId, () => _checkoutItems);
+    orderId++;
+    print(_orderItems);
+    print(orderId);
+    return _orderItems;
+  }
+
+  int get getOrderItemsLength {
+    return _orderItems.length;
   }
 
   int get getCheckOutLenght {

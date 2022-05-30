@@ -1,4 +1,5 @@
 import 'package:ecommerceshop/data/controller/cart_controller.dart';
+import 'package:ecommerceshop/route_helper/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +13,10 @@ class bottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.find<CartController>().orderItems,
+      onTap: () {
+        Get.find<CartController>().setOrderItems();
+        getMainPage(context);
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         padding: const EdgeInsets.only(),
@@ -35,5 +39,9 @@ class bottom extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future getMainPage(BuildContext context) async {
+    return await RouteHelper.getMainPage(context);
   }
 }
