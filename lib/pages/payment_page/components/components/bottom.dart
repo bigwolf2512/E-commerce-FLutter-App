@@ -14,8 +14,8 @@ class bottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.find<CartController>().setOrderItems();
-        getMainPage(context);
+        RouteHelper.getHome(context);
+        Get.find<CartController>().orderItems;
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
@@ -39,9 +39,5 @@ class bottom extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future getMainPage(BuildContext context) async {
-    return await RouteHelper.getMainPage(context);
   }
 }

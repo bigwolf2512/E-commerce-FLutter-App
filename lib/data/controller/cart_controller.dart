@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:convert';
-import 'package:ecommerceshop/app_const/app_const.dart';
 import 'package:ecommerceshop/data/api/api_client.dart';
 import 'package:ecommerceshop/data/controller/product_controller.dart';
 import 'package:ecommerceshop/models/cart_model.dart';
@@ -31,7 +30,8 @@ class CartController extends GetxController {
   List<CartModel> storageItems = [];
   List<CartModel> _checkoutItems = [];
   List<CartModel> get checkoutItems => _checkoutItems;
-
+  Map<int, List<CartModel>> _orderItems = {};
+  //Map<int, List<CartModel>> get orderItems => _orderItems;
   int get lengthCart => items.length;
   bool _removeAble = false;
   bool get removeAble => _removeAble;
@@ -158,7 +158,6 @@ class CartController extends GetxController {
         _checkoutItems.add(value);
       }
     });
-
     print(_checkoutItems);
     return _checkoutItems;
   }
@@ -188,15 +187,29 @@ class CartController extends GetxController {
     return _checkoutItems;
   }
 
-  final Map<int, List<CartModel>> _orderItems = {};
-  Map<int, List<CartModel>> get orderItems => _orderItems;
-  int orderId = 1;
-  setOrderItems() {
-    _orderItems.putIfAbsent(orderId, () => _checkoutItems);
-    orderId++;
+  int _orderId = 1;
+  int get orderId => _orderId;
+  Map<int, dynamic> get orderItems {
+    if (_checkoutItems.isNotEmpty) {
+      _orderItems.putIfAbsent(
+        _orderId,
+        () => _checkoutItems,
+      );
+      _orderId++;
+    }
     print(_orderItems);
-    print(orderId);
+    print(_orderId);
     return _orderItems;
+  }
+
+  List<List<CartModel>> get getOrderList {
+    return _orderItems.entries.map((e) => e.value).toList();
+  }
+
+  List<int> get getPerOrderItemsLength {
+    List<int> length = [];
+    length = _orderItems.entries.map((e) => e.value.length).toList();
+    return length;
   }
 
   int get getOrderItemsLength {

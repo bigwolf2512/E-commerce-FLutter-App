@@ -13,26 +13,29 @@ class body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int length = 0;
     Size size = MediaQuery.of(context).size;
     if (Get.find<CartController>().orderItems.isEmpty) {
       return Container(
           color: Colors.white,
           height: size.height,
           width: size.width,
-          child: Image.asset(
-            'assets/images/order.jpg',
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/order.jpg',
+              ),
+            ],
           ));
     } else {
       return SizedBox(
         height: size.height,
         width: size.width,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: Get.find<CartController>().orderItems.length,
-          itemBuilder: (BuildContext context, index) {
-            length = Get.find<CartController>().orderItems.length - 1;
-            return Container(
+        child: ListView(shrinkWrap: true, children: [
+          for (int i = 0;
+              i < Get.find<CartController>().getOrderItemsLength;
+              i++)
+            Container(
               margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -48,9 +51,9 @@ class body extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
-                          "Order ID: ${1}",
+                          "Order ID: ${i + 1}",
                           style: TextStyle(fontSize: 15),
                         ),
                         Text(
@@ -117,101 +120,107 @@ class body extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount:
-                          Get.find<CartController>().orderItems[length]?.length,
-                      itemBuilder: (BuildContext context, index) {
-                        return Container(
-                          margin: const EdgeInsets.only(top: 10, left: 10),
-                          height: size.height * 0.14,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: size.height * 0.14,
-                                width: size.height * 0.14,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        image: NetworkImage(''),
-                                        fit: BoxFit.cover),
-                                    color: kSecondaryColor),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  color: Colors.white,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.only(left: 15),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${1}',
-                                              maxLines: 1,
-                                              style: TextStyle(
-                                                fontSize: size.height * 0.022,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                                height: size.height * 0.01),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text.rich(
-                                                  TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text: '\$',
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                size.height *
-                                                                    0.022,
-                                                            color:
-                                                                kAccentColor),
-                                                      ),
-                                                      TextSpan(
-                                                        text: ' name',
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                size.height *
-                                                                    0.02,
-                                                            color: kTextColor),
-                                                      ),
-                                                    ],
-                                                  ),
+                  Column(
+                    children: List.generate(
+                      Get.find<CartController>().getPerOrderItemsLength[i],
+                      (index) => Container(
+                          margin: const EdgeInsets.all(10),
+                          child: SizedBox(
+                            height: size.height * 0.15,
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: size.height * 0.14,
+                                  width: size.height * 0.14,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              "${Get.find<CartController>().getOrderList[i][index].image}"),
+                                          fit: BoxFit.cover),
+                                      color: kSecondaryColor),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.white,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(left: 15),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                '${Get.find<CartController>().getOrderList[i][index].name}',
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                  fontSize: 15,
                                                 ),
-                                              ],
-                                            ),
-                                          ],
+                                              ),
+                                              SizedBox(
+                                                  height: size.height * 0.01),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text.rich(
+                                                    TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text: 'Price: \$ ',
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                        TextSpan(
+                                                          text:
+                                                              '${Get.find<CartController>().getOrderList[i][index].price}',
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                  height: size.height * 0.01),
+                                              Text(
+                                                  "Quantity: ${Get.find<CartController>().getOrderList[i][index].quantity}"),
+                                              SizedBox(
+                                                  height: size.height * 0.01),
+                                              Text(
+                                                  "Seller Id: ${Get.find<CartController>().getOrderList[i][index].sellerId ?? 1}"),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: size.height * 0.025,
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [],
+                                        SizedBox(
+                                          height: size.height * 0.025,
                                         ),
-                                      )
-                                    ],
+                                        Expanded(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [],
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                              ],
+                            ),
+                          )),
                     ),
                   ),
                   Container(
@@ -236,9 +245,8 @@ class body extends StatelessWidget {
                   ),
                 ],
               ),
-            );
-          },
-        ),
+            )
+        ]),
       );
     }
   }

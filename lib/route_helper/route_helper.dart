@@ -62,6 +62,18 @@ class RouteHelper {
     );
   }
 
+  static getHome(BuildContext context) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (c, a1, a2) => MainFoodPage(),
+        transitionsBuilder: (c, anim, a2, child) =>
+            FadeTransition(opacity: anim, child: child),
+        transitionDuration: Duration(milliseconds: 500),
+      ),
+    );
+  }
+
   static getSignIn(BuildContext context) {
     Navigator.push(
       context,

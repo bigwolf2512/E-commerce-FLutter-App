@@ -1,6 +1,5 @@
 import 'package:ecommerceshop/route_helper/route_helper.dart';
 import 'package:flutter/material.dart';
-
 import '../../../app_const/app_const.dart';
 
 AppBar appBar(BuildContext context) {
@@ -8,6 +7,7 @@ AppBar appBar(BuildContext context) {
   return AppBar(
     shadowColor: Colors.transparent,
     title: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         GestureDetector(
           onTap: () => RouteHelper().getPersonalPage(context),
