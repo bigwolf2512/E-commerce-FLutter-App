@@ -4,7 +4,7 @@ import 'package:ecommerceshop/data/api/api_client.dart';
 import 'package:ecommerceshop/data/repo/product_repo.dart';
 import 'package:get/get.dart';
 
-import '../../models/popular_product_model.dart';
+import '../model/popular_product_model.dart';
 import 'package:http/http.dart' as http;
 
 class ProductController extends GetxController {

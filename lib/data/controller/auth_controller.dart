@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:ecommerceshop/data/controller/cart_controller.dart';
 
-import 'package:ecommerceshop/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../app_const/app_const.dart';
-import '../../route_helper/route_helper.dart';
-import '../api/api_client.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../route/route_helper.dart';
+import '../../share/constant/constant.dart';
+import '../api/api_client.dart';
+import '../model/user_model.dart';
 import '../repo/auth_repo.dart';
+import 'cart_controller.dart';
 
 class AuthController extends GetxController {
   final SharedPreferences sharedPreferences;
@@ -38,7 +39,7 @@ class AuthController extends GetxController {
     if (email.isNotEmpty && password.isNotEmpty) {
       http.Response response = await apiClient.login(email, password);
       if (response.statusCode == 200) {
-        RouteHelper.getMainPage(context);
+        RouteHelper.getUserMainPage(context);
         _userData = UserModel.fromJson(jsonDecode(response.body)).user!;
         cartController.getCarts(userData.id!);
         apiClient.updateUserHeader(userData.token!);

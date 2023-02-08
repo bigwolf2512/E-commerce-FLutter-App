@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-import '../../app_const/app_const.dart';
+import '../../share/constant/constant.dart';
 
 class ApiClient extends GetConnect implements GetxService {
   String token = '';

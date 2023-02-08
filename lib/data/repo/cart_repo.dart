@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:ecommerceshop/data/api/api_client.dart';
+import '../api/api_client.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../app_const/app_const.dart';
-import '../../models/cart_model.dart';
+import '../../share/constant/constant.dart';
+import '../model/cart_model.dart';
 
 class CartRepo {
   final SharedPreferences sharedPreferences;

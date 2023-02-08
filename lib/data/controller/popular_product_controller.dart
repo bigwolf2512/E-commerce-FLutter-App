@@ -1,9 +1,9 @@
 import 'package:ecommerceshop/data/controller/auth_controller.dart';
 import 'package:ecommerceshop/data/controller/cart_controller.dart';
 import 'package:ecommerceshop/data/repo/popular_product_repo.dart';
-import 'package:ecommerceshop/models/cart_model.dart';
+import 'package:ecommerceshop/data/model/cart_model.dart';
 import 'package:get/get.dart';
-import '../../models/popular_product_model.dart';
+import '../model/popular_product_model.dart';
 
 class PopularProductController extends GetxController {
   final PopularProductRepo productRepo;

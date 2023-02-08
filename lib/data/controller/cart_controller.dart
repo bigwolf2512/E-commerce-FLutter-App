@@ -3,8 +3,8 @@
 import 'dart:convert';
 import 'package:ecommerceshop/data/api/api_client.dart';
 import 'package:ecommerceshop/data/controller/product_controller.dart';
-import 'package:ecommerceshop/models/cart_model.dart';
-import 'package:ecommerceshop/models/popular_product_model.dart';
+import 'package:ecommerceshop/data/model/cart_model.dart';
+import 'package:ecommerceshop/data/model/popular_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';

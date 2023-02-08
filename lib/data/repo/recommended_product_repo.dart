@@ -3,7 +3,7 @@
 import 'package:ecommerceshop/data/api/api_client.dart';
 import 'package:get/get.dart';
 
-import '../../app_const/app_const.dart';
+import '../../share/constant/constant.dart';
 
 class RecommendedProductRepo extends GetxService {
   final ApiClient apiClient;

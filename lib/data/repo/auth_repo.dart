@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-import 'package:ecommerceshop/data/controller/auth_controller.dart';
-import 'package:ecommerceshop/models/user_model.dart';
+import '../controller/auth_controller.dart';
+import '../model/user_model.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../app_const/app_const.dart';
 
 class AuthRepo {
   final SharedPreferences sharedPreferences;
