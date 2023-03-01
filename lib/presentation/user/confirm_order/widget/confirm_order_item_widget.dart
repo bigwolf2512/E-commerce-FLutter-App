@@ -1,17 +1,13 @@
+import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/controller/cart_controller.dart';
 import '../../../../share/constant/constant.dart';
 
-class items extends StatelessWidget {
+class ConfirmOrderItemWidget extends StatelessWidget {
   final int index;
-  const items({
-    Key? key,
-    required this.size,
-    required this.index,
-  }) : super(key: key);
-
-  final Size size;
+  const ConfirmOrderItemWidget({Key? key, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +15,13 @@ class items extends StatelessWidget {
       onTap: () {},
       child: Container(
         margin: const EdgeInsets.only(top: 10),
-        height: size.height * 0.14,
+        height: 1.h * 0.14,
         color: Colors.white,
         child: Row(
           children: [
             Container(
-              height: size.height * 0.14,
-              width: size.height * 0.14,
+              height: 1.h * 0.14,
+              width: 1.h * 0.14,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
@@ -47,10 +43,10 @@ class items extends StatelessWidget {
                             'name',
                             maxLines: 1,
                             style: TextStyle(
-                              fontSize: size.height * 0.022,
+                              fontSize: 1.h * 0.022,
                             ),
                           ),
-                          SizedBox(height: size.height * 0.01),
+                          SizedBox(height: 1.h * 0.01),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -59,12 +55,12 @@ class items extends StatelessWidget {
                                   TextSpan(
                                       text: 'price',
                                       style: TextStyle(
-                                          fontSize: size.height * 0.022,
+                                          fontSize: 1.h * 0.022,
                                           color: kAccentColor)),
                                   TextSpan(
                                       text: ' name',
                                       style: TextStyle(
-                                          fontSize: size.height * 0.02,
+                                          fontSize: 1.h * 0.02,
                                           color: kTextColor))
                                 ]),
                               ),
@@ -74,7 +70,7 @@ class items extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.025,
+                      height: 1.h * 0.025,
                     ),
                     Expanded(
                       child: Row(

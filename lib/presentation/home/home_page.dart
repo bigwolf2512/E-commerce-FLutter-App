@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../data/controller/popular_product_controller.dart';
 import '../../share/constant/constant.dart';
 import 'food_page_body.dart';
-import '../merchant/manage_order/order_page.dart';
+import '../merchant/manage_order/manage_order_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({

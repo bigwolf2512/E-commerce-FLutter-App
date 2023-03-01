@@ -1,22 +1,18 @@
+import 'package:ecommerceshop/design/extension/size_extension.dart';
+import 'package:ecommerceshop/presentation/user/confirm_order/widget/confirm_order_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/controller/cart_controller.dart';
-import 'items.dart';
 
-class body extends StatefulWidget {
-  const body({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
+class ConfirmOrderBody extends StatefulWidget {
+  const ConfirmOrderBody({Key? key}) : super(key: key);
 
   @override
-  State<body> createState() => _bodyState();
+  State<ConfirmOrderBody> createState() => _ConfirmOrderBodyState();
 }
 
-class _bodyState extends State<body> {
+class _ConfirmOrderBodyState extends State<ConfirmOrderBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +21,7 @@ class _bodyState extends State<body> {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            height: widget.size.height * 0.12,
+            height: 1.h * 0.12,
             width: double.maxFinite,
             color: Colors.white,
             child: Column(
@@ -34,13 +30,12 @@ class _bodyState extends State<body> {
                 Text(
                   'Check Out',
                   style: TextStyle(
-                      fontSize: widget.size.width * 0.08,
-                      fontWeight: FontWeight.bold),
+                      fontSize: 1.w * 0.08, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   ' items',
                   style: TextStyle(
-                      fontSize: widget.size.width * 0.04,
+                      fontSize: 1.w * 0.04,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey.withOpacity(0.8)),
                 ),
@@ -66,16 +61,13 @@ class _bodyState extends State<body> {
               scrollDirection: Axis.vertical,
               itemCount: 0,
               itemBuilder: (BuildContext context, int index) {
-                return items(
-                  size: widget.size,
-                  index: index,
-                );
+                return ConfirmOrderItemWidget(index: index);
               },
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            height: widget.size.height * 0.19,
+            height: 1.h * 0.19,
             width: double.maxFinite,
             child: Column(
               children: [
@@ -84,11 +76,11 @@ class _bodyState extends State<body> {
                   children: [
                     Text('Sub Total',
                         style: TextStyle(
-                            fontSize: widget.size.width * 0.05,
+                            fontSize: 1.w * 0.05,
                             fontWeight: FontWeight.normal)),
                     Text('price',
                         style: TextStyle(
-                            fontSize: widget.size.width * 0.05,
+                            fontSize: 1.w * 0.05,
                             fontWeight: FontWeight.normal))
                   ],
                 ),
@@ -97,28 +89,26 @@ class _bodyState extends State<body> {
                   children: [
                     Text('Tax',
                         style: TextStyle(
-                            fontSize: widget.size.width * 0.05,
+                            fontSize: 1.w * 0.05,
                             fontWeight: FontWeight.normal)),
                     Text('price',
                         style: TextStyle(
-                            fontSize: widget.size.width * 0.05,
+                            fontSize: 1.w * 0.05,
                             fontWeight: FontWeight.normal))
                   ],
                 ),
                 SizedBox(
-                  height: widget.size.height * 0.01,
+                  height: 1.h * 0.01,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Total',
                         style: TextStyle(
-                            fontSize: widget.size.width * 0.08,
-                            fontWeight: FontWeight.bold)),
+                            fontSize: 1.w * 0.08, fontWeight: FontWeight.bold)),
                     Text('price',
                         style: TextStyle(
-                            fontSize: widget.size.width * 0.05,
-                            fontWeight: FontWeight.bold))
+                            fontSize: 1.w * 0.05, fontWeight: FontWeight.bold))
                   ],
                 )
               ],

@@ -1,23 +1,20 @@
+import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/controller/cart_controller.dart';
 import '../../../../share/constant/constant.dart';
 
-class body extends StatelessWidget {
-  const body(
-    find, {
-    Key? key,
-  }) : super(key: key);
+class ManageOrderBody extends StatelessWidget {
+  const ManageOrderBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    if (true) {
+    if (false) {
       return Container(
           color: Colors.white,
-          height: size.height,
-          width: size.width,
+          height: 1.h,
+          width: 1.w,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -28,8 +25,8 @@ class body extends StatelessWidget {
           ));
     } else {
       return SizedBox(
-        height: size.height,
-        width: size.width,
+        height: 1.h,
+        width: 1.w,
         child: ListView(shrinkWrap: true, children: [
           for (int i = 0; i < 1; i++)
             Container(
@@ -123,12 +120,12 @@ class body extends StatelessWidget {
                       (index) => Container(
                           margin: const EdgeInsets.all(10),
                           child: SizedBox(
-                            height: size.height * 0.15,
+                            height: 1.h * 0.15,
                             child: Row(
                               children: [
                                 Container(
-                                  height: size.height * 0.14,
-                                  width: size.height * 0.14,
+                                  height: 1.h * 0.14,
+                                  width: 1.h * 0.14,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
@@ -159,13 +156,12 @@ class body extends StatelessWidget {
                                                   fontSize: 15,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  height: size.height * 0.01),
+                                              SizedBox(height: 1.h * 0.01),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
-                                                children: [
+                                                children: const [
                                                   Text.rich(
                                                     TextSpan(
                                                       children: [
@@ -188,17 +184,15 @@ class body extends StatelessWidget {
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                  height: size.height * 0.01),
+                                              SizedBox(height: 1.h * 0.01),
                                               Text("Quantity: 0"),
-                                              SizedBox(
-                                                  height: size.height * 0.01),
+                                              SizedBox(height: 1.h * 0.01),
                                               Text("Seller Id: 0"),
                                             ],
                                           ),
                                         ),
                                         SizedBox(
-                                          height: size.height * 0.025,
+                                          height: 1.h * 0.025,
                                         ),
                                         Expanded(
                                           child: Row(

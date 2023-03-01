@@ -8,7 +8,7 @@ import '../../../../data/controller/product_controller.dart';
 import '../../../../data/controller/recommended_product_controller.dart';
 import '../../../../share/constant/constant.dart';
 import '../../../../share/widget/button_flat.dart';
-import 'components/description_page_view.dart';
+import 'widget/description_page_view.dart';
 
 class ItemsPageView extends StatefulWidget {
   final int productId;

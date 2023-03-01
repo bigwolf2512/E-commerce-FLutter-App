@@ -2,10 +2,8 @@ import 'package:ecommerceshop/data/controller/cart_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class bottom extends StatelessWidget {
-  const bottom({
-    Key? key,
-  }) : super(key: key);
+class PaymentBottom extends StatelessWidget {
+  const PaymentBottom({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

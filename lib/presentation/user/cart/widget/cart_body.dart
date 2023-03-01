@@ -9,14 +9,14 @@ import '../../../../data/controller/recommended_product_controller.dart';
 import '../../../../share/constant/constant.dart';
 import '../../../../share/widget/alert_dialog.dart';
 
-class body extends StatefulWidget {
-  const body({Key? key}) : super(key: key);
+class CartScreenBody extends StatefulWidget {
+  const CartScreenBody({Key? key}) : super(key: key);
 
   @override
-  State<body> createState() => _bodyState();
+  State<CartScreenBody> createState() => _CartScreenBodyState();
 }
 
-class _bodyState extends State<body> {
+class _CartScreenBodyState extends State<CartScreenBody> {
   bool isChecked = false;
   bool isPush = false;
   @override

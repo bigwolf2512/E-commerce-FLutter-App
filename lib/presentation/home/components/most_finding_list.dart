@@ -1,18 +1,13 @@
 import 'dart:math';
 
+import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../share/constant/constant.dart';
 
 class ListMostFinding extends StatelessWidget {
+  const ListMostFinding({Key? key, required this.pageID}) : super(key: key);
   final int pageID;
-  const ListMostFinding({
-    Key? key,
-    required this.size,
-    required this.pageID,
-  }) : super(key: key);
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +15,8 @@ class ListMostFinding extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(left: 15),
-          height: size.height * 0.2,
-          width: size.width * 0.6,
+          height: 1.h * 0.2,
+          width: 1.w * 0.6,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color:

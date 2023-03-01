@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,13 +19,11 @@ class ButtonFlat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int a = 2;
-    Size size = MediaQuery.of(context).size;
     return Stack(children: [
       Container(
           padding: EdgeInsets.all(padding),
-          height: size.width * 0.13,
-          width: size.width * 0.13,
+          height: 1.w * 0.13,
+          width: 1.w * 0.13,
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
@@ -39,8 +38,8 @@ class ButtonFlat extends StatelessWidget {
               top: 0,
               right: 0,
               child: Container(
-                height: size.width * 0.06,
-                width: size.width * 0.06,
+                height: 1.w * 0.06,
+                width: 1.w * 0.06,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: kPrimaryColor,

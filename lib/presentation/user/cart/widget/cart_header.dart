@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../../share/constant/constant.dart';
 
-class buildAppBarDetail extends StatefulWidget {
-  const buildAppBarDetail({
+class CartHeader extends StatefulWidget {
+  const CartHeader({
     Key? key,
     required this.size,
   }) : super(key: key);
@@ -12,10 +12,10 @@ class buildAppBarDetail extends StatefulWidget {
   final Size size;
 
   @override
-  State<buildAppBarDetail> createState() => _buildAppBarDetailState();
+  State<CartHeader> createState() => _CartHeaderState();
 }
 
-class _buildAppBarDetailState extends State<buildAppBarDetail> {
+class _CartHeaderState extends State<CartHeader> {
   bool allChecked = false;
   @override
   Widget build(BuildContext context) {

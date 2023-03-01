@@ -138,10 +138,7 @@ class FoodPageBody extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 0,
               itemBuilder: (BuildContext context, index) {
-                return ListPopularFood(
-                  size: size,
-                  productID: 0,
-                );
+                return ListPopularFood(productID: 0);
               },
             ),
           ),
@@ -183,7 +180,6 @@ class FoodPageBody extends StatelessWidget {
               itemCount: 0,
               itemBuilder: (BuildContext context, int index) {
                 return ListRecommendedFood(
-                  size: size,
                   productID: 0,
                 );
               },
@@ -227,7 +223,6 @@ class FoodPageBody extends StatelessWidget {
               itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
                 return ListMostFinding(
-                  size: size,
                   pageID: index,
                 );
               },

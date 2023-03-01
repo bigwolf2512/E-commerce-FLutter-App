@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:ecommerceshop/presentation/auth/sign_up/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,7 +13,6 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     final AuthController controller = Get.find();
     return Scaffold(
       body: SingleChildScrollView(
@@ -24,19 +24,19 @@ class SignInPage extends StatelessWidget {
                   style: TextStyle(
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.bold,
-                      fontSize: size.width * 0.05,
+                      fontSize: 0.05.w,
                       color: Colors.black)),
-              SizedBox(height: size.height * 0.05),
+              SizedBox(height: 0.05.h),
               SvgPicture.asset(
                 "assets/icons/login.svg",
-                height: size.height * 0.4,
+                height: 0.4.h,
               ),
-              SizedBox(height: size.height * 0.07),
+              SizedBox(height: 0.07.h),
               Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                  width: size.width * 0.8,
+                  width: 0.8.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(29),
                     color: kPrimaryLightColor,
@@ -52,7 +52,7 @@ class SignInPage extends StatelessWidget {
               Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                  width: size.width * 0.8,
+                  width: 0.8.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(29),
                     color: kPrimaryLightColor,
@@ -75,13 +75,13 @@ class SignInPage extends StatelessWidget {
                     //   _password = values;
                     // }
                   )),
-              SizedBox(height: size.height * 0.02),
+              SizedBox(height: 1.h * 0.02),
               ClipRRect(
                 borderRadius: BorderRadius.circular(29),
                 child: MaterialButton(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                  minWidth: size.width * 0.8,
+                  minWidth: 0.8.w,
                   color: kPrimaryColor,
                   onPressed: () {
                     controller.onSignIn();
@@ -92,7 +92,7 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: size.height * 0.01),
+              SizedBox(height: 0.01.h),
               GestureDetector(
                 onTap: () {
                   Get.to(SignUpPage());
@@ -102,7 +102,7 @@ class SignInPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: size.height * 0.01),
+              SizedBox(height: 0.01.h),
               GestureDetector(
                 onTap: () {},
                 child: Text(

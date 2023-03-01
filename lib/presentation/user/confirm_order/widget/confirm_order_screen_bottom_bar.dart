@@ -1,13 +1,10 @@
 import 'dart:async';
 
+import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 
-class bottom extends StatelessWidget {
-  const bottom({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-  final Size size;
+class ConfirmOrderBottom extends StatelessWidget {
+  const ConfirmOrderBottom({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +13,8 @@ class bottom extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         padding: const EdgeInsets.only(),
-        height: size.height * 0.07,
-        width: size.width * 0.55,
+        height: 1.h * 0.07,
+        width: 1.w * 0.55,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40), color: Colors.black),
         child: Align(

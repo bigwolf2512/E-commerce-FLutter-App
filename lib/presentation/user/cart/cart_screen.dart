@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/controller/cart_controller.dart';
-import 'components/body.dart';
-import 'components/bottom_bar.dart';
-import 'components/header.dart';
+import 'widget/cart_body.dart';
+import 'widget/cart_bottom_bar.dart';
+import 'widget/cart_header.dart';
 
 class CartHomePage extends StatefulWidget {
   const CartHomePage({Key? key}) : super(key: key);
@@ -19,8 +19,8 @@ class _CartPageState extends State<CartHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey.withOpacity(0.1),
       appBar: appBar(context),
-      body: body(),
-      bottomNavigationBar: bottom(),
+      body: CartScreenBody(),
+      bottomNavigationBar: CartScreenBottomBar(),
     );
   }
 }
@@ -31,7 +31,7 @@ AppBar appBar(BuildContext context) {
     shadowColor: Colors.transparent,
     iconTheme: IconThemeData(color: Colors.black),
     backgroundColor: Colors.white,
-    flexibleSpace: buildAppBarDetail(
+    flexibleSpace: CartHeader(
       size: size,
     ),
   );

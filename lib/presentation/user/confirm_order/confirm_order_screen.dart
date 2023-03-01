@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'components/body.dart';
-import 'components/bottom.dart';
+import 'widget/confirm_order_screen_body.dart';
+import 'widget/confirm_order_screen_bottom_bar.dart';
 
 class CheckOutPage extends StatelessWidget {
   const CheckOutPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -19,7 +18,10 @@ class CheckOutPage extends StatelessWidget {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
-          children: [body(size: size), bottom(size: size)],
+          children: const [
+            ConfirmOrderBody(),
+            ConfirmOrderBottom(),
+          ],
         ),
       )),
     );

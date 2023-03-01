@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,9 +6,7 @@ import '../../../share/constant/constant.dart';
 import '../../../share/widget/button_flat.dart';
 
 class CartAndNotification extends StatelessWidget {
-  const CartAndNotification({Key? key, required this.size}) : super(key: key);
-
-  final Size size;
+  const CartAndNotification({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +19,15 @@ class CartAndNotification extends StatelessWidget {
             color: kSecondaryColor,
             images: "assets/icons/Cart Icon.svg",
             itemsNumber: 0,
-            padding: size.width * 0.025,
+            padding: 1.w * 0.025,
           ),
         ),
-        SizedBox(width: size.width * 0.03),
+        SizedBox(width: 1.w * 0.03),
         ButtonFlat(
           color: kSecondaryColor,
           images: "assets/icons/Bell.svg",
           itemsNumber: 12,
-          padding: size.width * 0.025,
+          padding: 1.w * 0.025,
         ),
         SizedBox(width: 10),
       ]),

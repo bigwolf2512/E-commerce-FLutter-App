@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import '../../../../data/controller/cart_controller.dart';
 import '../../../../share/constant/constant.dart';
 
-class bottom extends StatelessWidget {
-  const bottom({
+class CartScreenBottomBar extends StatelessWidget {
+  const CartScreenBottomBar({
     Key? key,
   }) : super(key: key);
 

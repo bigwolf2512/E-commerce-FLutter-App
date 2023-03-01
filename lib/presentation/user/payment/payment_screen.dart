@@ -1,7 +1,6 @@
-import 'package:ecommerceshop/presentation/user/payment_page/components/components/bottom.dart';
+import 'package:ecommerceshop/presentation/user/payment/widget/payment_body.dart';
+import 'package:ecommerceshop/presentation/user/payment/widget/payment_bottom_bar.dart';
 import 'package:flutter/material.dart';
-
-import 'components/components/body.dart';
 
 class PaymentPage extends StatelessWidget {
   const PaymentPage({Key? key}) : super(key: key);
@@ -20,7 +19,10 @@ class PaymentPage extends StatelessWidget {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
-          children: [body(size: size), bottom()],
+          children: const [
+            PaymentBody(),
+            PaymentBottom(),
+          ],
         ),
       )),
     );
