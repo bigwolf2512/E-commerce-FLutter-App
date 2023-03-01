@@ -1,6 +1,6 @@
+import 'package:ecommerceshop/presentation/user/payment_page/components/components/bottom.dart';
 import 'package:flutter/material.dart';
 
-import '../cart_page/components/bottom_bar.dart';
 import 'components/components/body.dart';
 
 class PaymentPage extends StatelessWidget {

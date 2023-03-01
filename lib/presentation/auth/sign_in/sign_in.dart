@@ -1,33 +1,22 @@
+import 'package:ecommerceshop/presentation/auth/sign_up/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../data/controller/auth_controller.dart';
-import '../../../route/route_helper.dart';
 import '../../../share/constant/constant.dart';
-import 'signinBackground.dart';
+import 'signin_background.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
-  final String _password = '';
-  final String _email = '';
-  bool obscure_text = true;
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    String _password = '';
-
+    final Size size = MediaQuery.of(context).size;
+    final AuthController controller = Get.find();
     return Scaffold(
       body: SingleChildScrollView(
-        child: signinBackground(
+        child: SignInBackground(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -53,9 +42,9 @@ class _SignInPageState extends State<SignInPage> {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    controller: _emailController,
+                    controller: controller.phoneNumber,
                     decoration: InputDecoration(
-                        hintText: "Email",
+                        hintText: "Phone Number",
                         icon: Icon(Icons.person, color: kPrimaryColor),
                         border: InputBorder.none),
                     // onChanged: (value) => _email = value,
@@ -69,21 +58,15 @@ class _SignInPageState extends State<SignInPage> {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    controller: _passwordController,
-                    obscureText: obscure_text,
+                    controller: controller.password,
+                    obscureText: true,
                     decoration: InputDecoration(
                         hintText: "Password",
                         icon: Icon(Icons.lock, color: kPrimaryColor),
                         suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              obscure_text = !obscure_text;
-                            });
-                          },
+                          onPressed: () {},
                           icon: Icon(
-                            obscure_text
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                            Icons.visibility,
                             color: kPrimaryColor,
                           ),
                         ),
@@ -101,8 +84,7 @@ class _SignInPageState extends State<SignInPage> {
                   minWidth: size.width * 0.8,
                   color: kPrimaryColor,
                   onPressed: () {
-                    Get.find<AuthController>().LoginPress(context,
-                        _emailController.text, _passwordController.text);
+                    controller.onSignIn();
                   },
                   child: const Text(
                     "Login",
@@ -113,7 +95,7 @@ class _SignInPageState extends State<SignInPage> {
               SizedBox(height: size.height * 0.01),
               GestureDetector(
                 onTap: () {
-                  RouteHelper.getSignUp(context);
+                  Get.to(SignUpPage());
                 },
                 child: Text(
                   'Dont have an account? Let Sign Up!',
@@ -122,9 +104,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
               SizedBox(height: size.height * 0.01),
               GestureDetector(
-                onTap: () {
-                  RouteHelper.getMerchantMainPage(context);
-                },
+                onTap: () {},
                 child: Text(
                   'Or countinue at GUEST.',
                   style: TextStyle(

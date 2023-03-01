@@ -4,12 +4,10 @@ import '../../../../../data/controller/cart_controller.dart';
 import '../../../../../share/constant/constant.dart';
 
 class items extends StatelessWidget {
-  final CartController cartController;
   final int index;
   const items({
     Key? key,
     required this.index,
-    required this.cartController,
   }) : super(key: key);
 
   @override

@@ -1,9 +1,11 @@
+import 'package:ecommerceshop/presentation/auth/sign_in/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import '../../../route/route_helper.dart';
 import '../../../share/constant/constant.dart';
-import '../components/mainBackground.dart';
+import '../components/main_background.dart';
+import '../sign_up/sign_up.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -11,7 +13,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return mainBackground(
+    return MainBackground(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -35,7 +37,7 @@ class WelcomeScreen extends StatelessWidget {
               minWidth: size.width * 0.8,
               color: kPrimaryColor,
               onPressed: () {
-                RouteHelper.getSignIn(context);
+                Get.to(SignInPage());
               },
               child: const Text(
                 "Login",
@@ -51,7 +53,7 @@ class WelcomeScreen extends StatelessWidget {
               minWidth: size.width * 0.8,
               color: kPrimaryColor.withOpacity(0.5),
               onPressed: () {
-                RouteHelper.getSignUp(context);
+                Get.to(SignUpPage());
               },
               child: const Text(
                 "Sign Up",
@@ -66,9 +68,7 @@ class WelcomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
               minWidth: size.width * 0.8,
               color: Colors.deepOrange,
-              onPressed: () {
-                RouteHelper.getUserMainPage(context);
-              },
+              onPressed: () {},
               child: const Text(
                 "Continue as Guest",
                 style: TextStyle(color: Colors.white),

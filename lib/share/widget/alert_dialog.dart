@@ -9,30 +9,25 @@ confirmAlertCartPage(BuildContext context, int cartID) {
   showDialog(
       context: context,
       builder: (BuildContext ctx) {
-        return GetBuilder<CartController>(builder: (cartController) {
-          return AlertDialog(
-            title: const Text('Please Confirm'),
-            content: const Text('Are you sure to remove this item?'),
-            actions: [
-              // The "Yes" button
-              TextButton(
-                  onPressed: () {
-                    var product =
-                        Get.find<ProductController>().productList[cartID];
-                    Get.find<CartController>().removeItems(product, true);
-                    Navigator.of(context).pop();
-                    Get.snackbar("Notification", "Remove successfull",
-                        colorText: Colors.white,
-                        backgroundColor: Colors.deepOrange);
-                  },
-                  child: const Text('Confirm')),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('No'))
-            ],
-          );
-        });
+        return AlertDialog(
+          title: const Text('Please Confirm'),
+          content: const Text('Are you sure to remove this item?'),
+          actions: [
+            // The "Yes" button
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Get.snackbar("Notification", "Remove successfull",
+                      colorText: Colors.white,
+                      backgroundColor: Colors.deepOrange);
+                },
+                child: const Text('Confirm')),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('No'))
+          ],
+        );
       });
 }

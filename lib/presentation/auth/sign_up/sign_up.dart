@@ -1,11 +1,10 @@
+import 'package:ecommerceshop/presentation/auth/sign_in/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../../data/controller/auth_controller.dart';
-import '../../../route/route_helper.dart';
 import '../../../share/constant/constant.dart';
-import 'signupBackground.dart';
+import 'signup_background.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -13,17 +12,10 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    // final _name = TextEditingController();
-    // final _email = TextEditingController();
-    // final _phonenumber = TextEditingController();
-    // final _password = TextEditingController();
-    String _name = '';
-    String _email = '';
-    String _phonenumber = '';
-    String _password = '';
+
     return Scaffold(
       body: SingleChildScrollView(
-        child: signupBackground(
+        child: SignUpBackground(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -50,7 +42,6 @@ class SignUpPage extends StatelessWidget {
                         hintText: "Full Name",
                         icon: Icon(Icons.person, color: kPrimaryColor),
                         border: InputBorder.none),
-                    onChanged: (value) => _name = value,
                   )),
               Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
@@ -62,7 +53,6 @@ class SignUpPage extends StatelessWidget {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    onChanged: (value) => _email = value,
                     decoration: InputDecoration(
                         hintText: "Email",
                         icon: Icon(Icons.mail, color: kPrimaryColor),
@@ -77,7 +67,6 @@ class SignUpPage extends StatelessWidget {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    onChanged: (value) => _phonenumber = value,
                     decoration: InputDecoration(
                         hintText: "Phone number",
                         icon: Icon(Icons.phone, color: kPrimaryColor),
@@ -93,7 +82,6 @@ class SignUpPage extends StatelessWidget {
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
-                    onChanged: (value) => _password = value,
                     obscureText: true,
                     decoration: InputDecoration(
                         hintText: "Password",
@@ -108,10 +96,7 @@ class SignUpPage extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                   minWidth: size.width * 0.8,
                   color: kPrimaryColor,
-                  onPressed: () {
-                    Get.find<AuthController>().RegisterPress(
-                        context, _name, _email, _phonenumber, _password);
-                  },
+                  onPressed: () {},
                   child: const Text(
                     "Sign Up",
                     style: TextStyle(color: Colors.white),
@@ -121,7 +106,7 @@ class SignUpPage extends StatelessWidget {
               SizedBox(height: size.height * 0.01),
               GestureDetector(
                 onTap: () {
-                  RouteHelper.getSignIn(context);
+                  Get.to(SignInPage());
                 },
                 child: Text(
                   'Already have an account? Let Sign In!',

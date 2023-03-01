@@ -1,22 +1,18 @@
 import 'package:ecommerceshop/data/controller/cart_controller.dart';
-import 'package:ecommerceshop/route/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class bottom extends StatelessWidget {
   const bottom({
     Key? key,
-    required this.size,
   }) : super(key: key);
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return GestureDetector(
-      onTap: () {
-        RouteHelper.getHome(context);
-        Get.find<CartController>().orderItems;
-      },
+      onTap: () {},
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         padding: const EdgeInsets.only(),
