@@ -29,9 +29,9 @@ _$_OrderModel _$$_OrderModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_OrderModelToJson(_$_OrderModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'seller': instance.seller,
-      'buyer': instance.buyer,
-      'products': instance.products,
+      'seller': instance.seller?.toJson(),
+      'buyer': instance.buyer?.toJson(),
+      'products': instance.products?.map((e) => e.toJson()).toList(),
       'boughtDate': instance.boughtDate?.toIso8601String(),
       'receiveExpectDate': instance.receiveExpectDate?.toIso8601String(),
     };

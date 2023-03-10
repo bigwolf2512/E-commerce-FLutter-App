@@ -25,14 +25,6 @@ const int POPULAR_CATEGORY_ID = 1;
 const int RECOMMENDED_CATEGORY_ID = 2;
 
 const String cartlistKey = "Cart-List";
-const String userAvatar =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXp5ZIUWquEoLHqcBFvATwXyfQsiNfV9o_OopJKKuGU1oY7Otw_tlw7lqpYZJIZfB7KuM&usqp=CAU';
-const String admin =
-    "https://scontent.fsgn5-12.fna.fbcdn.net/v/t39.30808-6/275626876_3076796902573541_8189424536756048255_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=3S5z9NyLBRwAX8a56GW&_nc_ht=scontent.fsgn5-12.fna&oh=00_AT_f_rHLj0ww3eh6a2JMhTdtvQ5KMVl6xImUL-seIduR4A&oe=62991911";
-List<String> imagePayment = [
-  paypalImage,
-  atmImage,
-];
 
 List<String> EventListIcons = [
   'assets/icons/Game Icon.svg',
@@ -60,8 +52,3 @@ errorSnackBar(BuildContext context, String text) {
       content: Text(text),
       duration: const Duration(milliseconds: 1000)));
 }
-
-const String paypalImage =
-    'https://res.cloudinary.com/dipmwqfxq/w_275,h_275,c_fit,f_auto,q_99/cci/2019/11/paypal-cash-mastercard-2.png';
-const String atmImage =
-    'https://www.bankofthejames.bank/wp-content/uploads/2016/02/botj_card.jpg';

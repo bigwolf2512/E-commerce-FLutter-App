@@ -1,8 +1,6 @@
-import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../../../data/controller/cart_controller.dart';
+import '../../../../design/extension/double_extension.dart';
 import '../../../../share/constant/constant.dart';
 
 class ManageOrderBody extends StatelessWidget {
@@ -13,8 +11,8 @@ class ManageOrderBody extends StatelessWidget {
     if (false) {
       return Container(
           color: Colors.white,
-          height: 1.h,
-          width: 1.w,
+          height: 1.0.h,
+          width: 1.0.w,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -25,8 +23,8 @@ class ManageOrderBody extends StatelessWidget {
           ));
     } else {
       return SizedBox(
-        height: 1.h,
-        width: 1.w,
+        height: 1.0.h,
+        width: 1.0.w,
         child: ListView(shrinkWrap: true, children: [
           for (int i = 0; i < 1; i++)
             Container(
@@ -120,12 +118,12 @@ class ManageOrderBody extends StatelessWidget {
                       (index) => Container(
                           margin: const EdgeInsets.all(10),
                           child: SizedBox(
-                            height: 1.h * 0.15,
+                            height: 0.15.h,
                             child: Row(
                               children: [
                                 Container(
-                                  height: 1.h * 0.14,
-                                  width: 1.h * 0.14,
+                                  height: 0.14.h,
+                                  width: 0.14.h,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
@@ -156,7 +154,7 @@ class ManageOrderBody extends StatelessWidget {
                                                   fontSize: 15,
                                                 ),
                                               ),
-                                              SizedBox(height: 1.h * 0.01),
+                                              SizedBox(height: 0.01.h),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -184,15 +182,15 @@ class ManageOrderBody extends StatelessWidget {
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(height: 1.h * 0.01),
+                                              SizedBox(height: 0.01.h),
                                               Text("Quantity: 0"),
-                                              SizedBox(height: 1.h * 0.01),
+                                              SizedBox(height: 0.01.h),
                                               Text("Seller Id: 0"),
                                             ],
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 1.h * 0.025,
+                                          height: 0.025.h,
                                         ),
                                         Expanded(
                                           child: Row(

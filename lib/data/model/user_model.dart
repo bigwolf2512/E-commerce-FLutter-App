@@ -9,7 +9,8 @@ part 'user_model.g.dart';
 @freezed
 class UserModel with _$UserModel {
   const factory UserModel({
-    String? token,
+    String? id,
+    String? phoneNumber,
     bool? isRegisterMerchant,
     MerchantUserModel? merchantUser,
     RegularUserModel? regularUser,

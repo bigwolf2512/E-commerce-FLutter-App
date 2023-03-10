@@ -1,20 +1,19 @@
-import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../design/extension/double_extension.dart';
 import '../constant/constant.dart';
 
 class ButtonFlat extends StatelessWidget {
   final Color color;
   final double padding;
   final int itemsNumber;
-  final String images;
+  final Icon icon;
   const ButtonFlat({
     Key? key,
-    required this.images,
     required this.itemsNumber,
     required this.padding,
     required this.color,
+    required this.icon,
   }) : super(key: key);
 
   @override
@@ -22,24 +21,21 @@ class ButtonFlat extends StatelessWidget {
     return Stack(children: [
       Container(
           padding: EdgeInsets.all(padding),
-          height: 1.w * 0.13,
-          width: 1.w * 0.13,
+          height: 0.13.w,
+          width: 0.13.w,
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
           ),
-          child: SvgPicture.asset(
-            images,
-            color: kTextColor,
-          )),
+          child: icon),
       itemsNumber == 0
           ? Container()
           : Positioned(
               top: 0,
               right: 0,
               child: Container(
-                height: 1.w * 0.06,
-                width: 1.w * 0.06,
+                height: 0.06.w,
+                width: 0.06.w,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: kPrimaryColor,

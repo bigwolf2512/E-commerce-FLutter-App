@@ -1,7 +1,6 @@
-import 'dart:async';
-
-import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../design/extension/double_extension.dart';
 
 class ConfirmOrderBottom extends StatelessWidget {
   const ConfirmOrderBottom({Key? key}) : super(key: key);
@@ -13,8 +12,8 @@ class ConfirmOrderBottom extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         padding: const EdgeInsets.only(),
-        height: 1.h * 0.07,
-        width: 1.w * 0.55,
+        height: 0.07.h,
+        width: 0.55.w,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40), color: Colors.black),
         child: Align(

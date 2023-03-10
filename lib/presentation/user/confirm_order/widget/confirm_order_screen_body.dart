@@ -1,9 +1,7 @@
-import 'package:ecommerceshop/design/extension/size_extension.dart';
-import 'package:ecommerceshop/presentation/user/confirm_order/widget/confirm_order_item_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../../../data/controller/cart_controller.dart';
+import '../../../../design/extension/double_extension.dart';
+import 'confirm_order_item_widget.dart';
 
 class ConfirmOrderBody extends StatefulWidget {
   const ConfirmOrderBody({Key? key}) : super(key: key);
@@ -21,7 +19,7 @@ class _ConfirmOrderBodyState extends State<ConfirmOrderBody> {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            height: 1.h * 0.12,
+            height: 1.0.h,
             width: double.maxFinite,
             color: Colors.white,
             child: Column(
@@ -29,13 +27,13 @@ class _ConfirmOrderBodyState extends State<ConfirmOrderBody> {
               children: [
                 Text(
                   'Check Out',
-                  style: TextStyle(
-                      fontSize: 1.w * 0.08, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontSize: 0.08.w, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   ' items',
                   style: TextStyle(
-                      fontSize: 1.w * 0.04,
+                      fontSize: 0.04.w,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey.withOpacity(0.8)),
                 ),
@@ -67,7 +65,7 @@ class _ConfirmOrderBodyState extends State<ConfirmOrderBody> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            height: 1.h * 0.19,
+            height: 0.19.h,
             width: double.maxFinite,
             child: Column(
               children: [
@@ -76,12 +74,10 @@ class _ConfirmOrderBodyState extends State<ConfirmOrderBody> {
                   children: [
                     Text('Sub Total',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05,
-                            fontWeight: FontWeight.normal)),
+                            fontSize: 0.05.w, fontWeight: FontWeight.normal)),
                     Text('price',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05,
-                            fontWeight: FontWeight.normal))
+                            fontSize: 0.05.w, fontWeight: FontWeight.normal))
                   ],
                 ),
                 Row(
@@ -89,26 +85,24 @@ class _ConfirmOrderBodyState extends State<ConfirmOrderBody> {
                   children: [
                     Text('Tax',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05,
-                            fontWeight: FontWeight.normal)),
+                            fontSize: 0.05.w, fontWeight: FontWeight.normal)),
                     Text('price',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05,
-                            fontWeight: FontWeight.normal))
+                            fontSize: 0.05.w, fontWeight: FontWeight.normal))
                   ],
                 ),
                 SizedBox(
-                  height: 1.h * 0.01,
+                  height: 0.01.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Total',
                         style: TextStyle(
-                            fontSize: 1.w * 0.08, fontWeight: FontWeight.bold)),
+                            fontSize: 0.08.w, fontWeight: FontWeight.bold)),
                     Text('price',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05, fontWeight: FontWeight.bold))
+                            fontSize: 0.05.w, fontWeight: FontWeight.bold))
                   ],
                 )
               ],

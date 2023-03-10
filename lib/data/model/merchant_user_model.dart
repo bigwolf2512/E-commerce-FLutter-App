@@ -9,11 +9,11 @@ part 'merchant_user_model.g.dart';
 @freezed
 class MerchantUserModel with _$MerchantUserModel {
   const factory MerchantUserModel({
-    int? id,
     String? name,
     String? email,
-    String? storePhoneNumber,
     String? storeAddress,
+    String? password,
+    String? avatar,
     List<ProductModel>? productOnSale,
     List<OrderModel>? orders,
   }) = _MerchantUserModel;

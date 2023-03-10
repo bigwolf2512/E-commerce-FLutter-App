@@ -1,7 +1,6 @@
-import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../data/controller/cart_controller.dart';
+import '../../../../design/extension/double_extension.dart';
 import '../../../../share/constant/constant.dart';
 
 class ConfirmOrderItemWidget extends StatelessWidget {
@@ -15,13 +14,13 @@ class ConfirmOrderItemWidget extends StatelessWidget {
       onTap: () {},
       child: Container(
         margin: const EdgeInsets.only(top: 10),
-        height: 1.h * 0.14,
+        height: 0.14.h,
         color: Colors.white,
         child: Row(
           children: [
             Container(
-              height: 1.h * 0.14,
-              width: 1.h * 0.14,
+              height: 0.14.h,
+              width: 0.14.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
@@ -43,10 +42,10 @@ class ConfirmOrderItemWidget extends StatelessWidget {
                             'name',
                             maxLines: 1,
                             style: TextStyle(
-                              fontSize: 1.h * 0.022,
+                              fontSize: 0.022.h,
                             ),
                           ),
-                          SizedBox(height: 1.h * 0.01),
+                          SizedBox(height: 0.01.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -55,13 +54,12 @@ class ConfirmOrderItemWidget extends StatelessWidget {
                                   TextSpan(
                                       text: 'price',
                                       style: TextStyle(
-                                          fontSize: 1.h * 0.022,
+                                          fontSize: 0.022.h,
                                           color: kAccentColor)),
                                   TextSpan(
                                       text: ' name',
                                       style: TextStyle(
-                                          fontSize: 1.h * 0.02,
-                                          color: kTextColor))
+                                          fontSize: 0.02.h, color: kTextColor))
                                 ]),
                               ),
                             ],
@@ -70,7 +68,7 @@ class ConfirmOrderItemWidget extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 1.h * 0.025,
+                      height: 0.025.h,
                     ),
                     Expanded(
                       child: Row(

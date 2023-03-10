@@ -1,4 +1,9 @@
+
+echo "===============  clean  ==============="
+
 fvm flutter clean 
+
+echo "===============  pub get and build runner  ==============="
 
 fvm flutter pub get
 

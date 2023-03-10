@@ -1,7 +1,7 @@
-import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../design/extension/double_extension.dart';
 import '../../../share/constant/constant.dart';
 
 class ListEventObject extends StatelessWidget {
@@ -15,16 +15,16 @@ class ListEventObject extends StatelessWidget {
         //  RouteHelper.getItemsPageView (context, pageID);
       },
       child: SizedBox(
-        height: 1.h * 0.12,
-        width: 1.h * 0.1,
+        height: 0.12.h,
+        width: 0.1.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               padding: const EdgeInsets.all(20),
-              height: 1.h * 0.08,
-              width: 1.h * 0.08,
+              height: 0.08.h,
+              width: 0.08.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: kSecondaryColor,

@@ -1,11 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
-import '../../../../data/controller/cart_controller.dart';
-import '../../../../data/controller/popular_product_controller.dart';
-import '../../../../data/controller/product_controller.dart';
-import '../../../../data/controller/recommended_product_controller.dart';
 import '../../../../share/constant/constant.dart';
 import '../../../../share/widget/button_flat.dart';
 import 'widget/description_page_view.dart';
@@ -60,9 +56,9 @@ class _ItemsPageViewState extends State<ItemsPageView> {
                           },
                           child: ButtonFlat(
                             itemsNumber: 0,
-                            images: 'assets/icons/Back ICon.svg',
                             padding: 16,
                             color: Colors.white,
+                            icon: Icon(CupertinoIcons.back),
                           ),
                         ),
                         Container(

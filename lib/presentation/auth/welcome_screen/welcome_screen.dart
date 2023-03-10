@@ -1,12 +1,13 @@
-import 'package:ecommerceshop/design/extension/size_extension.dart';
-import 'package:ecommerceshop/presentation/auth/sign_in/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../design/extension/double_extension.dart';
 import '../../../share/constant/constant.dart';
-import '../widget/main_background.dart';
+import '../sign_in_user/sign_in_user.dart';
 import '../sign_up/sign_up.dart';
+import '../sing_in_merchant/sign_in_merchant_screen.dart';
+import '../widget/main_background.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -18,26 +19,24 @@ class WelcomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'WELCOME TO EMMERCESHOP!',
+            'WELCOME TO ECOMMERCE!',
             style: TextStyle(
                 decoration: TextDecoration.none,
                 fontWeight: FontWeight.bold,
-                fontSize: 1.w * 0.05,
+                fontSize: 0.05.w,
                 color: Colors.black),
           ),
-          SizedBox(
-            height: 1.h * 0.05,
-          ),
-          SvgPicture.asset("assets/icons/chat.svg", height: 1.h * 0.4),
-          SizedBox(height: 1.h * 0.05),
+          SizedBox(height: 0.05.h),
+          SvgPicture.asset("assets/icons/chat.svg", height: 0.4.h),
+          SizedBox(height: 0.05.h),
           ClipRRect(
             borderRadius: BorderRadius.circular(29),
             child: MaterialButton(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-              minWidth: 1.w * 0.8,
+              minWidth: 0.8.w,
               color: kPrimaryColor,
               onPressed: () {
-                Get.to(SignInPage());
+                Get.to(() => SignInUserScreen());
               },
               child: const Text(
                 "Login",
@@ -45,15 +44,15 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 1.h * 0.01),
+          SizedBox(height: 0.01.h),
           ClipRRect(
             borderRadius: BorderRadius.circular(29),
             child: MaterialButton(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-              minWidth: 1.w * 0.8,
+              minWidth: 0.8.w,
               color: kPrimaryColor.withOpacity(0.5),
               onPressed: () {
-                Get.to(SignUpPage());
+                Get.to(() => SignUpPage());
               },
               child: const Text(
                 "Sign Up",
@@ -61,16 +60,18 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 1.h * 0.01),
+          SizedBox(height: 0.01.h),
           ClipRRect(
             borderRadius: BorderRadius.circular(29),
             child: MaterialButton(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-              minWidth: 1.w * 0.8,
+              minWidth: 0.8.w,
               color: Colors.deepOrange,
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => SignInMerchantScreen());
+              },
               child: const Text(
-                "Continue as Guest",
+                "Login as merchant",
                 style: TextStyle(color: Colors.white),
               ),
             ),

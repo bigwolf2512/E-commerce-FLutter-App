@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../share/constant/constant.dart';
 
@@ -36,7 +35,7 @@ class _CartHeaderState extends State<CartHeader> {
                       shape: BoxShape.circle,
                       color: Colors.deepOrange,
                       image: DecorationImage(
-                          image: NetworkImage(admin), fit: BoxFit.cover)),
+                          image: NetworkImage(''), fit: BoxFit.cover)),
                 ),
               ),
               Column(

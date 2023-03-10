@@ -1,14 +1,17 @@
-import 'package:ecommerceshop/design/extension/size_extension.dart';
-import 'package:ecommerceshop/presentation/auth/sign_in/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../data/controller/auth_controller.dart';
+import '../../../design/extension/double_extension.dart';
 import '../../../share/constant/constant.dart';
+import '../sign_in_user/sign_in_user.dart';
 import 'signup_background.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  SignUpPage({Key? key}) : super(key: key);
+
+  final AuthController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +25,21 @@ class SignUpPage extends StatelessWidget {
                   style: TextStyle(
                       decoration: TextDecoration.none,
                       fontWeight: FontWeight.bold,
-                      fontSize: 1.w * 0.05,
+                      fontSize: 0.05.w,
                       color: Colors.black)),
-              SvgPicture.asset("assets/icons/signup.svg", width: 1.w * 0.8),
-              SizedBox(height: 1.h * 0.01),
+              SvgPicture.asset("assets/icons/signup.svg", width: 0.8.w),
+              SizedBox(height: 0.01.h),
               Container(
                   margin: const EdgeInsets.symmetric(vertical: 0),
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                  width: 1.w * 0.8,
+                  width: 0.8.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(29),
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
+                    controller: controller.fullName,
                     decoration: InputDecoration(
                         hintText: "Full Name",
                         icon: Icon(Icons.person, color: kPrimaryColor),
@@ -45,12 +49,13 @@ class SignUpPage extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                  width: 1.w * 0.8,
+                  width: 0.8.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(29),
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
+                    controller: controller.email,
                     decoration: InputDecoration(
                         hintText: "Email",
                         icon: Icon(Icons.mail, color: kPrimaryColor),
@@ -59,12 +64,13 @@ class SignUpPage extends StatelessWidget {
               Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                  width: 1.w * 0.8,
+                  width: 0.8.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(29),
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
+                    controller: controller.phoneNumber,
                     decoration: InputDecoration(
                         hintText: "Phone number",
                         icon: Icon(Icons.phone, color: kPrimaryColor),
@@ -74,37 +80,57 @@ class SignUpPage extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                  width: 1.w * 0.8,
+                  width: 0.8.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(29),
                     color: kPrimaryLightColor,
                   ),
                   child: TextField(
                     obscureText: true,
+                    controller: controller.password,
                     decoration: InputDecoration(
                         hintText: "Password",
                         icon: Icon(Icons.lock, color: kPrimaryColor),
                         border: InputBorder.none),
                   )),
-              SizedBox(height: 1.h * 0.01),
+              SizedBox(height: 0.01.h),
               ClipRRect(
                 borderRadius: BorderRadius.circular(29),
                 child: MaterialButton(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                  minWidth: 1.w * 0.8,
+                  minWidth: 0.8.w,
                   color: kPrimaryColor,
-                  onPressed: () {},
+                  onPressed: () async {
+                    await controller.onSignUpUser(false);
+                  },
                   child: const Text(
                     "Sign Up",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
-              SizedBox(height: 1.h * 0.01),
+              SizedBox(height: 0.01.h),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(29),
+                child: MaterialButton(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  minWidth: 0.8.w,
+                  color: kActiveColor,
+                  onPressed: () async {
+                    await controller.onSignUpUser(true);
+                  },
+                  child: const Text(
+                    "Sign Up As Merchant",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(height: 0.01.h),
               GestureDetector(
                 onTap: () {
-                  Get.to(SignInPage());
+                  Get.to(() => SignInUserScreen());
                 },
                 child: Text(
                   'Already have an account? Let Sign In!',

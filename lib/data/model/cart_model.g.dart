@@ -17,6 +17,6 @@ _$_CartModel _$$_CartModelFromJson(Map<String, dynamic> json) => _$_CartModel(
 
 Map<String, dynamic> _$$_CartModelToJson(_$_CartModel instance) =>
     <String, dynamic>{
-      'user': instance.user,
-      'products': instance.products,
+      'user': instance.user?.toJson(),
+      'products': instance.products?.map((e) => e.toJson()).toList(),
     };

@@ -28,7 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.2.0
-  cloud_firestore: ^4.4.2
+  cloud_firestore: ^4.4.3
   cupertino_icons: ^1.0.2
   dots_indicator: ^2.1.0
   double_back_to_close_app: ^2.1.0
@@ -42,12 +42,15 @@ dependencies:
   go_router: ^6.2.0
   http: ^0.13.4
   http_auth: ^1.0.1
+  infinite_scroll_pagination: ^3.2.0
   json_annotation: ^4.8.0
+  persistent_bottom_nav_bar: ^5.0.2
   progress_state_button: ^1.0.4
   shared_preferences: ^2.0.13
   smooth_page_indicator: ^1.0.0+2
   splashscreen: ^1.3.5
   transparent_image: ^2.0.0
+  uuid: ^3.0.7
   webview_flutter: ^3.0.4
 
 dev_dependencies:

@@ -1,4 +1,4 @@
-import 'package:ecommerceshop/design/extension/size_extension.dart';
+import 'package:ecommerceshop/design/extension/double_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -23,11 +23,10 @@ class _PaymentBodyState extends State<PaymentBody> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('Name',
-              style: TextStyle(
-                  fontSize: 1.w * 0.05, fontWeight: FontWeight.normal)),
+              style:
+                  TextStyle(fontSize: 10.05.w, fontWeight: FontWeight.normal)),
           Text('price',
-              style: TextStyle(
-                  fontSize: 1.w * 0.05, fontWeight: FontWeight.normal))
+              style: TextStyle(fontSize: 0.05.w, fontWeight: FontWeight.normal))
         ],
       ),
     );
@@ -37,7 +36,7 @@ class _PaymentBodyState extends State<PaymentBody> {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            height: 1.h * 0.12,
+            height: 0.12.h,
             width: double.maxFinite,
             color: Colors.white,
             child: Column(
@@ -45,13 +44,13 @@ class _PaymentBodyState extends State<PaymentBody> {
               children: [
                 Text(
                   'Payment Method',
-                  style: TextStyle(
-                      fontSize: 1.w * 0.08, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontSize: 0.08.w, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   '2 methods',
                   style: TextStyle(
-                      fontSize: 1.w * 0.04,
+                      fontSize: 10.04.w,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey.withOpacity(0.8)),
                 ),
@@ -70,12 +69,12 @@ class _PaymentBodyState extends State<PaymentBody> {
                 width: 1.9,
               ),
             )),
-            height: 1.h * 0.35,
+            height: 0.35.h,
             width: double.maxFinite,
             child: Column(
               children: [
                 SizedBox(
-                  height: 1.h * 0.3,
+                  height: 0.3.h,
                   width: double.maxFinite,
                   child: PageView.builder(
                     scrollDirection: Axis.horizontal,
@@ -121,7 +120,7 @@ class _PaymentBodyState extends State<PaymentBody> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            height: 1.h * 0.19,
+            height: 0.19.h,
             width: double.maxFinite,
             child: Column(
               children: [
@@ -130,12 +129,10 @@ class _PaymentBodyState extends State<PaymentBody> {
                   children: [
                     Text('Sub Total',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05,
-                            fontWeight: FontWeight.normal)),
+                            fontSize: 0.05.w, fontWeight: FontWeight.normal)),
                     Text('sub total',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05,
-                            fontWeight: FontWeight.normal))
+                            fontSize: 0.05.w, fontWeight: FontWeight.normal))
                   ],
                 ),
                 Row(
@@ -143,26 +140,24 @@ class _PaymentBodyState extends State<PaymentBody> {
                   children: [
                     Text('Tax',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05,
-                            fontWeight: FontWeight.normal)),
+                            fontSize: 0.05.w, fontWeight: FontWeight.normal)),
                     Text('price',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05,
-                            fontWeight: FontWeight.normal))
+                            fontSize: 0.05.w, fontWeight: FontWeight.normal))
                   ],
                 ),
                 SizedBox(
-                  height: 1.h * 0.01,
+                  height: 0.01.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Total',
                         style: TextStyle(
-                            fontSize: 1.w * 0.08, fontWeight: FontWeight.bold)),
+                            fontSize: 0.08.w, fontWeight: FontWeight.bold)),
                     Text('total',
                         style: TextStyle(
-                            fontSize: 1.w * 0.05, fontWeight: FontWeight.bold))
+                            fontSize: 0.05.w, fontWeight: FontWeight.bold))
                   ],
                 ),
               ],

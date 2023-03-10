@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,10 +31,10 @@ class ItemsPageView_Header extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: const ButtonFlat(
+                  child: ButtonFlat(
                     color: kSecondaryColor,
                     itemsNumber: 0,
-                    images: 'assets/icons/Back ICon.svg',
+                    icon: Icon(CupertinoIcons.back),
                     padding: 16,
                   ),
                 ),

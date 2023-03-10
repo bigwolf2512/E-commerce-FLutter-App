@@ -6,16 +6,16 @@ part 'product_model.g.dart';
 @freezed
 class ProductModel with _$ProductModel {
   const factory ProductModel({
-    int? id,
+    String? id,
     String? name,
     int? price,
     String? description,
     int? quantity,
     String? status,
     String? image,
-    int? sellerId,
-    String? createdAt,
-    String? updatedAt,
+    String? sellerId,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, Object?> json) =>

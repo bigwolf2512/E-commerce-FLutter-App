@@ -1,5 +1,5 @@
 import 'package:ecommerceshop/data/controller/cart_controller.dart';
-import 'package:ecommerceshop/design/extension/size_extension.dart';
+import 'package:ecommerceshop/design/extension/double_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'widget/order_body.dart';
@@ -19,8 +19,8 @@ class OrderPage extends StatelessWidget {
               onTap: () {},
               child: Container(
                 margin: const EdgeInsets.only(right: 10),
-                height: 1.h * 0.05,
-                width: 1.h * 0.05,
+                height: 0.05.h,
+                width: 0.05.h,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(

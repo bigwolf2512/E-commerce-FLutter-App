@@ -9,11 +9,11 @@ part 'regular_user_model.g.dart';
 @freezed
 class RegularUserModel with _$RegularUserModel {
   const factory RegularUserModel({
-    int? id,
     String? name,
     String? email,
-    String? phoneNumber,
     String? address,
+    String? avatar,
+    String? password,
     List<ProductModel>? productOnCart,
     List<OrderModel>? orders,
   }) = _RegularUserModel;

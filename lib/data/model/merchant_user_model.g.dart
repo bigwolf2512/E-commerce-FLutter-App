@@ -8,11 +8,11 @@ part of 'merchant_user_model.dart';
 
 _$_MerchantUserModel _$$_MerchantUserModelFromJson(Map<String, dynamic> json) =>
     _$_MerchantUserModel(
-      id: json['id'] as int?,
       name: json['name'] as String?,
       email: json['email'] as String?,
-      storePhoneNumber: json['storePhoneNumber'] as String?,
       storeAddress: json['storeAddress'] as String?,
+      password: json['password'] as String?,
+      avatar: json['avatar'] as String?,
       productOnSale: (json['productOnSale'] as List<dynamic>?)
           ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -24,11 +24,11 @@ _$_MerchantUserModel _$$_MerchantUserModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_MerchantUserModelToJson(
         _$_MerchantUserModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'name': instance.name,
       'email': instance.email,
-      'storePhoneNumber': instance.storePhoneNumber,
       'storeAddress': instance.storeAddress,
-      'productOnSale': instance.productOnSale,
-      'orders': instance.orders,
+      'password': instance.password,
+      'avatar': instance.avatar,
+      'productOnSale': instance.productOnSale?.map((e) => e.toJson()).toList(),
+      'orders': instance.orders?.map((e) => e.toJson()).toList(),
     };

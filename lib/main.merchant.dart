@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'independences.dart' as dep;
-import 'presentation/auth/sign_in/sign_in.dart';
+import 'presentation/auth/sign_in_user/sign_in_user.dart';
 import 'share/constant/constant.dart';
 
 Future<void> main() async {
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: SignInPage(),
+      home: SignInUserScreen(),
     );
   }
 }

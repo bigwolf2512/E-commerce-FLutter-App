@@ -20,11 +20,11 @@ RegularUserModel _$RegularUserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RegularUserModel {
-  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  String? get phoneNumber => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
   List<ProductModel>? get productOnCart => throw _privateConstructorUsedError;
   List<OrderModel>? get orders => throw _privateConstructorUsedError;
 
@@ -41,11 +41,11 @@ abstract class $RegularUserModelCopyWith<$Res> {
       _$RegularUserModelCopyWithImpl<$Res, RegularUserModel>;
   @useResult
   $Res call(
-      {int? id,
-      String? name,
+      {String? name,
       String? email,
-      String? phoneNumber,
       String? address,
+      String? avatar,
+      String? password,
       List<ProductModel>? productOnCart,
       List<OrderModel>? orders});
 }
@@ -63,19 +63,15 @@ class _$RegularUserModelCopyWithImpl<$Res, $Val extends RegularUserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? email = freezed,
-    Object? phoneNumber = freezed,
     Object? address = freezed,
+    Object? avatar = freezed,
+    Object? password = freezed,
     Object? productOnCart = freezed,
     Object? orders = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -84,13 +80,17 @@ class _$RegularUserModelCopyWithImpl<$Res, $Val extends RegularUserModel>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      phoneNumber: freezed == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String?,
       productOnCart: freezed == productOnCart
           ? _value.productOnCart
@@ -113,11 +113,11 @@ abstract class _$$_RegularUserModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      String? name,
+      {String? name,
       String? email,
-      String? phoneNumber,
       String? address,
+      String? avatar,
+      String? password,
       List<ProductModel>? productOnCart,
       List<OrderModel>? orders});
 }
@@ -133,19 +133,15 @@ class __$$_RegularUserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? email = freezed,
-    Object? phoneNumber = freezed,
     Object? address = freezed,
+    Object? avatar = freezed,
+    Object? password = freezed,
     Object? productOnCart = freezed,
     Object? orders = freezed,
   }) {
     return _then(_$_RegularUserModel(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -154,13 +150,17 @@ class __$$_RegularUserModelCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      phoneNumber: freezed == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String?,
       productOnCart: freezed == productOnCart
           ? _value._productOnCart
@@ -178,11 +178,11 @@ class __$$_RegularUserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RegularUserModel implements _RegularUserModel {
   const _$_RegularUserModel(
-      {this.id,
-      this.name,
+      {this.name,
       this.email,
-      this.phoneNumber,
       this.address,
+      this.avatar,
+      this.password,
       final List<ProductModel>? productOnCart,
       final List<OrderModel>? orders})
       : _productOnCart = productOnCart,
@@ -192,15 +192,15 @@ class _$_RegularUserModel implements _RegularUserModel {
       _$$_RegularUserModelFromJson(json);
 
   @override
-  final int? id;
-  @override
   final String? name;
   @override
   final String? email;
   @override
-  final String? phoneNumber;
-  @override
   final String? address;
+  @override
+  final String? avatar;
+  @override
+  final String? password;
   final List<ProductModel>? _productOnCart;
   @override
   List<ProductModel>? get productOnCart {
@@ -223,7 +223,7 @@ class _$_RegularUserModel implements _RegularUserModel {
 
   @override
   String toString() {
-    return 'RegularUserModel(id: $id, name: $name, email: $email, phoneNumber: $phoneNumber, address: $address, productOnCart: $productOnCart, orders: $orders)';
+    return 'RegularUserModel(name: $name, email: $email, address: $address, avatar: $avatar, password: $password, productOnCart: $productOnCart, orders: $orders)';
   }
 
   @override
@@ -231,12 +231,12 @@ class _$_RegularUserModel implements _RegularUserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RegularUserModel &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
             const DeepCollectionEquality()
                 .equals(other._productOnCart, _productOnCart) &&
             const DeepCollectionEquality().equals(other._orders, _orders));
@@ -246,11 +246,11 @@ class _$_RegularUserModel implements _RegularUserModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
       name,
       email,
-      phoneNumber,
       address,
+      avatar,
+      password,
       const DeepCollectionEquality().hash(_productOnCart),
       const DeepCollectionEquality().hash(_orders));
 
@@ -270,11 +270,11 @@ class _$_RegularUserModel implements _RegularUserModel {
 
 abstract class _RegularUserModel implements RegularUserModel {
   const factory _RegularUserModel(
-      {final int? id,
-      final String? name,
+      {final String? name,
       final String? email,
-      final String? phoneNumber,
       final String? address,
+      final String? avatar,
+      final String? password,
       final List<ProductModel>? productOnCart,
       final List<OrderModel>? orders}) = _$_RegularUserModel;
 
@@ -282,15 +282,15 @@ abstract class _RegularUserModel implements RegularUserModel {
       _$_RegularUserModel.fromJson;
 
   @override
-  int? get id;
-  @override
   String? get name;
   @override
   String? get email;
   @override
-  String? get phoneNumber;
-  @override
   String? get address;
+  @override
+  String? get avatar;
+  @override
+  String? get password;
   @override
   List<ProductModel>? get productOnCart;
   @override

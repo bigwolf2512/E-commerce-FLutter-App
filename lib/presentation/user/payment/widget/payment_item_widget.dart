@@ -27,7 +27,7 @@ class items extends StatelessWidget {
               ),
               color: Colors.deepPurple,
               image: DecorationImage(
-                image: NetworkImage(imagePayment[index]),
+                image: NetworkImage(''),
                 fit: BoxFit.cover,
               ),
             ),

@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+import '../../../design/extension/double_extension.dart';
 
 class ListRecommendedFood extends StatelessWidget {
   const ListRecommendedFood({Key? key, required this.productID})
@@ -15,8 +15,8 @@ class ListRecommendedFood extends StatelessWidget {
       onTap: () {},
       child: Container(
         margin: const EdgeInsets.only(left: 15),
-        height: 1.h * 0.2,
-        width: 1.w * 0.5,
+        height: 0.2.h,
+        width: 0.5.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Colors.primaries[Random().nextInt(Colors.primaries.length)]

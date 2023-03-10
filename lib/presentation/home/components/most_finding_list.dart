@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:ecommerceshop/design/extension/size_extension.dart';
 import 'package:flutter/material.dart';
 
+import '../../../design/extension/double_extension.dart';
 import '../../../share/constant/constant.dart';
 
 class ListMostFinding extends StatelessWidget {
@@ -15,8 +15,8 @@ class ListMostFinding extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(left: 15),
-          height: 1.h * 0.2,
-          width: 1.w * 0.6,
+          height: 0.2.h,
+          width: 0.6.w,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color:

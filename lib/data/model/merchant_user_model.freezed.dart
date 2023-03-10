@@ -20,11 +20,11 @@ MerchantUserModel _$MerchantUserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MerchantUserModel {
-  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  String? get storePhoneNumber => throw _privateConstructorUsedError;
   String? get storeAddress => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
   List<ProductModel>? get productOnSale => throw _privateConstructorUsedError;
   List<OrderModel>? get orders => throw _privateConstructorUsedError;
 
@@ -41,11 +41,11 @@ abstract class $MerchantUserModelCopyWith<$Res> {
       _$MerchantUserModelCopyWithImpl<$Res, MerchantUserModel>;
   @useResult
   $Res call(
-      {int? id,
-      String? name,
+      {String? name,
       String? email,
-      String? storePhoneNumber,
       String? storeAddress,
+      String? password,
+      String? avatar,
       List<ProductModel>? productOnSale,
       List<OrderModel>? orders});
 }
@@ -63,19 +63,15 @@ class _$MerchantUserModelCopyWithImpl<$Res, $Val extends MerchantUserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? email = freezed,
-    Object? storePhoneNumber = freezed,
     Object? storeAddress = freezed,
+    Object? password = freezed,
+    Object? avatar = freezed,
     Object? productOnSale = freezed,
     Object? orders = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -84,13 +80,17 @@ class _$MerchantUserModelCopyWithImpl<$Res, $Val extends MerchantUserModel>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      storePhoneNumber: freezed == storePhoneNumber
-          ? _value.storePhoneNumber
-          : storePhoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
       storeAddress: freezed == storeAddress
           ? _value.storeAddress
           : storeAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
       productOnSale: freezed == productOnSale
           ? _value.productOnSale
@@ -113,11 +113,11 @@ abstract class _$$_MerchantUserModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      String? name,
+      {String? name,
       String? email,
-      String? storePhoneNumber,
       String? storeAddress,
+      String? password,
+      String? avatar,
       List<ProductModel>? productOnSale,
       List<OrderModel>? orders});
 }
@@ -133,19 +133,15 @@ class __$$_MerchantUserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? email = freezed,
-    Object? storePhoneNumber = freezed,
     Object? storeAddress = freezed,
+    Object? password = freezed,
+    Object? avatar = freezed,
     Object? productOnSale = freezed,
     Object? orders = freezed,
   }) {
     return _then(_$_MerchantUserModel(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -154,13 +150,17 @@ class __$$_MerchantUserModelCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      storePhoneNumber: freezed == storePhoneNumber
-          ? _value.storePhoneNumber
-          : storePhoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
       storeAddress: freezed == storeAddress
           ? _value.storeAddress
           : storeAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
       productOnSale: freezed == productOnSale
           ? _value._productOnSale
@@ -178,11 +178,11 @@ class __$$_MerchantUserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MerchantUserModel implements _MerchantUserModel {
   const _$_MerchantUserModel(
-      {this.id,
-      this.name,
+      {this.name,
       this.email,
-      this.storePhoneNumber,
       this.storeAddress,
+      this.password,
+      this.avatar,
       final List<ProductModel>? productOnSale,
       final List<OrderModel>? orders})
       : _productOnSale = productOnSale,
@@ -192,15 +192,15 @@ class _$_MerchantUserModel implements _MerchantUserModel {
       _$$_MerchantUserModelFromJson(json);
 
   @override
-  final int? id;
-  @override
   final String? name;
   @override
   final String? email;
   @override
-  final String? storePhoneNumber;
-  @override
   final String? storeAddress;
+  @override
+  final String? password;
+  @override
+  final String? avatar;
   final List<ProductModel>? _productOnSale;
   @override
   List<ProductModel>? get productOnSale {
@@ -223,7 +223,7 @@ class _$_MerchantUserModel implements _MerchantUserModel {
 
   @override
   String toString() {
-    return 'MerchantUserModel(id: $id, name: $name, email: $email, storePhoneNumber: $storePhoneNumber, storeAddress: $storeAddress, productOnSale: $productOnSale, orders: $orders)';
+    return 'MerchantUserModel(name: $name, email: $email, storeAddress: $storeAddress, password: $password, avatar: $avatar, productOnSale: $productOnSale, orders: $orders)';
   }
 
   @override
@@ -231,13 +231,13 @@ class _$_MerchantUserModel implements _MerchantUserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MerchantUserModel &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.storePhoneNumber, storePhoneNumber) ||
-                other.storePhoneNumber == storePhoneNumber) &&
             (identical(other.storeAddress, storeAddress) ||
                 other.storeAddress == storeAddress) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
             const DeepCollectionEquality()
                 .equals(other._productOnSale, _productOnSale) &&
             const DeepCollectionEquality().equals(other._orders, _orders));
@@ -247,11 +247,11 @@ class _$_MerchantUserModel implements _MerchantUserModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
       name,
       email,
-      storePhoneNumber,
       storeAddress,
+      password,
+      avatar,
       const DeepCollectionEquality().hash(_productOnSale),
       const DeepCollectionEquality().hash(_orders));
 
@@ -272,11 +272,11 @@ class _$_MerchantUserModel implements _MerchantUserModel {
 
 abstract class _MerchantUserModel implements MerchantUserModel {
   const factory _MerchantUserModel(
-      {final int? id,
-      final String? name,
+      {final String? name,
       final String? email,
-      final String? storePhoneNumber,
       final String? storeAddress,
+      final String? password,
+      final String? avatar,
       final List<ProductModel>? productOnSale,
       final List<OrderModel>? orders}) = _$_MerchantUserModel;
 
@@ -284,15 +284,15 @@ abstract class _MerchantUserModel implements MerchantUserModel {
       _$_MerchantUserModel.fromJson;
 
   @override
-  int? get id;
-  @override
   String? get name;
   @override
   String? get email;
   @override
-  String? get storePhoneNumber;
-  @override
   String? get storeAddress;
+  @override
+  String? get password;
+  @override
+  String? get avatar;
   @override
   List<ProductModel>? get productOnSale;
   @override

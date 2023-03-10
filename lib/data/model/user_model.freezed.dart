@@ -20,7 +20,8 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  String? get token => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
   bool? get isRegisterMerchant => throw _privateConstructorUsedError;
   MerchantUserModel? get merchantUser => throw _privateConstructorUsedError;
   RegularUserModel? get regularUser => throw _privateConstructorUsedError;
@@ -37,7 +38,8 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String? token,
+      {String? id,
+      String? phoneNumber,
       bool? isRegisterMerchant,
       MerchantUserModel? merchantUser,
       RegularUserModel? regularUser});
@@ -59,15 +61,20 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = freezed,
+    Object? id = freezed,
+    Object? phoneNumber = freezed,
     Object? isRegisterMerchant = freezed,
     Object? merchantUser = freezed,
     Object? regularUser = freezed,
   }) {
     return _then(_value.copyWith(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       isRegisterMerchant: freezed == isRegisterMerchant
           ? _value.isRegisterMerchant
@@ -117,7 +124,8 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? token,
+      {String? id,
+      String? phoneNumber,
       bool? isRegisterMerchant,
       MerchantUserModel? merchantUser,
       RegularUserModel? regularUser});
@@ -139,15 +147,20 @@ class __$$_UserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = freezed,
+    Object? id = freezed,
+    Object? phoneNumber = freezed,
     Object? isRegisterMerchant = freezed,
     Object? merchantUser = freezed,
     Object? regularUser = freezed,
   }) {
     return _then(_$_UserModel(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       isRegisterMerchant: freezed == isRegisterMerchant
           ? _value.isRegisterMerchant
@@ -169,7 +182,8 @@ class __$$_UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
   const _$_UserModel(
-      {this.token,
+      {this.id,
+      this.phoneNumber,
       this.isRegisterMerchant,
       this.merchantUser,
       this.regularUser});
@@ -178,7 +192,9 @@ class _$_UserModel implements _UserModel {
       _$$_UserModelFromJson(json);
 
   @override
-  final String? token;
+  final String? id;
+  @override
+  final String? phoneNumber;
   @override
   final bool? isRegisterMerchant;
   @override
@@ -188,7 +204,7 @@ class _$_UserModel implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(token: $token, isRegisterMerchant: $isRegisterMerchant, merchantUser: $merchantUser, regularUser: $regularUser)';
+    return 'UserModel(id: $id, phoneNumber: $phoneNumber, isRegisterMerchant: $isRegisterMerchant, merchantUser: $merchantUser, regularUser: $regularUser)';
   }
 
   @override
@@ -196,7 +212,9 @@ class _$_UserModel implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            (identical(other.token, token) || other.token == token) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
             (identical(other.isRegisterMerchant, isRegisterMerchant) ||
                 other.isRegisterMerchant == isRegisterMerchant) &&
             (identical(other.merchantUser, merchantUser) ||
@@ -207,8 +225,8 @@ class _$_UserModel implements _UserModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, token, isRegisterMerchant, merchantUser, regularUser);
+  int get hashCode => Object.hash(runtimeType, id, phoneNumber,
+      isRegisterMerchant, merchantUser, regularUser);
 
   @JsonKey(ignore: true)
   @override
@@ -226,7 +244,8 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {final String? token,
+      {final String? id,
+      final String? phoneNumber,
       final bool? isRegisterMerchant,
       final MerchantUserModel? merchantUser,
       final RegularUserModel? regularUser}) = _$_UserModel;
@@ -235,7 +254,9 @@ abstract class _UserModel implements UserModel {
       _$_UserModel.fromJson;
 
   @override
-  String? get token;
+  String? get id;
+  @override
+  String? get phoneNumber;
   @override
   bool? get isRegisterMerchant;
   @override

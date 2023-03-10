@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/controller/auth_controller.dart';
-import '../../../share/constant/constant.dart';
 
 class PersonalPage extends StatefulWidget {
   const PersonalPage({Key? key}) : super(key: key);
@@ -37,7 +34,7 @@ class _PersonalPageState extends State<PersonalPage> {
                   background: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage(admin), fit: BoxFit.cover),
+                            image: NetworkImage(''), fit: BoxFit.cover),
                         borderRadius: BorderRadius.all(Radius.circular(25))),
                   ),
                   // title: Text(

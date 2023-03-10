@@ -20,16 +20,16 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductModel {
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  int? get sellerId => throw _privateConstructorUsedError;
-  String? get createdAt => throw _privateConstructorUsedError;
-  String? get updatedAt => throw _privateConstructorUsedError;
+  String? get sellerId => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,16 +44,16 @@ abstract class $ProductModelCopyWith<$Res> {
       _$ProductModelCopyWithImpl<$Res, ProductModel>;
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? name,
       int? price,
       String? description,
       int? quantity,
       String? status,
       String? image,
-      int? sellerId,
-      String? createdAt,
-      String? updatedAt});
+      String? sellerId,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -84,7 +84,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -112,15 +112,15 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       sellerId: freezed == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -134,16 +134,16 @@ abstract class _$$_ProductModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {String? id,
       String? name,
       int? price,
       String? description,
       int? quantity,
       String? status,
       String? image,
-      int? sellerId,
-      String? createdAt,
-      String? updatedAt});
+      String? sellerId,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -172,7 +172,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -200,15 +200,15 @@ class __$$_ProductModelCopyWithImpl<$Res>
       sellerId: freezed == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
     ));
   }
 }
@@ -232,7 +232,7 @@ class _$_ProductModel implements _ProductModel {
       _$$_ProductModelFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
   final String? name;
   @override
@@ -246,11 +246,11 @@ class _$_ProductModel implements _ProductModel {
   @override
   final String? image;
   @override
-  final int? sellerId;
+  final String? sellerId;
   @override
-  final String? createdAt;
+  final DateTime? createdAt;
   @override
-  final String? updatedAt;
+  final DateTime? updatedAt;
 
   @override
   String toString() {
@@ -300,22 +300,22 @@ class _$_ProductModel implements _ProductModel {
 
 abstract class _ProductModel implements ProductModel {
   const factory _ProductModel(
-      {final int? id,
+      {final String? id,
       final String? name,
       final int? price,
       final String? description,
       final int? quantity,
       final String? status,
       final String? image,
-      final int? sellerId,
-      final String? createdAt,
-      final String? updatedAt}) = _$_ProductModel;
+      final String? sellerId,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$_ProductModel.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
   String? get name;
   @override
@@ -329,11 +329,11 @@ abstract class _ProductModel implements ProductModel {
   @override
   String? get image;
   @override
-  int? get sellerId;
+  String? get sellerId;
   @override
-  String? get createdAt;
+  DateTime? get createdAt;
   @override
-  String? get updatedAt;
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>

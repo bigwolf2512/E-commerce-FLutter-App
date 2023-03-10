@@ -1,15 +1,17 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
-import 'data/api/api_client.dart';
 import 'data/controller/auth_controller.dart';
 import 'data/repo/auth_repo.dart';
 
 Future<void> init() async {
-  Get.lazyPut(() => SharedPreferences.getInstance());
+  final sharedPreferences = await SharedPreferences.getInstance();
 
-  Get.lazyPut<ApiClient>(() => ApiClient());
+  Get.lazyPut<Uuid>(() => Uuid());
 
-  Get.lazyPut<AuthRepo>(() => AuthRepo(sharedPreferences: Get.find()));
-  Get.lazyPut<AuthController>(() => AuthController());
+  Get.lazyPut<AuthRepo>(() => AuthRepo(sharedPreferences));
+
+  Get.lazyPut<AuthController>(
+      () => AuthController(Get.find(), sharedPreferences));
 }
