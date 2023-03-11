@@ -1,13 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'regular_user_model.dart';
+part of 'buyer_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RegularUserModel _$$_RegularUserModelFromJson(Map<String, dynamic> json) =>
-    _$_RegularUserModel(
+_$_BuyerModel _$$_BuyerModelFromJson(Map<String, dynamic> json) =>
+    _$_BuyerModel(
+      id: json['id'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
       address: json['address'] as String?,
@@ -21,8 +23,10 @@ _$_RegularUserModel _$$_RegularUserModelFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_RegularUserModelToJson(_$_RegularUserModel instance) =>
+Map<String, dynamic> _$$_BuyerModelToJson(_$_BuyerModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'phoneNumber': instance.phoneNumber,
       'name': instance.name,
       'email': instance.email,
       'address': instance.address,

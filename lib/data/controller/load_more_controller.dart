@@ -4,14 +4,14 @@ import '../firebase/firebase_curd_core.dart';
 
 class LoadMoreController<T> extends GetxController {
   LoadMoreController({
+    this.id,
     required this.pathCollection,
-    required this.id,
     required this.fromJson,
   }) {
     initController();
   }
   final String pathCollection;
-  final String id;
+  String? id;
   final T Function(Map<String, dynamic> json) fromJson;
   late LoadMoreRepo<T> repo;
 
@@ -19,12 +19,18 @@ class LoadMoreController<T> extends GetxController {
     repo = LoadMoreRepo<T>(
         pathCollection: pathCollection, fromJsonFunction: fromJson);
     getAll();
+    update();
   }
 
   List<T> data = [];
 
   getAll() async {
-    data = await repo.getAll();
+    if (id != null) {
+      data = await repo.getAll(id: id, field: 'storeId');
+    } else {
+      data = await repo.getAll();
+    }
+
     update();
   }
 }

@@ -1,23 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../helper/navigator_helper.dart';
+import '../../helper/pop_up_helper.dart';
 import '../../presentation/auth/sign_in_user/sign_in_user.dart';
 import '../../presentation/auth/sing_in_merchant/sign_in_merchant_screen.dart';
+import '../../presentation/auth/welcome_screen/welcome_screen.dart';
 import '../../presentation/home/home_screen.dart';
+import '../../presentation/merchant/setup_store/setup_store_screen.dart';
+import '../../share/widget/loading_indicator.dart';
 import '../constant/path_collection.dart';
 import '../constant/path_spref.dart';
-import '../model/merchant_user_model.dart';
-import '../model/regular_user_model.dart';
-import '../model/user_model.dart';
+import '../model/buyer_model.dart';
+import '../model/seller_model.dart';
 import '../repo/auth_repo.dart';
 
 class AuthController extends GetxController {
-  AuthController(this.authRepo, this.sharedPreferences);
+  AuthController(this.sellerRepo, this.buyerRepo, this.sharedPreferences);
 
-  final AuthRepo authRepo;
+  final SellerAuthRepo sellerRepo;
+  final BuyerAuthRepo buyerRepo;
   final SharedPreferences sharedPreferences;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
@@ -26,92 +32,157 @@ class AuthController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
 
-  onSignIn(bool isMerchant) async {
-    if (phoneNumber.text.isEmpty || password.text.isEmpty) return;
+  final storeName = TextEditingController();
+  final storeAddress = TextEditingController();
+  final storeAvatar = TextEditingController();
 
-    final CollectionReference response =
-        firebaseFirestore.collection(kPathCollectionUser);
+  onSignIn(bool isSeller, BuildContext context) async {
+    try {
+      if (phoneNumber.text.isEmpty || password.text.isEmpty) return;
 
-    var documentReference =
-        response.where('phoneNumber', isEqualTo: phoneNumber.text);
+      LoadingIndicator.show(context);
 
-    final result = await documentReference.get();
+      final CollectionReference response;
 
-    if (isMerchant) {
-      final merchantUser =
-          MerchantUserModel.fromJson(result.docs.first.get('merchantUser'));
-
-      if (merchantUser.password == password.text) {
-        debugPrint('success merchantUser');
-
-        if (!sharedPreferences.containsKey(kPathPrefUserId)) {
-          sharedPreferences.setString(kPathPrefUserId, merchantUser.name ?? '');
-        }
-
-        Get.offAll(() => HomePage());
+      if (isSeller) {
+        response = firebaseFirestore.collection(kPathCollectionSeller);
+      } else {
+        response = firebaseFirestore.collection(kPathCollectionBuyer);
       }
-    } else {
-      final regularUser =
-          RegularUserModel.fromJson(result.docs.first.get('regularUser'));
 
-      if (regularUser.password == password.text) {
-        debugPrint('success regularUser');
+      var documentReference =
+          response.where('phoneNumber', isEqualTo: phoneNumber.text);
 
-        if (!sharedPreferences.containsKey(kPathPrefUserId)) {
-          sharedPreferences
-            ..setString(kPathPrefUserId, regularUser.name ?? '')
-            ..setBool(kPathPrefUserCheck, false);
-        }
+      final result = await documentReference.get();
 
-        Get.offAll(() => HomePage());
+      if (result.size == 0) {
+        LoadingIndicator.hide(context);
+        return PopupHelper.showToastError(
+            msg: 'Phone number or password is wrong, try again');
       }
+
+      if (isSeller) {
+        final SellerModel sellerModel = SellerModel.fromJson(
+            result.docs.first.data() as Map<String, dynamic>);
+        if (password.text == sellerModel.password) {
+          if (!sharedPreferences.containsKey(kPathPrefUserId)) {
+            sharedPreferences
+              ..setString(kPathPrefUserId, sellerModel.id ?? '')
+              ..setBool(kPathPrefUserIsSeller, true);
+          }
+          LoadingIndicator.hide(context);
+          Get.lazyPut<SellerModel>(() => sellerModel);
+
+          if (sellerModel.isSetupStore) {
+            Push.to(context, HomePage());
+          } else {
+            Push.to(context, SetupStoreScreen());
+          }
+        }
+      } else {
+        final BuyerModel buyerModel = BuyerModel.fromJson(
+            result.docs.first.data() as Map<String, dynamic>);
+        if (password.text == buyerModel.password) {
+          if (!sharedPreferences.containsKey(kPathPrefUserId)) {
+            sharedPreferences
+              ..setString(kPathPrefUserId, buyerModel.id ?? '')
+              ..setBool(kPathPrefUserIsSeller, false);
+          }
+          LoadingIndicator.hide(context);
+          Get
+            ..lazyPut<BuyerModel>(() => buyerModel)
+            ..offAll(() => HomePage());
+        }
+      }
+    } catch (e) {
+      LoadingIndicator.hide(context);
     }
   }
 
-  onSignUpUser(bool isMerchant) async {
+  onSignUpUser(bool isSeller, BuildContext context) async {
     if (phoneNumber.text.isEmpty ||
         fullName.text.isEmpty ||
         email.text.isEmpty ||
         password.text.isEmpty) return null;
 
-    final CollectionReference response =
-        firebaseFirestore.collection(kPathCollectionUser);
+    LoadingIndicator.show(context);
+
+    final CollectionReference response;
+
+    if (isSeller) {
+      response = firebaseFirestore.collection(kPathCollectionSeller);
+    } else {
+      response = firebaseFirestore.collection(kPathCollectionBuyer);
+    }
 
     var documentReference =
         response.where('phoneNumber', isEqualTo: phoneNumber.text);
 
     final result = await documentReference.get();
 
-    if (result.size != 0) return;
+    if (result.size != 0) {
+      LoadingIndicator.hide(context);
+      return PopupHelper.showToastError(msg: 'Phone number exist, try again');
+    }
 
-    if (isMerchant) {
-      authRepo
-          .create(UserModel(
-              id: Get.find<Uuid>().v1(),
-              isRegisterMerchant: isMerchant,
-              phoneNumber: phoneNumber.text,
-              merchantUser: MerchantUserModel(
-                name: fullName.text,
-                email: email.text,
-                password: password.text,
-              )).toJson())
+    if (isSeller) {
+      sellerRepo
+          .create(SellerModel(
+        id: Get.find<Uuid>().v1(),
+        phoneNumber: phoneNumber.text,
+        name: fullName.text,
+        email: email.text,
+        password: password.text,
+        isSetupStore: false,
+      ).toJson())
           .whenComplete(() {
-        Get.to(() => SignInMerchantScreen());
+        LoadingIndicator.hide(context);
+        Push.to(context, SignInMerchantScreen());
       });
     } else {
-      authRepo
-          .create(UserModel(
-              id: Get.find<Uuid>().v1(),
-              isRegisterMerchant: isMerchant,
-              phoneNumber: phoneNumber.text,
-              regularUser: RegularUserModel(
-                name: fullName.text,
-                email: email.text,
-                password: password.text,
-              )).toJson())
+      buyerRepo
+          .create(BuyerModel(
+        id: Get.find<Uuid>().v1(),
+        phoneNumber: phoneNumber.text,
+        name: fullName.text,
+        email: email.text,
+        password: password.text,
+      ).toJson())
           .whenComplete(() {
-        Get.to(() => SignInUserScreen());
+        LoadingIndicator.hide(context);
+        Push.to(context, SignInUserScreen());
       });
     }
+  }
+
+  logOut(BuildContext context) {
+    sharedPreferences.clear().then((value) {
+      PersistentNavBarNavigator.pushNewScreen(
+        context,
+        screen: WelcomeScreen(),
+        withNavBar: false, // OPTIONAL VALUE. True by default.
+        pageTransitionAnimation: PageTransitionAnimation.cupertino,
+      );
+    });
+  }
+
+  onSetupStore(BuildContext context) {
+    if (storeName.text.isEmpty) return;
+    SellerModel sellerModel = Get.find();
+
+    sellerRepo
+        .update(
+            sellerModel
+                .copyWith(
+                  storeId: Get.find<Uuid>().v1(),
+                  storeName: storeName.text,
+                  storeAddress: storeAddress.text,
+                  isSetupStore: true,
+                )
+                .toJson(),
+            sellerModel.id)
+        .whenComplete(() {
+      Push.to(context, HomePage());
+    });
   }
 }

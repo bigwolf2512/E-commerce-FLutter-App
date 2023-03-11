@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import '../../../data/constant/path_spref.dart';
-import '../../../data/repo/auth_repo.dart';
+import '../../../data/repo/pref_repo.dart';
 import '../../../helper/size_helper.dart';
 import '../../../share/constant/constant.dart';
 import '../../home/home_screen.dart';
@@ -12,7 +12,7 @@ import '../welcome_screen/welcome_screen.dart';
 class SplashPage extends StatelessWidget {
   SplashPage({Key? key}) : super(key: key);
 
-  final AuthRepo authRepo = Get.find();
+  final PrefRepo repo = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +28,10 @@ class SplashPage extends StatelessWidget {
         imageBackground: AssetImage('assets/images/main_top.png'),
         loaderColor: Colors.white,
         navigateAfterSeconds:
-            authRepo.sharedPreferences.containsKey(kPathPrefUserId)
+            repo.sharedPreferences.containsKey(kPathPrefUserId)
                 ? HomePage()
                 : WelcomeScreen(),
-        onClick: () => authRepo.sharedPreferences.containsKey(kPathPrefUserId)
+        onClick: () => repo.sharedPreferences.containsKey(kPathPrefUserId)
             ? HomePage()
             : WelcomeScreen());
   }

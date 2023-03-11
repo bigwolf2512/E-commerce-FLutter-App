@@ -32,19 +32,35 @@ abstract class FirebaseCRUDCore<T> extends FirebaseCRUDCoreBase {
   }
 
   @override
-  Future<void> update(Map<String, dynamic> data, String id) async {
+  Future<void> update(Map<String, dynamic> data, String? id) async {
     final CollectionReference response =
         FirebaseFirestore.instance.collection(pathCollection);
-    DocumentReference documentReference = response.doc(id);
+    var documentReference = response.where('id', isEqualTo: id);
 
-    await documentReference.update(data);
+    final result = await documentReference.get();
+
+    final _id = result.docs.first.id;
+
+    DocumentReference doc = response.doc(_id);
+
+    await doc.update(data);
   }
 
   @override
-  Future<List<T>> getAll() async {
+  Future<List<T>> getAll({String? field, String? id}) async {
     List<T> data = [];
-    final response =
-        FirebaseFirestore.instance.collection(pathCollection).limit(100);
+    late final Query<Map<String, dynamic>> response;
+
+    if (id != null && field != null) {
+      response = FirebaseFirestore.instance
+          .collection(pathCollection)
+          .limit(100)
+          .where(field, isEqualTo: id);
+    } else {
+      response =
+          FirebaseFirestore.instance.collection(pathCollection).limit(100);
+    }
+
     final snapShot = await response.get();
 
     for (var element in snapShot.docs) {

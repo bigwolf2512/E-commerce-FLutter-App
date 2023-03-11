@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
 import '../../../design/extension/double_extension.dart';
+import '../../../helper/navigator_helper.dart';
 import '../../../share/constant/constant.dart';
 import '../sign_in_user/sign_in_user.dart';
 import '../sign_up/sign_up.dart';
@@ -36,7 +36,8 @@ class WelcomeScreen extends StatelessWidget {
               minWidth: 0.8.w,
               color: kPrimaryColor,
               onPressed: () {
-                Get.to(() => SignInUserScreen());
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => SignInUserScreen()));
               },
               child: const Text(
                 "Login",
@@ -52,7 +53,7 @@ class WelcomeScreen extends StatelessWidget {
               minWidth: 0.8.w,
               color: kPrimaryColor.withOpacity(0.5),
               onPressed: () {
-                Get.to(() => SignUpPage());
+                Push.to(context, SignUpPage());
               },
               child: const Text(
                 "Sign Up",
@@ -68,7 +69,7 @@ class WelcomeScreen extends StatelessWidget {
               minWidth: 0.8.w,
               color: Colors.deepOrange,
               onPressed: () {
-                Get.to(() => SignInMerchantScreen());
+                Push.to(context, SignInMerchantScreen());
               },
               child: const Text(
                 "Login as merchant",

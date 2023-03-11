@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../../design/extension/double_extension.dart';
+import '../../../../helper/navigator_helper.dart';
 import '../../../user/user_detail/user_detail_screen.dart';
 
 class ManageOrderAppBar extends StatelessWidget {
@@ -15,7 +15,7 @@ class ManageOrderAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: () => Get.to(PersonalPage()),
+            onTap: () => Push.to(context, PersonalPage()),
             child: Container(
               margin: const EdgeInsets.only(right: 10),
               height: 0.05.h,

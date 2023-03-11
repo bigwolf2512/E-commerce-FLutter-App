@@ -3,12 +3,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'order_model.dart';
 import 'product_model.dart';
 
-part 'regular_user_model.freezed.dart';
-part 'regular_user_model.g.dart';
+part 'buyer_model.freezed.dart';
+part 'buyer_model.g.dart';
 
 @freezed
-class RegularUserModel with _$RegularUserModel {
-  const factory RegularUserModel({
+class BuyerModel with _$BuyerModel {
+  const factory BuyerModel({
+    String? id,
+    String? phoneNumber,
     String? name,
     String? email,
     String? address,
@@ -16,8 +18,8 @@ class RegularUserModel with _$RegularUserModel {
     String? password,
     List<ProductModel>? productOnCart,
     List<OrderModel>? orders,
-  }) = _RegularUserModel;
+  }) = _BuyerModel;
 
-  factory RegularUserModel.fromJson(Map<String, Object?> json) =>
-      _$RegularUserModelFromJson(json);
+  factory BuyerModel.fromJson(Map<String, Object?> json) =>
+      _$BuyerModelFromJson(json);
 }

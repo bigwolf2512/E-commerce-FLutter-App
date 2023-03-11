@@ -11,10 +11,10 @@ _$_OrderModel _$$_OrderModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
       seller: json['seller'] == null
           ? null
-          : MerchantUserModel.fromJson(json['seller'] as Map<String, dynamic>),
+          : SellerModel.fromJson(json['seller'] as Map<String, dynamic>),
       buyer: json['buyer'] == null
           ? null
-          : RegularUserModel.fromJson(json['buyer'] as Map<String, dynamic>),
+          : BuyerModel.fromJson(json['buyer'] as Map<String, dynamic>),
       products: (json['products'] as List<dynamic>?)
           ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),

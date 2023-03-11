@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import '../merchant/manage_order/manage_order_screen.dart';
 import '../user/user_detail/user_detail_screen.dart';
 import 'home_screen_body.dart';
 
@@ -16,8 +15,8 @@ class HomePage extends StatefulWidget {
 class _MainFoodPageState extends State<HomePage> {
   final List<Widget> _buildScreens = [
     HomeScreenBody(),
-    ManageOrderScreen(),
-    ManageOrderScreen(),
+    Container(),
+    Container(),
     PersonalPage(),
   ];
 
@@ -62,7 +61,7 @@ class _MainFoodPageState extends State<HomePage> {
         backgroundColor: Colors.white, // Default is Colors.white.
         handleAndroidBackButtonPress: true, // Default is true.
         resizeToAvoidBottomInset:
-            true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+            false, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
         stateManagement: true, // Default is true.
         hideNavigationBarWhenKeyboardShows:
             true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.

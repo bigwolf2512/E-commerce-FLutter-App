@@ -20,7 +20,7 @@ CartModel _$CartModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CartModel {
-  RegularUserModel? get user => throw _privateConstructorUsedError;
+  BuyerModel? get user => throw _privateConstructorUsedError;
   List<ProductModel>? get products => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,9 +34,9 @@ abstract class $CartModelCopyWith<$Res> {
   factory $CartModelCopyWith(CartModel value, $Res Function(CartModel) then) =
       _$CartModelCopyWithImpl<$Res, CartModel>;
   @useResult
-  $Res call({RegularUserModel? user, List<ProductModel>? products});
+  $Res call({BuyerModel? user, List<ProductModel>? products});
 
-  $RegularUserModelCopyWith<$Res>? get user;
+  $BuyerModelCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as RegularUserModel?,
+              as BuyerModel?,
       products: freezed == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
@@ -69,12 +69,12 @@ class _$CartModelCopyWithImpl<$Res, $Val extends CartModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $RegularUserModelCopyWith<$Res>? get user {
+  $BuyerModelCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $RegularUserModelCopyWith<$Res>(_value.user!, (value) {
+    return $BuyerModelCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -87,10 +87,10 @@ abstract class _$$_CartModelCopyWith<$Res> implements $CartModelCopyWith<$Res> {
       __$$_CartModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({RegularUserModel? user, List<ProductModel>? products});
+  $Res call({BuyerModel? user, List<ProductModel>? products});
 
   @override
-  $RegularUserModelCopyWith<$Res>? get user;
+  $BuyerModelCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -111,7 +111,7 @@ class __$$_CartModelCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as RegularUserModel?,
+              as BuyerModel?,
       products: freezed == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ class _$_CartModel implements _CartModel {
       _$$_CartModelFromJson(json);
 
   @override
-  final RegularUserModel? user;
+  final BuyerModel? user;
   final List<ProductModel>? _products;
   @override
   List<ProductModel>? get products {
@@ -176,14 +176,14 @@ class _$_CartModel implements _CartModel {
 
 abstract class _CartModel implements CartModel {
   const factory _CartModel(
-      {final RegularUserModel? user,
+      {final BuyerModel? user,
       final List<ProductModel>? products}) = _$_CartModel;
 
   factory _CartModel.fromJson(Map<String, dynamic> json) =
       _$_CartModel.fromJson;
 
   @override
-  RegularUserModel? get user;
+  BuyerModel? get user;
   @override
   List<ProductModel>? get products;
   @override

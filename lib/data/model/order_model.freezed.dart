@@ -21,8 +21,8 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OrderModel {
   String? get id => throw _privateConstructorUsedError;
-  MerchantUserModel? get seller => throw _privateConstructorUsedError;
-  RegularUserModel? get buyer => throw _privateConstructorUsedError;
+  SellerModel? get seller => throw _privateConstructorUsedError;
+  BuyerModel? get buyer => throw _privateConstructorUsedError;
   List<ProductModel>? get products => throw _privateConstructorUsedError;
   DateTime? get boughtDate => throw _privateConstructorUsedError;
   DateTime? get receiveExpectDate => throw _privateConstructorUsedError;
@@ -41,14 +41,14 @@ abstract class $OrderModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
-      MerchantUserModel? seller,
-      RegularUserModel? buyer,
+      SellerModel? seller,
+      BuyerModel? buyer,
       List<ProductModel>? products,
       DateTime? boughtDate,
       DateTime? receiveExpectDate});
 
-  $MerchantUserModelCopyWith<$Res>? get seller;
-  $RegularUserModelCopyWith<$Res>? get buyer;
+  $SellerModelCopyWith<$Res>? get seller;
+  $BuyerModelCopyWith<$Res>? get buyer;
 }
 
 /// @nodoc
@@ -79,11 +79,11 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
       seller: freezed == seller
           ? _value.seller
           : seller // ignore: cast_nullable_to_non_nullable
-              as MerchantUserModel?,
+              as SellerModel?,
       buyer: freezed == buyer
           ? _value.buyer
           : buyer // ignore: cast_nullable_to_non_nullable
-              as RegularUserModel?,
+              as BuyerModel?,
       products: freezed == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
@@ -101,24 +101,24 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $MerchantUserModelCopyWith<$Res>? get seller {
+  $SellerModelCopyWith<$Res>? get seller {
     if (_value.seller == null) {
       return null;
     }
 
-    return $MerchantUserModelCopyWith<$Res>(_value.seller!, (value) {
+    return $SellerModelCopyWith<$Res>(_value.seller!, (value) {
       return _then(_value.copyWith(seller: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $RegularUserModelCopyWith<$Res>? get buyer {
+  $BuyerModelCopyWith<$Res>? get buyer {
     if (_value.buyer == null) {
       return null;
     }
 
-    return $RegularUserModelCopyWith<$Res>(_value.buyer!, (value) {
+    return $BuyerModelCopyWith<$Res>(_value.buyer!, (value) {
       return _then(_value.copyWith(buyer: value) as $Val);
     });
   }
@@ -134,16 +134,16 @@ abstract class _$$_OrderModelCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
-      MerchantUserModel? seller,
-      RegularUserModel? buyer,
+      SellerModel? seller,
+      BuyerModel? buyer,
       List<ProductModel>? products,
       DateTime? boughtDate,
       DateTime? receiveExpectDate});
 
   @override
-  $MerchantUserModelCopyWith<$Res>? get seller;
+  $SellerModelCopyWith<$Res>? get seller;
   @override
-  $RegularUserModelCopyWith<$Res>? get buyer;
+  $BuyerModelCopyWith<$Res>? get buyer;
 }
 
 /// @nodoc
@@ -172,11 +172,11 @@ class __$$_OrderModelCopyWithImpl<$Res>
       seller: freezed == seller
           ? _value.seller
           : seller // ignore: cast_nullable_to_non_nullable
-              as MerchantUserModel?,
+              as SellerModel?,
       buyer: freezed == buyer
           ? _value.buyer
           : buyer // ignore: cast_nullable_to_non_nullable
-              as RegularUserModel?,
+              as BuyerModel?,
       products: freezed == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -211,9 +211,9 @@ class _$_OrderModel implements _OrderModel {
   @override
   final String? id;
   @override
-  final MerchantUserModel? seller;
+  final SellerModel? seller;
   @override
-  final RegularUserModel? buyer;
+  final BuyerModel? buyer;
   final List<ProductModel>? _products;
   @override
   List<ProductModel>? get products {
@@ -277,8 +277,8 @@ class _$_OrderModel implements _OrderModel {
 abstract class _OrderModel implements OrderModel {
   const factory _OrderModel(
       {final String? id,
-      final MerchantUserModel? seller,
-      final RegularUserModel? buyer,
+      final SellerModel? seller,
+      final BuyerModel? buyer,
       final List<ProductModel>? products,
       final DateTime? boughtDate,
       final DateTime? receiveExpectDate}) = _$_OrderModel;
@@ -289,9 +289,9 @@ abstract class _OrderModel implements OrderModel {
   @override
   String? get id;
   @override
-  MerchantUserModel? get seller;
+  SellerModel? get seller;
   @override
-  RegularUserModel? get buyer;
+  BuyerModel? get buyer;
   @override
   List<ProductModel>? get products;
   @override

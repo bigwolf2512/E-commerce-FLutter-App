@@ -1,8 +1,8 @@
+import 'package:ecommerceshop/data/model/seller_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'merchant_user_model.dart';
+import 'buyer_model.dart';
 import 'product_model.dart';
-import 'regular_user_model.dart';
 
 part 'order_model.freezed.dart';
 part 'order_model.g.dart';
@@ -11,8 +11,8 @@ part 'order_model.g.dart';
 class OrderModel with _$OrderModel {
   const factory OrderModel({
     String? id,
-    MerchantUserModel? seller,
-    RegularUserModel? buyer,
+    SellerModel? seller,
+    BuyerModel? buyer,
     List<ProductModel>? products,
     DateTime? boughtDate,
     DateTime? receiveExpectDate,

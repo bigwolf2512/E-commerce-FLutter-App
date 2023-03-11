@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/constant/path_spref.dart';
-import '../../data/repo/auth_repo.dart';
+import '../../data/repo/pref_repo.dart';
 import '../../design/extension/double_extension.dart';
 import '../../share/constant/constant.dart';
 import '../../share/widget/button_flat.dart';
-import '../user/products/products_screen.dart';
 import 'components/events_list.dart';
+import 'components/list_store_widget.dart';
 import 'components/most_finding_list.dart';
-import 'components/popular_food_list.dart';
-import 'components/recommended_food_list.dart';
+import 'components/title_widget.dart';
 
 class HomeScreenBody extends StatefulWidget {
   const HomeScreenBody({Key? key}) : super(key: key);
@@ -21,27 +20,26 @@ class HomeScreenBody extends StatefulWidget {
 }
 
 class _HomeScreenBodyState extends State<HomeScreenBody> {
-  final AuthRepo authRepo = Get.find();
-  final List<Widget> _listHomeScreenBodyWidget = <Widget>[];
+  final PrefRepo repo = Get.find();
+  List<Widget> _listHomeScreenBodyWidget = <Widget>[];
 
   @override
   void initState() {
     super.initState();
-    if (authRepo.sharedPreferences.containsKey(kPathPrefUserCheck)) {
-      if (authRepo.sharedPreferences.getBool(kPathPrefUserCheck) ?? false) {
-        //** build home screen for merchant */
+    if (repo.sharedPreferences.containsKey(kPathPrefUserIsSeller)) {
+      if (repo.sharedPreferences.getBool(kPathPrefUserIsSeller) ?? false) {
         _listHomeScreenBodyWidget
           ..add(_buildAppBar())
           ..add(_buildDiscount())
-          ..add(_buildHeaderPopularFood())
+          ..add(_buildDiscount())
+          ..add(_buildDiscount())
+          ..add(TitleWidget(title: 'Your products on sale'))
           ..add(_buildListMostFinding());
       } else {
-        //** build home screen for user */
         _listHomeScreenBodyWidget
           ..add(_buildAppBar())
-          ..add(_buildHeaderPopularFood())
-          ..add(ListStoreWidget())
-          ..add(_buildListMostFinding());
+          ..add(_buildDiscount())
+          ..add(ListStoreScreen());
       }
     }
   }
@@ -50,9 +48,12 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(_listHomeScreenBodyWidget.length,
-              (index) => _listHomeScreenBodyWidget[index])),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          _listHomeScreenBodyWidget.length,
+          (index) => _listHomeScreenBodyWidget[index],
+        ),
+      ),
     );
   }
 
@@ -123,22 +124,6 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
     );
   }
 
-  Widget _buildListRecommendedProducts() {
-    return Container(
-      height: 0.2.h,
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 0,
-        itemBuilder: (BuildContext context, int index) {
-          return ListRecommendedFood(
-            productID: 0,
-          );
-        },
-      ),
-    );
-  }
-
   Widget _buildHeaderRecommendedFood() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -150,53 +135,6 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
               children: const [
                 TextSpan(
                     text: "Recommended Food",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              ],
-            ),
-          ),
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                    text: "See more",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: kBodyTextColor.withOpacity(0.5))),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildListPopularProducts() {
-    return Container(
-      height: 0.2.h,
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 0,
-        itemBuilder: (BuildContext context, index) {
-          return ListPopularFood(productID: 0);
-        },
-      ),
-    );
-  }
-
-  Widget _buildHeaderPopularFood() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text.rich(
-            TextSpan(
-              children: const [
-                TextSpan(
-                    text: "Popular Food",
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               ],

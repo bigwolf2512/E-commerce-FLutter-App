@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../data/controller/auth_controller.dart';
 import '../../../design/extension/double_extension.dart';
+import '../../../helper/navigator_helper.dart';
 import '../../../share/constant/constant.dart';
 import '../sign_up/sign_up.dart';
 import '../sing_in_merchant/sign_in_merchant_screen.dart';
@@ -86,7 +87,7 @@ class SignInUserScreen extends StatelessWidget {
                   minWidth: 0.8.w,
                   color: kPrimaryColor,
                   onPressed: () {
-                    controller.onSignIn(false);
+                    controller.onSignIn(false, context);
                   },
                   child: const Text(
                     "Login",
@@ -97,7 +98,7 @@ class SignInUserScreen extends StatelessWidget {
               SizedBox(height: 0.01.h),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => SignUpPage());
+                  Push.to(context, SignUpPage());
                 },
                 child: Text(
                   'Dont have an account? Let Sign Up!',
@@ -107,7 +108,7 @@ class SignInUserScreen extends StatelessWidget {
               SizedBox(height: 0.01.h),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => SignInMerchantScreen());
+                  Push.to(context, SignInMerchantScreen());
                 },
                 child: Text(
                   'Or login as merchant',

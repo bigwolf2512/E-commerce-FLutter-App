@@ -1,3 +1,4 @@
+import '../../../helper/navigator_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -102,7 +103,7 @@ class SignUpPage extends StatelessWidget {
                   minWidth: 0.8.w,
                   color: kPrimaryColor,
                   onPressed: () async {
-                    await controller.onSignUpUser(false);
+                    await controller.onSignUpUser(false, context);
                   },
                   child: const Text(
                     "Sign Up",
@@ -119,7 +120,7 @@ class SignUpPage extends StatelessWidget {
                   minWidth: 0.8.w,
                   color: kActiveColor,
                   onPressed: () async {
-                    await controller.onSignUpUser(true);
+                    await controller.onSignUpUser(true, context);
                   },
                   child: const Text(
                     "Sign Up As Merchant",
@@ -130,7 +131,7 @@ class SignUpPage extends StatelessWidget {
               SizedBox(height: 0.01.h),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => SignInUserScreen());
+                  Push.to(context, SignInUserScreen());
                 },
                 child: Text(
                   'Already have an account? Let Sign In!',
