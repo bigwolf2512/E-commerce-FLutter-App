@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../share/constant/constant.dart';
 import '../user/user_detail/user_detail_screen.dart';
-import 'home_screen_body.dart';
+import 'dashboard_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _MainFoodPageState extends State<HomePage> {
   final List<Widget> _buildScreens = [
-    HomeScreenBody(),
+    DashboardPage(),
     Container(),
     Container(),
     PersonalPage(),
@@ -24,25 +25,25 @@ class _MainFoodPageState extends State<HomePage> {
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.home),
       title: ("Home"),
-      activeColorPrimary: CupertinoColors.activeBlue,
+      activeColorPrimary: kPrimaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.shopping_cart),
       title: ("Card"),
-      activeColorPrimary: CupertinoColors.activeBlue,
+      activeColorPrimary: kPrimaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.archivebox),
       title: ("Order"),
-      activeColorPrimary: CupertinoColors.activeBlue,
+      activeColorPrimary: kPrimaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.person),
       title: ("Personal"),
-      activeColorPrimary: CupertinoColors.activeBlue,
+      activeColorPrimary: kPrimaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
   ];

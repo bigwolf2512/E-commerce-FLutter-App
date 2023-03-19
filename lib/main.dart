@@ -1,7 +1,9 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'data/repo/pref_repo.dart';
 import 'firebase_options.dart';
 import 'independences.dart' as dep;
 import 'presentation/auth/splash_screen/splash.dart';
@@ -14,7 +16,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp());
+  runApp(
+    DevicePreview(
+      enabled: false,
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -26,8 +33,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    final PrefRepo repo = Get.find();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      repo.getCurrentUser();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

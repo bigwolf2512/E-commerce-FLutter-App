@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../../../share/constant/constant.dart';
 
-class DesciptionPageView extends StatefulWidget {
+class DescriptionPageView extends StatefulWidget {
   final String text;
-  const DesciptionPageView({Key? key, required this.text}) : super(key: key);
+  const DescriptionPageView({Key? key, required this.text}) : super(key: key);
 
   @override
-  State<DesciptionPageView> createState() => _DesciptionPageViewState();
+  State<DescriptionPageView> createState() => _DescriptionPageViewState();
 }
 
-class _DesciptionPageViewState extends State<DesciptionPageView> {
+class _DescriptionPageViewState extends State<DescriptionPageView> {
   late String firstHalf;
   late String secondHalf;
   bool hidenText = true;

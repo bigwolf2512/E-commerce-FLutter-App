@@ -8,9 +8,9 @@ class ProductModel with _$ProductModel {
   const factory ProductModel({
     String? id,
     String? name,
-    int? price,
+    num? price,
     String? description,
-    int? quantity,
+    num? quantity,
     String? status,
     String? image,
     String? sellerId,

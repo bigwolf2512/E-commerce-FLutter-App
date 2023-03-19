@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class LoadOneController<T> extends GetxController {
-  LoadOneController({required this.pathCollection, required this.id});
-  final String id;
+  LoadOneController({required this.pathCollection, required this.id}) {
+    getOne();
+  }
+  final String? id;
   final String pathCollection;
 
   bool _isLoading = false;

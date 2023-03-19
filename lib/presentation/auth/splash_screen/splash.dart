@@ -27,11 +27,10 @@ class SplashPage extends StatelessWidget {
         backgroundColor: kPrimaryColor,
         imageBackground: AssetImage('assets/images/main_top.png'),
         loaderColor: Colors.white,
-        navigateAfterSeconds:
-            repo.sharedPreferences.containsKey(kPathPrefUserId)
-                ? HomePage()
-                : WelcomeScreen(),
-        onClick: () => repo.sharedPreferences.containsKey(kPathPrefUserId)
+        navigateAfterSeconds: repo.sharedPreferences.containsKey(kPathPrefUser)
+            ? HomePage()
+            : WelcomeScreen(),
+        onClick: () => repo.sharedPreferences.containsKey(kPathPrefUser)
             ? HomePage()
             : WelcomeScreen());
   }

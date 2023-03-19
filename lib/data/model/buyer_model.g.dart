@@ -15,7 +15,7 @@ _$_BuyerModel _$$_BuyerModelFromJson(Map<String, dynamic> json) =>
       address: json['address'] as String?,
       avatar: json['avatar'] as String?,
       password: json['password'] as String?,
-      productOnCart: (json['productOnCart'] as List<dynamic>?)
+      productInCart: (json['productInCart'] as List<dynamic>?)
           ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       orders: (json['orders'] as List<dynamic>?)
@@ -32,6 +32,6 @@ Map<String, dynamic> _$$_BuyerModelToJson(_$_BuyerModel instance) =>
       'address': instance.address,
       'avatar': instance.avatar,
       'password': instance.password,
-      'productOnCart': instance.productOnCart?.map((e) => e.toJson()).toList(),
+      'productInCart': instance.productInCart?.map((e) => e.toJson()).toList(),
       'orders': instance.orders?.map((e) => e.toJson()).toList(),
     };

@@ -27,7 +27,7 @@ mixin _$BuyerModel {
   String? get address => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
-  List<ProductModel>? get productOnCart => throw _privateConstructorUsedError;
+  List<ProductModel>? get productInCart => throw _privateConstructorUsedError;
   List<OrderModel>? get orders => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $BuyerModelCopyWith<$Res> {
       String? address,
       String? avatar,
       String? password,
-      List<ProductModel>? productOnCart,
+      List<ProductModel>? productInCart,
       List<OrderModel>? orders});
 }
 
@@ -74,7 +74,7 @@ class _$BuyerModelCopyWithImpl<$Res, $Val extends BuyerModel>
     Object? address = freezed,
     Object? avatar = freezed,
     Object? password = freezed,
-    Object? productOnCart = freezed,
+    Object? productInCart = freezed,
     Object? orders = freezed,
   }) {
     return _then(_value.copyWith(
@@ -106,9 +106,9 @@ class _$BuyerModelCopyWithImpl<$Res, $Val extends BuyerModel>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      productOnCart: freezed == productOnCart
-          ? _value.productOnCart
-          : productOnCart // ignore: cast_nullable_to_non_nullable
+      productInCart: freezed == productInCart
+          ? _value.productInCart
+          : productInCart // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>?,
       orders: freezed == orders
           ? _value.orders
@@ -134,7 +134,7 @@ abstract class _$$_BuyerModelCopyWith<$Res>
       String? address,
       String? avatar,
       String? password,
-      List<ProductModel>? productOnCart,
+      List<ProductModel>? productInCart,
       List<OrderModel>? orders});
 }
 
@@ -156,7 +156,7 @@ class __$$_BuyerModelCopyWithImpl<$Res>
     Object? address = freezed,
     Object? avatar = freezed,
     Object? password = freezed,
-    Object? productOnCart = freezed,
+    Object? productInCart = freezed,
     Object? orders = freezed,
   }) {
     return _then(_$_BuyerModel(
@@ -188,9 +188,9 @@ class __$$_BuyerModelCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      productOnCart: freezed == productOnCart
-          ? _value._productOnCart
-          : productOnCart // ignore: cast_nullable_to_non_nullable
+      productInCart: freezed == productInCart
+          ? _value._productInCart
+          : productInCart // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>?,
       orders: freezed == orders
           ? _value._orders
@@ -211,9 +211,9 @@ class _$_BuyerModel implements _BuyerModel {
       this.address,
       this.avatar,
       this.password,
-      final List<ProductModel>? productOnCart,
+      final List<ProductModel>? productInCart,
       final List<OrderModel>? orders})
-      : _productOnCart = productOnCart,
+      : _productInCart = productInCart,
         _orders = orders;
 
   factory _$_BuyerModel.fromJson(Map<String, dynamic> json) =>
@@ -233,12 +233,12 @@ class _$_BuyerModel implements _BuyerModel {
   final String? avatar;
   @override
   final String? password;
-  final List<ProductModel>? _productOnCart;
+  final List<ProductModel>? _productInCart;
   @override
-  List<ProductModel>? get productOnCart {
-    final value = _productOnCart;
+  List<ProductModel>? get productInCart {
+    final value = _productInCart;
     if (value == null) return null;
-    if (_productOnCart is EqualUnmodifiableListView) return _productOnCart;
+    if (_productInCart is EqualUnmodifiableListView) return _productInCart;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -255,7 +255,7 @@ class _$_BuyerModel implements _BuyerModel {
 
   @override
   String toString() {
-    return 'BuyerModel(id: $id, phoneNumber: $phoneNumber, name: $name, email: $email, address: $address, avatar: $avatar, password: $password, productOnCart: $productOnCart, orders: $orders)';
+    return 'BuyerModel(id: $id, phoneNumber: $phoneNumber, name: $name, email: $email, address: $address, avatar: $avatar, password: $password, productInCart: $productInCart, orders: $orders)';
   }
 
   @override
@@ -273,7 +273,7 @@ class _$_BuyerModel implements _BuyerModel {
             (identical(other.password, password) ||
                 other.password == password) &&
             const DeepCollectionEquality()
-                .equals(other._productOnCart, _productOnCart) &&
+                .equals(other._productInCart, _productInCart) &&
             const DeepCollectionEquality().equals(other._orders, _orders));
   }
 
@@ -288,7 +288,7 @@ class _$_BuyerModel implements _BuyerModel {
       address,
       avatar,
       password,
-      const DeepCollectionEquality().hash(_productOnCart),
+      const DeepCollectionEquality().hash(_productInCart),
       const DeepCollectionEquality().hash(_orders));
 
   @JsonKey(ignore: true)
@@ -314,7 +314,7 @@ abstract class _BuyerModel implements BuyerModel {
       final String? address,
       final String? avatar,
       final String? password,
-      final List<ProductModel>? productOnCart,
+      final List<ProductModel>? productInCart,
       final List<OrderModel>? orders}) = _$_BuyerModel;
 
   factory _BuyerModel.fromJson(Map<String, dynamic> json) =
@@ -335,7 +335,7 @@ abstract class _BuyerModel implements BuyerModel {
   @override
   String? get password;
   @override
-  List<ProductModel>? get productOnCart;
+  List<ProductModel>? get productInCart;
   @override
   List<OrderModel>? get orders;
   @override

@@ -1,81 +1,62 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../data/constant/path_collection.dart';
 import '../../../data/controller/load_more_controller.dart';
+import '../../../data/controller/load_one_controller.dart';
 import '../../../data/model/seller_model.dart';
-import '../../../design/extension/double_extension.dart';
 import '../../../helper/load_more_helper.dart';
-import '../../../share/constant/constant.dart';
+import '../../../helper/load_one_helper.dart';
+import '../../user/products/list_product_by_storeid_widget.dart';
+import 'title_widget.dart';
 
-class ListStoreScreen extends LoadMoreStatelessHelper<SellerModel> {
-  const ListStoreScreen({Key? key}) : super(key: key);
+class ListStoreWidget extends LoadMoreStatelessHelper<SellerModel> {
+  const ListStoreWidget({Key? key}) : super(key: key);
 
   @override
   LoadMoreController<SellerModel> init() {
     return LoadMoreController(
-        pathCollection: kPathCollectionSeller, fromJson: SellerModel.fromJson);
+      pathCollection: kPathCollectionSeller,
+      fromJson: SellerModel.fromJson,
+    );
   }
 
   @override
   Widget itemBuilder(SellerModel data) {
-    return Stack(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(left: 15),
-          height: 0.2.h,
-          width: 0.6.w,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color:
-                  Colors.primaries[Random().nextInt(Colors.primaries.length)],
-              image: DecorationImage(
-                  colorFilter: ColorFilter.mode(
-                      Colors.grey.withOpacity(0.4), BlendMode.darken),
-                  image: AssetImage(
-                    "assets/images/Image Banner 2.png",
-                  ),
-                  fit: BoxFit.cover)),
-        ),
-        Positioned(
-          left: 24,
-          top: 10,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return data.storeId != null
+        ? Column(
             children: [
-              Text.rich(TextSpan(children: [
-                TextSpan(
-                    text: data.name,
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        backgroundColor: kSecondaryColor)),
-              ])),
-              Text.rich(
-                TextSpan(
-                  children: const [
-                    TextSpan(
-                      text: "",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          backgroundColor: kSecondaryColor),
-                    ),
-                  ],
-                ),
-              ),
+              TitleWidget(title: data.storeName),
+              ListProductsByStoreIdWidget(storeId: data.storeId)
             ],
-          ),
-        ),
+          )
+        : const SizedBox();
+  }
+}
+
+class OwnStoreWidget extends LoadOneHelper<SellerModel> {
+  OwnStoreWidget({Key? key}) : super(key: key);
+
+  final SellerModel sellerModel = Get.find();
+
+  @override
+  Widget buildUI(SellerModel data) {
+    return Column(
+      children: [
+        TitleWidget(title: data.storeName),
+        ListProductsByStoreIdWidget(storeId: data.storeId)
       ],
     );
   }
 
   @override
-  LoadMoreConfig? loadMoreConfig() {
-    return LoadMoreConfig(size: Size(double.maxFinite, 0.2.h));
+  SellerModel fromJson(Map<String, dynamic> json) {
+    return SellerModel.fromJson(json);
+  }
+
+  @override
+  LoadOneController<SellerModel> init() {
+    return LoadOneController(
+        pathCollection: kPathCollectionSeller, id: sellerModel.id);
   }
 }

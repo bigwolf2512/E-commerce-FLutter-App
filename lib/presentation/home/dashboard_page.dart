@@ -3,58 +3,52 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/constant/path_spref.dart';
+import '../../data/controller/cart_controller.dart';
 import '../../data/repo/pref_repo.dart';
 import '../../design/extension/double_extension.dart';
+import '../../helper/navigator_helper.dart';
 import '../../share/constant/constant.dart';
 import '../../share/widget/button_flat.dart';
+import '../../share/widget/loading_indicator.dart';
+import '../user/cart/cart_screen.dart';
 import 'components/events_list.dart';
 import 'components/list_store_widget.dart';
 import 'components/most_finding_list.dart';
 import 'components/title_widget.dart';
 
-class HomeScreenBody extends StatefulWidget {
-  const HomeScreenBody({Key? key}) : super(key: key);
+class DashboardPage extends StatelessWidget {
+  DashboardPage({Key? key}) : super(key: key);
 
-  @override
-  State<HomeScreenBody> createState() => _HomeScreenBodyState();
-}
-
-class _HomeScreenBodyState extends State<HomeScreenBody> {
   final PrefRepo repo = Get.find();
-  List<Widget> _listHomeScreenBodyWidget = <Widget>[];
-
-  @override
-  void initState() {
-    super.initState();
-    if (repo.sharedPreferences.containsKey(kPathPrefUserIsSeller)) {
-      if (repo.sharedPreferences.getBool(kPathPrefUserIsSeller) ?? false) {
-        _listHomeScreenBodyWidget
-          ..add(_buildAppBar())
-          ..add(_buildDiscount())
-          ..add(_buildDiscount())
-          ..add(_buildDiscount())
-          ..add(TitleWidget(title: 'Your products on sale'))
-          ..add(_buildListMostFinding());
-      } else {
-        _listHomeScreenBodyWidget
-          ..add(_buildAppBar())
-          ..add(_buildDiscount())
-          ..add(ListStoreScreen());
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          _listHomeScreenBodyWidget.length,
-          (index) => _listHomeScreenBodyWidget[index],
-        ),
-      ),
-    );
+    if (repo.sharedPreferences.containsKey(kPathPrefUser)) {
+      if (repo.isCurrentSeller()) {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildAppBar(context),
+              _buildDiscount(),
+              TitleWidget(title: 'Your products on sale'),
+              OwnStoreWidget(),
+              _buildListMostFinding(),
+            ],
+          ),
+        );
+      } else {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildAppBar(context),
+              _buildDiscount(),
+              ListStoreWidget(),
+            ],
+          ),
+        );
+      }
+    }
+    return OnLoadingIndicator();
   }
 
   Widget _buildListEvent() {
@@ -191,7 +185,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
     );
   }
 
-  Widget _buildAppBar() {
+  Widget _buildAppBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 4.0),
       child: Row(
@@ -207,6 +201,7 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
                 color: kSecondaryColor,
               ),
               child: TextField(
+                autofocus: false,
                 decoration: InputDecoration(
                     hintText: "Search for products",
                     icon: Image.asset(
@@ -227,12 +222,17 @@ class _HomeScreenBodyState extends State<HomeScreenBody> {
                   icon: Icon(CupertinoIcons.chat_bubble_2),
                 ),
                 SizedBox(width: 0.03.w),
-                ButtonFlat(
-                  color: kSecondaryColor,
-                  itemsNumber: 0,
-                  padding: 0.025.w,
-                  icon: Icon(CupertinoIcons.shopping_cart),
-                ),
+                GetBuilder<CartController>(builder: (controller) {
+                  return ButtonFlat(
+                    onTap: () {
+                      Push.noBottomBar(context, CartHomePage());
+                    },
+                    color: kSecondaryColor,
+                    itemsNumber: controller.getTotalProductsInCart,
+                    padding: 0.025.w,
+                    icon: Icon(CupertinoIcons.shopping_cart),
+                  );
+                }),
                 SizedBox(width: 0.03.w),
                 ButtonFlat(
                   color: kSecondaryColor,

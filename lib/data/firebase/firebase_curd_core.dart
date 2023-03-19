@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class FirebaseCRUDCoreBase<T> {
-  Future<void> update(Map<String, dynamic> data, String id);
+  Future<void> update(
+      {required Map<String, dynamic> data, String id, String field});
   Future<void> create(Map<String, dynamic> data);
   Future<void> delete(String id);
   Future<List<T>> getAll();
@@ -32,10 +33,11 @@ abstract class FirebaseCRUDCore<T> extends FirebaseCRUDCoreBase {
   }
 
   @override
-  Future<void> update(Map<String, dynamic> data, String? id) async {
+  Future<void> update(
+      {required Map<String, dynamic> data, String? id, String? field}) async {
     final CollectionReference response =
         FirebaseFirestore.instance.collection(pathCollection);
-    var documentReference = response.where('id', isEqualTo: id);
+    var documentReference = response.where(field ?? 'id', isEqualTo: id);
 
     final result = await documentReference.get();
 

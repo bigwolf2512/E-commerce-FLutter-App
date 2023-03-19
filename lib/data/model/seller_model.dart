@@ -20,7 +20,7 @@ class SellerModel with _$SellerModel {
     String? avatar,
     List<ProductModel>? productOnSale,
     List<OrderModel>? orders,
-    @Default(true) bool isSetupStore,
+    bool? isSetupStore,
   }) = _SellerModel;
 
   factory SellerModel.fromJson(Map<String, Object?> json) =>

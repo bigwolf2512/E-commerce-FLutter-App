@@ -1,308 +1,150 @@
-// // ignore_for_file: deprecated_member_use
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
-// import 'dart:convert';
+import '../../helper/navigator_helper.dart';
+import '../../presentation/user/cart/cart_screen.dart';
+import '../../share/widget/alert_dialog.dart';
+import '../../share/widget/loading_indicator.dart';
+import '../model/buyer_model.dart';
+import '../model/product_model.dart';
+import '../repo/auth_repo.dart';
+import '../repo/pref_repo.dart';
 
-// import 'package:ecommerceshop/data/api/api_client.dart';
-// import 'package:ecommerceshop/data/controller/product_controller.dart';
-// import 'package:ecommerceshop/data/model/cart_model.dart';
-// import 'package:ecommerceshop/data/model/product_model.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:shared_preferences/shared_preferences.dart';
+class CartController extends GetxController {
+  CartController(this.prefRepo, this.buyerRepo);
 
-// import '../repo/cart_repo.dart';
-// import 'auth_controller.dart';
+  final PrefRepo prefRepo;
+  final BuyerAuthRepo buyerRepo;
 
-// class CartController extends GetxController {
-//   final ApiClient apiClient;
-//   final CartRepo cartRepo;
-//   final SharedPreferences sharedPreferences;
-//   final ProductController productController;
-//   CartController({
-//     required this.productController,
-//     required this.sharedPreferences,
-//     required this.cartRepo,
-//     required this.apiClient,
-//   });
-//   Map<int, CartModel> _items = {};
-//   Map<int, CartModel> get items => _items;
-//   bool _exist = false;
-//   List<CartModel> storageItems = [];
-//   List<CartModel> _checkoutItems = [];
-//   List<CartModel> get checkoutItems => _checkoutItems;
-//   Map<int, List<CartModel>> _orderItems = {};
-//   //Map<int, List<CartModel>> get orderItems => _orderItems;
-//   int get lengthCart => items.length;
-//   bool _removeAble = false;
-//   bool get removeAble => _removeAble;
+  @override
+  void onInit() async {
+    super.onInit();
+    await initProductsInCart();
+  }
 
-//   Future storeTransactions(String incartQuantity, String buyerId,
-//       String productId, int quantity) async {
-//     http.Response response =
-//         await apiClient.storeTransactions(incartQuantity, buyerId, productId);
-//     if (response.statusCode == 200) {}
-//   }
+  num _quantity = 1;
+  num get quantity => _quantity;
 
-//   Future removeTransactions(int buyerId, int productId) async {
-//     http.Response response =
-//         await apiClient.removeTransactions(buyerId, productId);
-//     if (response.statusCode == 200) {}
-//   }
+  BuyerModel _userModel = BuyerModel();
+  BuyerModel get userModel => _userModel;
 
-//   List<CartModel> getProductId = [];
-//   Future getCarts(int id) async {
-//     http.Response response = await apiClient.getCarts(id);
-//     if (response.statusCode == 200) {
-//       getProductId = Carts.fromJson(jsonDecode(response.body)).carts!;
-//       for (int i = 0; i < getProductId.length; i++) {
-//         _items.putIfAbsent(getProductId[i].id!, () => getProductId[i]);
-//       }
-//     }
-//   }
+  List<ProductModel> _productsInCart = [];
+  List<ProductModel> get productsInCart => _productsInCart;
 
-//   Future addItems(Products products, int _quantity) async {
-//     checkSelected() {
-//       for (int i = 0; i < getCartItems.length; i++) {
-//         if (getCartItems[i].id == products.id) {
-//           return getCartItems[i].isSelect;
-//         } else {
-//           return false;
-//         }
-//       }
-//     }
+  Future<void> initProductsInCart() async {
+    _quantity = 1;
+    if (_userModel == BuyerModel()) {
+      _userModel = await buyerRepo
+          .getOne(prefRepo.getCurrentUser().buyerModel?.id ?? '');
+      _productsInCart.clear();
+      if ((_userModel.productInCart ?? []).isNotEmpty) {
+        _productsInCart.addAll(_userModel.productInCart!);
+      }
+    }
+  }
 
-//     var totalQuantity;
-//     if (_items.containsKey(products.id)) {
-//       _items.update(
-//         products.id!,
-//         (value) {
-//           totalQuantity = value.quantity! + _quantity;
-//           if (totalQuantity == 0 && _quantity == -1) {
-//             _removeAble = true;
-//             return CartModel(
-//               id: value.id,
-//               name: value.name,
-//               price: value.price,
-//               stars: value.stars,
-//               image: value.image,
-//               quantity: value.quantity!,
-//               isExist: true,
-//               isSelect: checkSelected(),
-//               time: TimeOfDay.now().toString(),
-//             );
-//           }
-//           if (totalQuantity == 0 && _quantity != -1) {
-//             _removeAble = false;
-//             return CartModel(
-//               id: value.id,
-//               name: value.name,
-//               price: value.price,
-//               stars: value.stars,
-//               image: value.image,
-//               quantity: value.quantity! + _quantity,
-//               isExist: true,
-//               isSelect: checkSelected(),
-//               time: TimeOfDay.now().toString(),
-//             );
-//           } else {
-//             _removeAble = false;
-//             return CartModel(
-//               id: value.id,
-//               name: value.name,
-//               price: value.price,
-//               stars: value.stars,
-//               image: value.image,
-//               quantity: value.quantity! + _quantity,
-//               isExist: true,
-//               isSelect: checkSelected(),
-//               time: TimeOfDay.now().toString(),
-//             );
-//           }
-//         },
-//       );
-//     } else {
-//       _removeAble = false;
-//       _items.putIfAbsent(
-//         products.id!,
-//         () {
-//           return CartModel(
-//             id: products.id,
-//             name: products.name,
-//             price: int.parse(products.price.toString()),
-//             image: products.image,
-//             quantity: _quantity,
-//             isExist: true,
-//             isSelect: false,
-//             time: TimeOfDay.now().toString(),
-//           );
-//         },
-//       );
-//     }
-//     cartRepo.addToCartList(getCartItems);
-//     storeTransactions(
-//         totalQuantity.toString(),
-//         Get.find<AuthController>().userData.id.toString(),
-//         products.id.toString(),
-//         _quantity);
-//     selectedPrice;
-//     update();
-//   }
+  Future<void> initQuantity({num qty = 1}) async {
+    _quantity = qty;
+    await initProductsInCart();
+  }
 
-//   List<CartModel> get getCartItems {
-//     return _items.entries.map((e) => e.value).toList();
-//   }
+  void addQuantity(bool isAdd) {
+    if (isAdd) {
+      _quantity = checkQuantity(_quantity += 1);
+    } else {
+      _quantity = checkQuantity(_quantity -= 1);
+    }
+    update();
+  }
 
-//   List<CartModel> setcheckoutItems() {
-//     _items.forEach((key, value) {
-//       if (value.isSelect ?? false) {
-//         _checkoutItems.add(value);
-//       }
-//     });
-//     print(_checkoutItems);
-//     return _checkoutItems;
-//   }
+  num checkQuantity(num quantity) {
+    if (quantity < 1) {
+      return 1;
+    }
+    return quantity;
+  }
 
-//   List<CartModel> setcheckoutItem(int productId, int quantity) {
-//     Map<int, CartModel> mapCarts = {};
-//     for (var e in productController.productList) {
-//       mapCarts.putIfAbsent(
-//           e.id,
-//           () => CartModel(
-//                 id: e.id,
-//                 name: e.name,
-//                 price: int.parse(e.price.toString()),
-//                 image: e.image,
-//                 quantity: quantity,
-//                 isExist: true,
-//                 isSelect: false,
-//                 time: TimeOfDay.now().toString(),
-//               ));
-//     }
-//     List<CartModel> listCarts = mapCarts.entries.map((e) => e.value).toList();
-//     for (int i = 0; i < productController.productList.length; i++) {
-//       if (productController.productList[i].id == productId) {
-//         _checkoutItems.add(listCarts[i]);
-//       }
-//     }
-//     return _checkoutItems;
-//   }
+  Future<void> addProductToCart(ProductModel product, BuildContext context,
+      {bool? shouldAddFromCart}) async {
+    try {
+      if (_userModel != BuyerModel()) {
+        LoadingIndicator.show(context);
 
-//   int _orderId = 1;
-//   int get orderId => _orderId;
-//   Map<int, dynamic> get orderItems {
-//     if (_checkoutItems.isNotEmpty) {
-//       _orderItems.putIfAbsent(
-//         _orderId,
-//         () => _checkoutItems,
-//       );
-//       _orderId++;
-//     }
-//     print(_orderItems);
-//     print(_orderId);
-//     return _orderItems;
-//   }
+        if ((product.quantity ?? 1) < 1) {
+          final result = await DialogHelper.confirmAlertCartPage(context);
 
-//   List<List<CartModel>> get getOrderList {
-//     return _orderItems.entries.map((e) => e.value).toList();
-//   }
+          if (result is bool && result) {
+            _productsInCart.removeWhere((element) => element.id == product.id);
+            _userModel = _userModel.copyWith(productInCart: _productsInCart);
+            await buyerRepo
+                .update(data: _userModel.toJson(), id: _userModel.id)
+                .whenComplete(() => update());
+          }
+          LoadingIndicator.hide(context);
+          return;
+        }
 
-//   List<int> get getPerOrderItemsLength {
-//     List<int> length = [];
-//     length = _orderItems.entries.map((e) => e.value.length).toList();
-//     return length;
-//   }
+        if (_productsInCart.isEmpty) {
+          _productsInCart.add(product.copyWith(quantity: _quantity));
+          _userModel = _userModel.copyWith(productInCart: _productsInCart);
+          await buyerRepo.update(data: _userModel.toJson(), id: _userModel.id);
+          LoadingIndicator.hide(context);
+          Push.noBottomBar(context, CartHomePage());
+          return;
+        }
 
-//   int get getOrderItemsLength {
-//     return _orderItems.length;
-//   }
+        _productsInCart = _productsInCart.map((e) {
+          if (e.id == product.id) {
+            if (shouldAddFromCart == null || shouldAddFromCart) {
+              e = e.copyWith(quantity: (e.quantity ?? 0) + _quantity);
+            } else {
+              e = e.copyWith(quantity: (e.quantity ?? 0) - _quantity);
+            }
+          }
+          return e;
+        }).toList();
 
-//   int get getCheckOutLenght {
-//     return _checkoutItems.length;
-//   }
+        ProductModel productNotInCart = _productsInCart.firstWhere(
+            (element) => element.id == product.id,
+            orElse: () => ProductModel());
 
-//   initCheckOutItems() {
-//     print('deleted');
-//     _checkoutItems = [];
-//   }
+        if (productNotInCart == ProductModel()) {
+          _productsInCart.add(product.copyWith(quantity: _quantity));
+        }
 
-//   void removeItems(Products products, bool removeAble) {
-//     if (removeAble) {
-//       _items.remove(products.id);
-//       removeTransactions(Get.find<AuthController>().userData.id!, products.id!);
-//       getCartItems;
-//       cartRepo.addToCartList(getCartItems);
-//     }
-//     update();
-//   }
+        _userModel = _userModel.copyWith(productInCart: _productsInCart);
+        await buyerRepo.update(data: _userModel.toJson(), id: _userModel.id);
+        update();
+        LoadingIndicator.hide(context);
 
-//   bool existItems(int productID) {
-//     if (_items.containsKey(productID)) {
-//       _exist = true;
-//     } else {
-//       _exist = false;
-//     }
-//     return _exist;
-//   }
+        if (shouldAddFromCart != null) return;
 
-//   int getQuantity(int productID) {
-//     int _quantity = 0;
-//     if (_items.containsKey(productID)) {
-//       _items.forEach(
-//         (key, value) {
-//           if (key == productID) {
-//             _quantity = value.quantity!;
-//           }
-//         },
-//       );
-//     }
-//     return _quantity;
-//   }
+        Push.noBottomBar(context, CartHomePage());
+      }
+    } catch (e) {
+      LoadingIndicator.hide(context);
 
-//   List<CartModel> getCartData() {
-//     setCart = cartRepo.getCartInstance();
-//     return storageItems;
-//   }
+      throw FlutterError(e.toString());
+    }
+  }
 
-//   set setCart(List<CartModel> items) {
-//     storageItems = items;
-//     for (int i = 0; i < storageItems.length; i++) {
-//       _items.putIfAbsent(storageItems[i].id!, () => storageItems[i]);
-//     }
-//     update();
-//   }
+  int get getTotalProductsInCart {
+    num _total = 0;
 
-//   void setSelectedAll(bool value) {
-//     for (var element in getCartItems) {
-//       element.isSelect = value;
-//     }
-//     update();
-//   }
+    for (var element in _productsInCart) {
+      _total += element.quantity ?? 0;
+    }
 
-//   void setSelected(bool value, int index) {
-//     getCartItems[index].isSelect = value;
-//     update();
-//   }
+    return _total.toInt();
+  }
 
-//   double get totalPrice {
-//     double _totalPrice = 0;
-//     for (var element in getCartItems) {
-//       _totalPrice += element.quantity! * element.price!;
-//     }
-//     return _totalPrice;
-//   }
+  num get getTotalPrice {
+    num _total = 0;
 
-//   double get selectedPrice {
-//     double _selectedPrice = 0;
-//     for (var element in getCartItems) {
-//       if (element.isSelect ?? false) {
-//         _selectedPrice += element.quantity! * element.price!;
-//       }
-//     }
-//     return _selectedPrice;
-//   }
+    for (var element in _productsInCart) {
+      _total += (element.quantity ?? 0) * (element.price ?? 0);
+    }
 
-//   checkItemsLogout() {
-//     _items = {};
-//   }
-// }
+    return _total;
+  }
+}

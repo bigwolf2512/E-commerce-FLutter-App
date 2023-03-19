@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/controller/auth_controller.dart';
+import '../../../data/repo/pref_repo.dart';
 
 class PersonalPage extends StatelessWidget {
   PersonalPage({Key? key}) : super(key: key);
 
   final AuthController controller = Get.find();
+
+  final repo = Get.find<PrefRepo>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final currentBuyer = repo.getCurrentUser().buyerModel;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -23,19 +28,22 @@ class PersonalPage extends StatelessWidget {
             expandedHeight: size.height * 0.4,
             collapsedHeight: size.height * 0.1,
             flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(''), fit: BoxFit.cover),
-                    borderRadius: BorderRadius.all(Radius.circular(25))),
-              ),
-              // title: Text(
-              //   Get.find<AuthController>().TOKEN.isNotEmpty
-              //       ? authController.userData.name!
-              //       : 'Your Profile',
-              //   style: TextStyle(
-              //       color: Colors.white, fontWeight: FontWeight.bold),
-              // ),
+              background: currentBuyer?.avatar != null
+                  ? Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(currentBuyer?.avatar ?? ''),
+                              fit: BoxFit.cover),
+                          borderRadius: BorderRadius.all(Radius.circular(25))),
+                    )
+                  : Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                  'assets/images/default_avatar.jpeg'),
+                              fit: BoxFit.cover),
+                          borderRadius: BorderRadius.all(Radius.circular(25))),
+                    ),
             ),
           ),
           SliverToBoxAdapter(
@@ -82,7 +90,7 @@ class PersonalPage extends StatelessWidget {
                                     children: [
                                       Icon(Icons.person),
                                       SizedBox(width: size.height * 0.01),
-                                      Text('name',
+                                      Text(currentBuyer?.name ?? '',
                                           style: TextStyle(fontSize: 18))
                                     ],
                                   ),
@@ -115,7 +123,7 @@ class PersonalPage extends StatelessWidget {
                                     children: [
                                       Icon(Icons.mail),
                                       SizedBox(width: size.height * 0.01),
-                                      Text('email',
+                                      Text(currentBuyer?.email ?? '',
                                           style: TextStyle(fontSize: 18))
                                     ],
                                   ),
@@ -153,7 +161,7 @@ class PersonalPage extends StatelessWidget {
                                         width: size.height * 0.01,
                                       ),
                                       Text(
-                                        'phone number',
+                                        currentBuyer?.phoneNumber ?? '',
                                         style: TextStyle(fontSize: 18),
                                       ),
                                     ],

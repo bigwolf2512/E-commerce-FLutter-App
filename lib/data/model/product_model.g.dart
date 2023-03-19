@@ -10,9 +10,9 @@ _$_ProductModel _$$_ProductModelFromJson(Map<String, dynamic> json) =>
     _$_ProductModel(
       id: json['id'] as String?,
       name: json['name'] as String?,
-      price: json['price'] as int?,
+      price: json['price'] as num?,
       description: json['description'] as String?,
-      quantity: json['quantity'] as int?,
+      quantity: json['quantity'] as num?,
       status: json['status'] as String?,
       image: json['image'] as String?,
       sellerId: json['sellerId'] as String?,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import '../../../data/controller/cart_controller.dart';
+import '../../../design/extension/double_extension.dart';
 import 'widget/cart_body.dart';
 import 'widget/cart_bottom_bar.dart';
-import 'widget/cart_header.dart';
 
 class CartHomePage extends StatefulWidget {
   const CartHomePage({Key? key}) : super(key: key);
@@ -16,23 +16,42 @@ class CartHomePage extends StatefulWidget {
 class _CartPageState extends State<CartHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.1),
-      appBar: appBar(context),
-      body: CartScreenBody(),
-      bottomNavigationBar: CartScreenBottomBar(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[350],
+        appBar: AppBar(
+          shadowColor: Colors.transparent,
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.white,
+          flexibleSpace: GetBuilder<CartController>(builder: (controller) {
+            return Column(
+              children: [
+                Spacer(),
+                Row(
+                  children: [
+                    SizedBox(width: 0.16.w),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Your Cart',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Text('${controller.getTotalProductsInCart} products',
+                            style: Theme.of(context).textTheme.caption)
+                      ],
+                    ),
+                  ],
+                ),
+                Spacer(),
+              ],
+            );
+          }),
+        ),
+        body: CartScreenBody(),
+        bottomNavigationBar: CartScreenBottomBar(),
+      ),
     );
   }
-}
-
-AppBar appBar(BuildContext context) {
-  Size size = MediaQuery.of(context).size;
-  return AppBar(
-    shadowColor: Colors.transparent,
-    iconTheme: IconThemeData(color: Colors.black),
-    backgroundColor: Colors.white,
-    flexibleSpace: CartHeader(
-      size: size,
-    ),
-  );
 }

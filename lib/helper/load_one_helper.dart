@@ -14,7 +14,7 @@ abstract class LoadOneHelper<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LoadOneController<T>>(
-        init: init()..getOne(),
+        init: init(),
         builder: (c) {
           if (c.isLoading) {
             return OnLoadingIndicator();

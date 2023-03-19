@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -17,6 +18,7 @@ import '../constant/path_collection.dart';
 import '../constant/path_spref.dart';
 import '../model/buyer_model.dart';
 import '../model/seller_model.dart';
+import '../model/user_model.dart';
 import '../repo/auth_repo.dart';
 
 class AuthController extends GetxController {
@@ -65,15 +67,13 @@ class AuthController extends GetxController {
         final SellerModel sellerModel = SellerModel.fromJson(
             result.docs.first.data() as Map<String, dynamic>);
         if (password.text == sellerModel.password) {
-          if (!sharedPreferences.containsKey(kPathPrefUserId)) {
-            sharedPreferences
-              ..setString(kPathPrefUserId, sellerModel.id ?? '')
-              ..setBool(kPathPrefUserIsSeller, true);
+          if (!sharedPreferences.containsKey(kPathPrefUser)) {
+            sharedPreferences.setString(
+                kPathPrefUser, jsonEncode(UserModel(sellerModel: sellerModel)));
           }
           LoadingIndicator.hide(context);
-          Get.lazyPut<SellerModel>(() => sellerModel);
 
-          if (sellerModel.isSetupStore) {
+          if (sellerModel.isSetupStore ?? false) {
             Push.to(context, HomePage());
           } else {
             Push.to(context, SetupStoreScreen());
@@ -83,15 +83,12 @@ class AuthController extends GetxController {
         final BuyerModel buyerModel = BuyerModel.fromJson(
             result.docs.first.data() as Map<String, dynamic>);
         if (password.text == buyerModel.password) {
-          if (!sharedPreferences.containsKey(kPathPrefUserId)) {
-            sharedPreferences
-              ..setString(kPathPrefUserId, buyerModel.id ?? '')
-              ..setBool(kPathPrefUserIsSeller, false);
+          if (!sharedPreferences.containsKey(kPathPrefUser)) {
+            sharedPreferences.setString(
+                kPathPrefUser, jsonEncode(UserModel(buyerModel: buyerModel)));
           }
           LoadingIndicator.hide(context);
-          Get
-            ..lazyPut<BuyerModel>(() => buyerModel)
-            ..offAll(() => HomePage());
+          Push.to(context, HomePage());
         }
       }
     } catch (e) {
@@ -157,12 +154,7 @@ class AuthController extends GetxController {
 
   logOut(BuildContext context) {
     sharedPreferences.clear().then((value) {
-      PersistentNavBarNavigator.pushNewScreen(
-        context,
-        screen: WelcomeScreen(),
-        withNavBar: false, // OPTIONAL VALUE. True by default.
-        pageTransitionAnimation: PageTransitionAnimation.cupertino,
-      );
+      Push.noBottomBar(context, WelcomeScreen());
     });
   }
 
@@ -172,7 +164,7 @@ class AuthController extends GetxController {
 
     sellerRepo
         .update(
-            sellerModel
+            data: sellerModel
                 .copyWith(
                   storeId: Get.find<Uuid>().v1(),
                   storeName: storeName.text,
@@ -180,7 +172,7 @@ class AuthController extends GetxController {
                   isSetupStore: true,
                 )
                 .toJson(),
-            sellerModel.id)
+            id: sellerModel.id)
         .whenComplete(() {
       Push.to(context, HomePage());
     });

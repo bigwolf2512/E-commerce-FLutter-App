@@ -31,7 +31,7 @@ mixin _$SellerModel {
   String? get avatar => throw _privateConstructorUsedError;
   List<ProductModel>? get productOnSale => throw _privateConstructorUsedError;
   List<OrderModel>? get orders => throw _privateConstructorUsedError;
-  bool get isSetupStore => throw _privateConstructorUsedError;
+  bool? get isSetupStore => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +57,7 @@ abstract class $SellerModelCopyWith<$Res> {
       String? avatar,
       List<ProductModel>? productOnSale,
       List<OrderModel>? orders,
-      bool isSetupStore});
+      bool? isSetupStore});
 }
 
 /// @nodoc
@@ -84,7 +84,7 @@ class _$SellerModelCopyWithImpl<$Res, $Val extends SellerModel>
     Object? avatar = freezed,
     Object? productOnSale = freezed,
     Object? orders = freezed,
-    Object? isSetupStore = null,
+    Object? isSetupStore = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -131,10 +131,10 @@ class _$SellerModelCopyWithImpl<$Res, $Val extends SellerModel>
           ? _value.orders
           : orders // ignore: cast_nullable_to_non_nullable
               as List<OrderModel>?,
-      isSetupStore: null == isSetupStore
+      isSetupStore: freezed == isSetupStore
           ? _value.isSetupStore
           : isSetupStore // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -159,7 +159,7 @@ abstract class _$$_SellerModelCopyWith<$Res>
       String? avatar,
       List<ProductModel>? productOnSale,
       List<OrderModel>? orders,
-      bool isSetupStore});
+      bool? isSetupStore});
 }
 
 /// @nodoc
@@ -184,7 +184,7 @@ class __$$_SellerModelCopyWithImpl<$Res>
     Object? avatar = freezed,
     Object? productOnSale = freezed,
     Object? orders = freezed,
-    Object? isSetupStore = null,
+    Object? isSetupStore = freezed,
   }) {
     return _then(_$_SellerModel(
       id: freezed == id
@@ -231,10 +231,10 @@ class __$$_SellerModelCopyWithImpl<$Res>
           ? _value._orders
           : orders // ignore: cast_nullable_to_non_nullable
               as List<OrderModel>?,
-      isSetupStore: null == isSetupStore
+      isSetupStore: freezed == isSetupStore
           ? _value.isSetupStore
           : isSetupStore // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -254,7 +254,7 @@ class _$_SellerModel implements _SellerModel {
       this.avatar,
       final List<ProductModel>? productOnSale,
       final List<OrderModel>? orders,
-      this.isSetupStore = true})
+      this.isSetupStore})
       : _productOnSale = productOnSale,
         _orders = orders;
 
@@ -300,8 +300,7 @@ class _$_SellerModel implements _SellerModel {
   }
 
   @override
-  @JsonKey()
-  final bool isSetupStore;
+  final bool? isSetupStore;
 
   @override
   String toString() {
@@ -377,7 +376,7 @@ abstract class _SellerModel implements SellerModel {
       final String? avatar,
       final List<ProductModel>? productOnSale,
       final List<OrderModel>? orders,
-      final bool isSetupStore}) = _$_SellerModel;
+      final bool? isSetupStore}) = _$_SellerModel;
 
   factory _SellerModel.fromJson(Map<String, dynamic> json) =
       _$_SellerModel.fromJson;
@@ -405,7 +404,7 @@ abstract class _SellerModel implements SellerModel {
   @override
   List<OrderModel>? get orders;
   @override
-  bool get isSetupStore;
+  bool? get isSetupStore;
   @override
   @JsonKey(ignore: true)
   _$$_SellerModelCopyWith<_$_SellerModel> get copyWith =>

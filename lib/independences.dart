@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import 'data/controller/auth_controller.dart';
+import 'data/controller/cart_controller.dart';
 import 'data/repo/auth_repo.dart';
 import 'data/repo/pref_repo.dart';
 
@@ -17,4 +18,6 @@ Future<void> init() async {
 
   Get.lazyPut<AuthController>(
       () => AuthController(Get.find(), Get.find(), sharedPreferences));
+  Get.lazyPut<CartController>(
+      () => CartController(Get.find(), Get.find())..onInit());
 }

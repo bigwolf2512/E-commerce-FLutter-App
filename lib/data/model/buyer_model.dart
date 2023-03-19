@@ -16,7 +16,7 @@ class BuyerModel with _$BuyerModel {
     String? address,
     String? avatar,
     String? password,
-    List<ProductModel>? productOnCart,
+    List<ProductModel>? productInCart,
     List<OrderModel>? orders,
   }) = _BuyerModel;
 

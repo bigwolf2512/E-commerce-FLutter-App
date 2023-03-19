@@ -22,9 +22,9 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductModel {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  int? get price => throw _privateConstructorUsedError;
+  num? get price => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  int? get quantity => throw _privateConstructorUsedError;
+  num? get quantity => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   String? get sellerId => throw _privateConstructorUsedError;
@@ -46,9 +46,9 @@ abstract class $ProductModelCopyWith<$Res> {
   $Res call(
       {String? id,
       String? name,
-      int? price,
+      num? price,
       String? description,
-      int? quantity,
+      num? quantity,
       String? status,
       String? image,
       String? sellerId,
@@ -92,7 +92,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       quantity: freezed == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -136,9 +136,9 @@ abstract class _$$_ProductModelCopyWith<$Res>
   $Res call(
       {String? id,
       String? name,
-      int? price,
+      num? price,
       String? description,
-      int? quantity,
+      num? quantity,
       String? status,
       String? image,
       String? sellerId,
@@ -180,7 +180,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -188,7 +188,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
       quantity: freezed == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -236,11 +236,11 @@ class _$_ProductModel implements _ProductModel {
   @override
   final String? name;
   @override
-  final int? price;
+  final num? price;
   @override
   final String? description;
   @override
-  final int? quantity;
+  final num? quantity;
   @override
   final String? status;
   @override
@@ -302,9 +302,9 @@ abstract class _ProductModel implements ProductModel {
   const factory _ProductModel(
       {final String? id,
       final String? name,
-      final int? price,
+      final num? price,
       final String? description,
-      final int? quantity,
+      final num? quantity,
       final String? status,
       final String? image,
       final String? sellerId,
@@ -319,11 +319,11 @@ abstract class _ProductModel implements ProductModel {
   @override
   String? get name;
   @override
-  int? get price;
+  num? get price;
   @override
   String? get description;
   @override
-  int? get quantity;
+  num? get quantity;
   @override
   String? get status;
   @override
