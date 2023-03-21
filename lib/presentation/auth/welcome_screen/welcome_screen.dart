@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../design/extension/double_extension.dart';
 import '../../../helper/navigator_helper.dart';
 import '../../../share/constant/constant.dart';
-import '../sign_in_user/sign_in_user.dart';
+import '../log_in_buyer/log_in_buyer_page.dart';
+import '../log_in_seller/log_in_seller.dart';
 import '../sign_up/sign_up.dart';
-import '../sing_in_merchant/sign_in_merchant_screen.dart';
 import '../widget/main_background.dart';
 
 class WelcomeScreen extends StatelessWidget {

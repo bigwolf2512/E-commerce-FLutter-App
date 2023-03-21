@@ -27,12 +27,14 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  awesome_snackbar_content: ^0.1.2
   cached_network_image: ^3.2.0
   cloud_firestore: ^4.4.3
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   dots_indicator: ^2.1.0
   double_back_to_close_app: ^2.1.0
+  firebase_storage: ^11.0.16
   flutter:
     sdk: flutter
   flutter_phoenix: ^1.0.0
@@ -44,8 +46,10 @@ dependencies:
   go_router: ^6.2.0
   http: ^0.13.4
   http_auth: ^1.0.1
+  image_picker: ^0.8.7
   infinite_scroll_pagination: ^3.2.0
   json_annotation: ^4.8.0
+  permission_handler: ^10.2.0
   persistent_bottom_nav_bar: ^5.0.2
   progress_state_button: ^1.0.4
   shared_preferences: ^2.0.13

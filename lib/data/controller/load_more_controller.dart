@@ -32,7 +32,7 @@ class LoadMoreController<T> extends GetxController {
 
   Future<List<T>> getAll() async {
     if (id != null) {
-      _data = await repo.getAll(id: id, field: field ?? 'storeId');
+      _data = await repo.getAll(id: id, field: field ?? 'id');
     } else {
       _data = await repo.getAll();
     }

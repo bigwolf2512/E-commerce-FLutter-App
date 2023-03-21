@@ -28,6 +28,7 @@ mixin _$ProductModel {
   String? get status => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   String? get sellerId => throw _privateConstructorUsedError;
+  SellerModel? get seller => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -52,8 +53,11 @@ abstract class $ProductModelCopyWith<$Res> {
       String? status,
       String? image,
       String? sellerId,
+      SellerModel? seller,
       DateTime? createdAt,
       DateTime? updatedAt});
+
+  $SellerModelCopyWith<$Res>? get seller;
 }
 
 /// @nodoc
@@ -77,6 +81,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? status = freezed,
     Object? image = freezed,
     Object? sellerId = freezed,
+    Object? seller = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -113,6 +118,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String?,
+      seller: freezed == seller
+          ? _value.seller
+          : seller // ignore: cast_nullable_to_non_nullable
+              as SellerModel?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -122,6 +131,18 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SellerModelCopyWith<$Res>? get seller {
+    if (_value.seller == null) {
+      return null;
+    }
+
+    return $SellerModelCopyWith<$Res>(_value.seller!, (value) {
+      return _then(_value.copyWith(seller: value) as $Val);
+    });
   }
 }
 
@@ -142,8 +163,12 @@ abstract class _$$_ProductModelCopyWith<$Res>
       String? status,
       String? image,
       String? sellerId,
+      SellerModel? seller,
       DateTime? createdAt,
       DateTime? updatedAt});
+
+  @override
+  $SellerModelCopyWith<$Res>? get seller;
 }
 
 /// @nodoc
@@ -165,6 +190,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? status = freezed,
     Object? image = freezed,
     Object? sellerId = freezed,
+    Object? seller = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -201,6 +227,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
               as String?,
+      seller: freezed == seller
+          ? _value.seller
+          : seller // ignore: cast_nullable_to_non_nullable
+              as SellerModel?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -225,6 +255,7 @@ class _$_ProductModel implements _ProductModel {
       this.status,
       this.image,
       this.sellerId,
+      this.seller,
       this.createdAt,
       this.updatedAt});
 
@@ -248,13 +279,15 @@ class _$_ProductModel implements _ProductModel {
   @override
   final String? sellerId;
   @override
+  final SellerModel? seller;
+  @override
   final DateTime? createdAt;
   @override
   final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, name: $name, price: $price, description: $description, quantity: $quantity, status: $status, image: $image, sellerId: $sellerId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductModel(id: $id, name: $name, price: $price, description: $description, quantity: $quantity, status: $status, image: $image, sellerId: $sellerId, seller: $seller, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -273,6 +306,7 @@ class _$_ProductModel implements _ProductModel {
             (identical(other.image, image) || other.image == image) &&
             (identical(other.sellerId, sellerId) ||
                 other.sellerId == sellerId) &&
+            (identical(other.seller, seller) || other.seller == seller) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -282,7 +316,7 @@ class _$_ProductModel implements _ProductModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, price, description,
-      quantity, status, image, sellerId, createdAt, updatedAt);
+      quantity, status, image, sellerId, seller, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -308,6 +342,7 @@ abstract class _ProductModel implements ProductModel {
       final String? status,
       final String? image,
       final String? sellerId,
+      final SellerModel? seller,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$_ProductModel;
 
@@ -330,6 +365,8 @@ abstract class _ProductModel implements ProductModel {
   String? get image;
   @override
   String? get sellerId;
+  @override
+  SellerModel? get seller;
   @override
   DateTime? get createdAt;
   @override

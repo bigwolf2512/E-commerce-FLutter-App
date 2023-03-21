@@ -6,8 +6,8 @@ import '../../../data/controller/auth_controller.dart';
 import '../../../design/extension/double_extension.dart';
 import '../../../helper/navigator_helper.dart';
 import '../../../share/constant/constant.dart';
-import '../sign_in_user/sign_in_user.dart';
-import '../sign_in_user/signin_background.dart';
+import '../log_in_buyer/log_in_buyer_page.dart';
+import '../log_in_buyer/signin_background.dart';
 import '../sign_up/sign_up.dart';
 
 class SignInMerchantScreen extends StatelessWidget {

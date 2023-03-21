@@ -1,12 +1,12 @@
-import '../../../helper/navigator_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../data/controller/auth_controller.dart';
 import '../../../design/extension/double_extension.dart';
+import '../../../helper/navigator_helper.dart';
 import '../../../share/constant/constant.dart';
-import '../sign_in_user/sign_in_user.dart';
+import '../log_in_buyer/log_in_buyer_page.dart';
 import 'signup_background.dart';
 
 class SignUpPage extends StatelessWidget {

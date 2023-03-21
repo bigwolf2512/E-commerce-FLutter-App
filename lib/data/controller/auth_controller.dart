@@ -8,12 +8,12 @@ import 'package:uuid/uuid.dart';
 
 import '../../helper/navigator_helper.dart';
 import '../../helper/pop_up_helper.dart';
-import '../../presentation/auth/sign_in_user/sign_in_user.dart';
-import '../../presentation/auth/sing_in_merchant/sign_in_merchant_screen.dart';
+import '../../presentation/after_auth_seller/setup_store/setup_store_screen.dart';
+import '../../presentation/auth/log_in_buyer/log_in_buyer_page.dart';
 import '../../presentation/auth/welcome_screen/welcome_screen.dart';
 import '../../presentation/home/home_screen.dart';
-import '../../presentation/merchant/setup_store/setup_store_screen.dart';
 import '../../share/widget/loading_indicator.dart';
+import '../../share/widget/snack_bar_helper.dart';
 import '../constant/path_collection.dart';
 import '../constant/path_spref.dart';
 import '../model/buyer_model.dart';
@@ -89,6 +89,10 @@ class AuthController extends GetxController {
           }
           LoadingIndicator.hide(context);
           Push.to(context, HomePage());
+          SnackBarHelper.showSnackBar(context,
+              title: 'Hello ${buyerModel.name ?? ''}',
+              subTitle:
+                  'Welcome Back to Own E-commerce App, Hope You Have A Good Day');
         }
       }
     } catch (e) {
@@ -122,30 +126,39 @@ class AuthController extends GetxController {
       return PopupHelper.showToastError(msg: 'Phone number exist, try again');
     }
 
+    final SellerModel sellerModel = SellerModel(
+      id: Get.find<Uuid>().v1(),
+      phoneNumber: phoneNumber.text,
+      name: fullName.text,
+      email: email.text,
+      password: password.text,
+      isSetupStore: false,
+    );
+
     if (isSeller) {
-      sellerRepo
-          .create(SellerModel(
-        id: Get.find<Uuid>().v1(),
-        phoneNumber: phoneNumber.text,
-        name: fullName.text,
-        email: email.text,
-        password: password.text,
-        isSetupStore: false,
-      ).toJson())
-          .whenComplete(() {
+      await sellerRepo.create(sellerModel.toJson()).whenComplete(() {
+        if (!sharedPreferences.containsKey(kPathPrefUser)) {
+          sharedPreferences.setString(
+              kPathPrefUser, jsonEncode(UserModel(sellerModel: sellerModel)));
+        }
+
         LoadingIndicator.hide(context);
-        Push.to(context, SignInMerchantScreen());
+        Push.to(context, SetupStoreScreen());
       });
     } else {
-      buyerRepo
-          .create(BuyerModel(
+      final BuyerModel buyerModel = BuyerModel(
         id: Get.find<Uuid>().v1(),
         phoneNumber: phoneNumber.text,
         name: fullName.text,
         email: email.text,
         password: password.text,
-      ).toJson())
-          .whenComplete(() {
+      );
+
+      buyerRepo.create(buyerModel.toJson()).whenComplete(() {
+        if (!sharedPreferences.containsKey(kPathPrefUser)) {
+          sharedPreferences.setString(
+              kPathPrefUser, jsonEncode(UserModel(buyerModel: buyerModel)));
+        }
         LoadingIndicator.hide(context);
         Push.to(context, SignInUserScreen());
       });
@@ -158,11 +171,11 @@ class AuthController extends GetxController {
     });
   }
 
-  onSetupStore(BuildContext context) {
+  Future<void> onSetupStore(BuildContext context) async {
     if (storeName.text.isEmpty) return;
-    SellerModel sellerModel = Get.find();
-
-    sellerRepo
+    SellerModel sellerModel = SellerModel();
+    LoadingIndicator.show(context);
+    await sellerRepo
         .update(
             data: sellerModel
                 .copyWith(
@@ -174,6 +187,7 @@ class AuthController extends GetxController {
                 .toJson(),
             id: sellerModel.id)
         .whenComplete(() {
+      LoadingIndicator.hide(context);
       Push.to(context, HomePage());
     });
   }

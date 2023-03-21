@@ -16,6 +16,9 @@ _$_ProductModel _$$_ProductModelFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
       image: json['image'] as String?,
       sellerId: json['sellerId'] as String?,
+      seller: json['seller'] == null
+          ? null
+          : SellerModel.fromJson(json['seller'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -34,6 +37,7 @@ Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
       'status': instance.status,
       'image': instance.image,
       'sellerId': instance.sellerId,
+      'seller': instance.seller?.toJson(),
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };

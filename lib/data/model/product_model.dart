@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'seller_model.dart';
+
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
 
@@ -14,6 +16,7 @@ class ProductModel with _$ProductModel {
     String? status,
     String? image,
     String? sellerId,
+    SellerModel? seller,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _ProductModel;

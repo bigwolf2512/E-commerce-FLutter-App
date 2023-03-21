@@ -10,16 +10,30 @@ import '../../helper/navigator_helper.dart';
 import '../../share/constant/constant.dart';
 import '../../share/widget/button_flat.dart';
 import '../../share/widget/loading_indicator.dart';
-import '../user/cart/cart_screen.dart';
-import 'components/events_list.dart';
+import '../../share/widget/snack_bar_helper.dart';
+import '../after_auth_buyer/cart/cart_screen.dart';
 import 'components/list_store_widget.dart';
-import 'components/most_finding_list.dart';
 import 'components/title_widget.dart';
 
-class DashboardPage extends StatelessWidget {
-  DashboardPage({Key? key}) : super(key: key);
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({Key? key}) : super(key: key);
 
-  final PrefRepo repo = Get.find();
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
+  late final PrefRepo repo;
+
+  @override
+  void initState() {
+    super.initState();
+
+    repo = Get.find<PrefRepo>();
+
+    // WidgetsBinding.instance.addPostFrameCallback(
+    //     (timeStamp) => SnackBarHelper.showSnackBar(context));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +46,6 @@ class DashboardPage extends StatelessWidget {
               _buildDiscount(),
               TitleWidget(title: 'Your products on sale'),
               OwnStoreWidget(),
-              _buildListMostFinding(),
             ],
           ),
         );
@@ -41,7 +54,11 @@ class DashboardPage extends StatelessWidget {
           child: Column(
             children: [
               _buildAppBar(context),
-              _buildDiscount(),
+              InkWell(
+                  onTap: () {
+                    SnackBarHelper.showSnackBar(context);
+                  },
+                  child: _buildDiscount()),
               ListStoreWidget(),
             ],
           ),
@@ -49,106 +66,6 @@ class DashboardPage extends StatelessWidget {
       }
     }
     return OnLoadingIndicator();
-  }
-
-  Widget _buildListEvent() {
-    return Container(
-      margin: const EdgeInsets.only(left: 10),
-      height: 0.12.h,
-      width: 1.0.w,
-      padding: const EdgeInsets.only(right: 0),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int index) {
-          return ListEventObject(
-            pageID: index,
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildListMostFinding() {
-    return Container(
-      height: 0.2.h,
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int index) {
-          return ListMostFinding(
-            pageID: index,
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildHeaderMostFinding() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text.rich(
-            TextSpan(
-              children: const [
-                TextSpan(
-                    text: "Most Finding For You",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              ],
-            ),
-          ),
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                    text: "See more",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: kBodyTextColor.withOpacity(0.5))),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHeaderRecommendedFood() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text.rich(
-            TextSpan(
-              children: const [
-                TextSpan(
-                    text: "Recommended Food",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              ],
-            ),
-          ),
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                    text: "See more",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: kBodyTextColor.withOpacity(0.5))),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget _buildDiscount() {

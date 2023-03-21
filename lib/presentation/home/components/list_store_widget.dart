@@ -7,7 +7,7 @@ import '../../../data/controller/load_one_controller.dart';
 import '../../../data/model/seller_model.dart';
 import '../../../helper/load_more_helper.dart';
 import '../../../helper/load_one_helper.dart';
-import '../../user/products/list_product_by_storeid_widget.dart';
+import '../../after_auth_buyer/products/list_product_by_storeid_widget.dart';
 import 'title_widget.dart';
 
 class ListStoreWidget extends LoadMoreStatelessHelper<SellerModel> {
@@ -27,7 +27,7 @@ class ListStoreWidget extends LoadMoreStatelessHelper<SellerModel> {
         ? Column(
             children: [
               TitleWidget(title: data.storeName),
-              ListProductsByStoreIdWidget(storeId: data.storeId)
+              ListProductsByStoreIdWidget(sellerId: data.id)
             ],
           )
         : const SizedBox();
@@ -44,7 +44,7 @@ class OwnStoreWidget extends LoadOneHelper<SellerModel> {
     return Column(
       children: [
         TitleWidget(title: data.storeName),
-        ListProductsByStoreIdWidget(storeId: data.storeId)
+        ListProductsByStoreIdWidget(sellerId: data.id)
       ],
     );
   }

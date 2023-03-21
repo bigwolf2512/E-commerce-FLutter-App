@@ -22,6 +22,7 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _data = await init().getAll();
+      if (mounted) setState(() {});
     });
   }
 

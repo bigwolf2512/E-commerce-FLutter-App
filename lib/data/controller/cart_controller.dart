@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../helper/navigator_helper.dart';
-import '../../presentation/user/cart/cart_screen.dart';
-import '../../share/widget/alert_dialog.dart';
+import '../../presentation/after_auth_buyer/cart/cart_screen.dart';
+import '../../share/widget/dialog_helper.dart';
 import '../../share/widget/loading_indicator.dart';
 import '../model/buyer_model.dart';
 import '../model/product_model.dart';
@@ -19,7 +19,7 @@ class CartController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    await initProductsInCart();
+    await initProductsInCart().whenComplete(() => update());
   }
 
   num _quantity = 1;
@@ -123,7 +123,6 @@ class CartController extends GetxController {
       }
     } catch (e) {
       LoadingIndicator.hide(context);
-
       throw FlutterError(e.toString());
     }
   }

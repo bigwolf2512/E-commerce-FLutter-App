@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'data/repo/pref_repo.dart';
 import 'firebase_options.dart';
 import 'independences.dart' as dep;
 import 'presentation/auth/splash_screen/splash.dart';
@@ -35,10 +34,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    final PrefRepo repo = Get.find();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      repo.getCurrentUser();
-    });
+    // final PrefRepo repo = Get.find();
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    //   repo.getCurrentUser();
+    // });
   }
 
   @override
