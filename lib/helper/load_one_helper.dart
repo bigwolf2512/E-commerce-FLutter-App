@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../data/controller/load_one_controller.dart';
-import '../share/widget/loading_indicator.dart';
+import '../share/widget/widget_loading_indicator.dart';
 
 abstract class LoadOneHelper<T> extends StatelessWidget {
   const LoadOneHelper({Key? key}) : super(key: key);

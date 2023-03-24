@@ -25,8 +25,9 @@ mixin _$ProductModel {
   num? get price => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   num? get quantity => throw _privateConstructorUsedError;
+  num? get totalQuantity => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
+  List<String> get images => throw _privateConstructorUsedError;
   String? get sellerId => throw _privateConstructorUsedError;
   SellerModel? get seller => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -50,8 +51,9 @@ abstract class $ProductModelCopyWith<$Res> {
       num? price,
       String? description,
       num? quantity,
+      num? totalQuantity,
       String? status,
-      String? image,
+      List<String> images,
       String? sellerId,
       SellerModel? seller,
       DateTime? createdAt,
@@ -78,8 +80,9 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? price = freezed,
     Object? description = freezed,
     Object? quantity = freezed,
+    Object? totalQuantity = freezed,
     Object? status = freezed,
-    Object? image = freezed,
+    Object? images = null,
     Object? sellerId = freezed,
     Object? seller = freezed,
     Object? createdAt = freezed,
@@ -106,14 +109,18 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as num?,
+      totalQuantity: freezed == totalQuantity
+          ? _value.totalQuantity
+          : totalQuantity // ignore: cast_nullable_to_non_nullable
+              as num?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       sellerId: freezed == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
@@ -160,8 +167,9 @@ abstract class _$$_ProductModelCopyWith<$Res>
       num? price,
       String? description,
       num? quantity,
+      num? totalQuantity,
       String? status,
-      String? image,
+      List<String> images,
       String? sellerId,
       SellerModel? seller,
       DateTime? createdAt,
@@ -187,8 +195,9 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? price = freezed,
     Object? description = freezed,
     Object? quantity = freezed,
+    Object? totalQuantity = freezed,
     Object? status = freezed,
-    Object? image = freezed,
+    Object? images = null,
     Object? sellerId = freezed,
     Object? seller = freezed,
     Object? createdAt = freezed,
@@ -215,14 +224,18 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as num?,
+      totalQuantity: freezed == totalQuantity
+          ? _value.totalQuantity
+          : totalQuantity // ignore: cast_nullable_to_non_nullable
+              as num?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       sellerId: freezed == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
@@ -252,12 +265,14 @@ class _$_ProductModel implements _ProductModel {
       this.price,
       this.description,
       this.quantity,
+      this.totalQuantity,
       this.status,
-      this.image,
+      final List<String> images = const <String>[],
       this.sellerId,
       this.seller,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt})
+      : _images = images;
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_ProductModelFromJson(json);
@@ -273,9 +288,18 @@ class _$_ProductModel implements _ProductModel {
   @override
   final num? quantity;
   @override
-  final String? status;
+  final num? totalQuantity;
   @override
-  final String? image;
+  final String? status;
+  final List<String> _images;
+  @override
+  @JsonKey()
+  List<String> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
   @override
   final String? sellerId;
   @override
@@ -287,7 +311,7 @@ class _$_ProductModel implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, name: $name, price: $price, description: $description, quantity: $quantity, status: $status, image: $image, sellerId: $sellerId, seller: $seller, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductModel(id: $id, name: $name, price: $price, description: $description, quantity: $quantity, totalQuantity: $totalQuantity, status: $status, images: $images, sellerId: $sellerId, seller: $seller, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -302,8 +326,10 @@ class _$_ProductModel implements _ProductModel {
                 other.description == description) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
+            (identical(other.totalQuantity, totalQuantity) ||
+                other.totalQuantity == totalQuantity) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.sellerId, sellerId) ||
                 other.sellerId == sellerId) &&
             (identical(other.seller, seller) || other.seller == seller) &&
@@ -315,8 +341,20 @@ class _$_ProductModel implements _ProductModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, price, description,
-      quantity, status, image, sellerId, seller, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      price,
+      description,
+      quantity,
+      totalQuantity,
+      status,
+      const DeepCollectionEquality().hash(_images),
+      sellerId,
+      seller,
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -339,8 +377,9 @@ abstract class _ProductModel implements ProductModel {
       final num? price,
       final String? description,
       final num? quantity,
+      final num? totalQuantity,
       final String? status,
-      final String? image,
+      final List<String> images,
       final String? sellerId,
       final SellerModel? seller,
       final DateTime? createdAt,
@@ -360,9 +399,11 @@ abstract class _ProductModel implements ProductModel {
   @override
   num? get quantity;
   @override
+  num? get totalQuantity;
+  @override
   String? get status;
   @override
-  String? get image;
+  List<String> get images;
   @override
   String? get sellerId;
   @override

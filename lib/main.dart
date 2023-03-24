@@ -1,11 +1,12 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:ecommerceshop/presentation/feature_shared/auth/splash_screen/splash.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
 import 'independences.dart' as dep;
-import 'presentation/auth/splash_screen/splash.dart';
 import 'share/constant/constant.dart';
 
 Future<void> main() async {
@@ -13,6 +14,10 @@ Future<void> main() async {
   await dep.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await FirebaseAppCheck.instance.activate(
+    webRecaptchaSiteKey: 'recaptcha-v3-site-key',
   );
 
   runApp(

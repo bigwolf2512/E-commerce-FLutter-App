@@ -15,9 +15,9 @@ _$_OrderModel _$$_OrderModelFromJson(Map<String, dynamic> json) =>
       buyer: json['buyer'] == null
           ? null
           : BuyerModel.fromJson(json['buyer'] as Map<String, dynamic>),
-      products: (json['products'] as List<dynamic>?)
-          ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      product: json['product'] == null
+          ? null
+          : ProductModel.fromJson(json['product'] as Map<String, dynamic>),
       boughtDate: json['boughtDate'] == null
           ? null
           : DateTime.parse(json['boughtDate'] as String),
@@ -31,7 +31,7 @@ Map<String, dynamic> _$$_OrderModelToJson(_$_OrderModel instance) =>
       'id': instance.id,
       'seller': instance.seller?.toJson(),
       'buyer': instance.buyer?.toJson(),
-      'products': instance.products?.map((e) => e.toJson()).toList(),
+      'product': instance.product?.toJson(),
       'boughtDate': instance.boughtDate?.toIso8601String(),
       'receiveExpectDate': instance.receiveExpectDate?.toIso8601String(),
     };

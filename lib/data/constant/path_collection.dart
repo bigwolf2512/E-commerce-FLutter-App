@@ -3,4 +3,5 @@ const String kPathCollectionBuyer = 'buyer';
 const String kPathCollectionProduct = 'product';
 const String kPathCollectionOrder = 'order';
 const String kPathCollectionChat = 'chat';
-const String kpathCollectionMessage = 'message';
+const String kPathCollectionMessage = 'message';
+const String kPathCollectionNotification = 'notification';

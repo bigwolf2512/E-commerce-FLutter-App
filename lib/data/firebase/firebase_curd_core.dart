@@ -78,6 +78,9 @@ abstract class FirebaseCRUDCore<T> extends FirebaseCRUDCoreBase {
         FirebaseFirestore.instance.collection(pathCollection);
     var documentReference =
         await response.where('id', isEqualTo: id).snapshots().first;
+
+    if (documentReference.docs.isEmpty) return fromJson({});
+
     return fromJson(
         documentReference.docs.first.data() as Map<String, dynamic>);
   }

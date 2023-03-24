@@ -1,8 +1,8 @@
-import 'package:ecommerceshop/data/model/seller_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'buyer_model.dart';
 import 'product_model.dart';
+import 'seller_model.dart';
 
 part 'order_model.freezed.dart';
 part 'order_model.g.dart';
@@ -13,7 +13,7 @@ class OrderModel with _$OrderModel {
     String? id,
     SellerModel? seller,
     BuyerModel? buyer,
-    List<ProductModel>? products,
+    ProductModel? product,
     DateTime? boughtDate,
     DateTime? receiveExpectDate,
   }) = _OrderModel;

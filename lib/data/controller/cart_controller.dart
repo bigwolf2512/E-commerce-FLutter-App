@@ -1,20 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../helper/navigator_helper.dart';
 import '../../presentation/after_auth_buyer/cart/cart_screen.dart';
-import '../../share/widget/dialog_helper.dart';
-import '../../share/widget/loading_indicator.dart';
+import '../../presentation/feature_shared/home/home_screen.dart';
+import '../../share/widget/widget_dialog_helper.dart';
+import '../../share/widget/widget_loading_indicator.dart';
 import '../model/buyer_model.dart';
+import '../model/order_model.dart';
 import '../model/product_model.dart';
 import '../repo/auth_repo.dart';
+import '../repo/order_repo.dart';
 import '../repo/pref_repo.dart';
 
 class CartController extends GetxController {
-  CartController(this.prefRepo, this.buyerRepo);
+  CartController(this.prefRepo, this.buyerRepo, this.orderRepo);
 
   final PrefRepo prefRepo;
   final BuyerAuthRepo buyerRepo;
+  final OrderRepo orderRepo;
 
   @override
   void onInit() async {
@@ -30,6 +35,38 @@ class CartController extends GetxController {
 
   List<ProductModel> _productsInCart = [];
   List<ProductModel> get productsInCart => _productsInCart;
+
+  createOrder(BuildContext context) async {
+    LoadingIndicator.show(context);
+
+    List<Future> future = [];
+
+    for (var item in _productsInCart) {
+      final OrderModel order = OrderModel(
+        id: Get.find<Uuid>().v1(),
+        seller: item.seller,
+        buyer: _userModel.copyWith(productInCart: []),
+        product: item,
+        boughtDate: DateTime.now(),
+        receiveExpectDate: DateTime.now(),
+      );
+
+      future.add(orderRepo.create(order.toJson()));
+    }
+
+    await Future.wait(future).then((_) async {
+      _productsInCart.clear();
+
+      await buyerRepo.update(
+          data: _userModel.copyWith(productInCart: []).toJson(),
+          id: _userModel.id);
+
+      Push.to(context, HomePage());
+    });
+
+    update();
+    LoadingIndicator.hide(context);
+  }
 
   Future<void> initProductsInCart() async {
     _quantity = 1;

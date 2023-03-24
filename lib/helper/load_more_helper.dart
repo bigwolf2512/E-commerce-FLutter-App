@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../data/controller/load_more_controller.dart';
 import '../design/extension/double_extension.dart';
-import '../share/widget/loading_indicator.dart';
+import '../share/widget/widget_loading_indicator.dart';
 
 abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
     extends State<Screen> {

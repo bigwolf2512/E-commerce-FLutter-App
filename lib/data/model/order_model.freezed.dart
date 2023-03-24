@@ -23,7 +23,7 @@ mixin _$OrderModel {
   String? get id => throw _privateConstructorUsedError;
   SellerModel? get seller => throw _privateConstructorUsedError;
   BuyerModel? get buyer => throw _privateConstructorUsedError;
-  List<ProductModel>? get products => throw _privateConstructorUsedError;
+  ProductModel? get product => throw _privateConstructorUsedError;
   DateTime? get boughtDate => throw _privateConstructorUsedError;
   DateTime? get receiveExpectDate => throw _privateConstructorUsedError;
 
@@ -43,12 +43,13 @@ abstract class $OrderModelCopyWith<$Res> {
       {String? id,
       SellerModel? seller,
       BuyerModel? buyer,
-      List<ProductModel>? products,
+      ProductModel? product,
       DateTime? boughtDate,
       DateTime? receiveExpectDate});
 
   $SellerModelCopyWith<$Res>? get seller;
   $BuyerModelCopyWith<$Res>? get buyer;
+  $ProductModelCopyWith<$Res>? get product;
 }
 
 /// @nodoc
@@ -67,7 +68,7 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
     Object? id = freezed,
     Object? seller = freezed,
     Object? buyer = freezed,
-    Object? products = freezed,
+    Object? product = freezed,
     Object? boughtDate = freezed,
     Object? receiveExpectDate = freezed,
   }) {
@@ -84,10 +85,10 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.buyer
           : buyer // ignore: cast_nullable_to_non_nullable
               as BuyerModel?,
-      products: freezed == products
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
-              as List<ProductModel>?,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductModel?,
       boughtDate: freezed == boughtDate
           ? _value.boughtDate
           : boughtDate // ignore: cast_nullable_to_non_nullable
@@ -122,6 +123,18 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
       return _then(_value.copyWith(buyer: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductModelCopyWith<$Res>? get product {
+    if (_value.product == null) {
+      return null;
+    }
+
+    return $ProductModelCopyWith<$Res>(_value.product!, (value) {
+      return _then(_value.copyWith(product: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -136,7 +149,7 @@ abstract class _$$_OrderModelCopyWith<$Res>
       {String? id,
       SellerModel? seller,
       BuyerModel? buyer,
-      List<ProductModel>? products,
+      ProductModel? product,
       DateTime? boughtDate,
       DateTime? receiveExpectDate});
 
@@ -144,6 +157,8 @@ abstract class _$$_OrderModelCopyWith<$Res>
   $SellerModelCopyWith<$Res>? get seller;
   @override
   $BuyerModelCopyWith<$Res>? get buyer;
+  @override
+  $ProductModelCopyWith<$Res>? get product;
 }
 
 /// @nodoc
@@ -160,7 +175,7 @@ class __$$_OrderModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? seller = freezed,
     Object? buyer = freezed,
-    Object? products = freezed,
+    Object? product = freezed,
     Object? boughtDate = freezed,
     Object? receiveExpectDate = freezed,
   }) {
@@ -177,10 +192,10 @@ class __$$_OrderModelCopyWithImpl<$Res>
           ? _value.buyer
           : buyer // ignore: cast_nullable_to_non_nullable
               as BuyerModel?,
-      products: freezed == products
-          ? _value._products
-          : products // ignore: cast_nullable_to_non_nullable
-              as List<ProductModel>?,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductModel?,
       boughtDate: freezed == boughtDate
           ? _value.boughtDate
           : boughtDate // ignore: cast_nullable_to_non_nullable
@@ -200,10 +215,9 @@ class _$_OrderModel implements _OrderModel {
       {this.id,
       this.seller,
       this.buyer,
-      final List<ProductModel>? products,
+      this.product,
       this.boughtDate,
-      this.receiveExpectDate})
-      : _products = products;
+      this.receiveExpectDate});
 
   factory _$_OrderModel.fromJson(Map<String, dynamic> json) =>
       _$$_OrderModelFromJson(json);
@@ -214,16 +228,8 @@ class _$_OrderModel implements _OrderModel {
   final SellerModel? seller;
   @override
   final BuyerModel? buyer;
-  final List<ProductModel>? _products;
   @override
-  List<ProductModel>? get products {
-    final value = _products;
-    if (value == null) return null;
-    if (_products is EqualUnmodifiableListView) return _products;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final ProductModel? product;
   @override
   final DateTime? boughtDate;
   @override
@@ -231,7 +237,7 @@ class _$_OrderModel implements _OrderModel {
 
   @override
   String toString() {
-    return 'OrderModel(id: $id, seller: $seller, buyer: $buyer, products: $products, boughtDate: $boughtDate, receiveExpectDate: $receiveExpectDate)';
+    return 'OrderModel(id: $id, seller: $seller, buyer: $buyer, product: $product, boughtDate: $boughtDate, receiveExpectDate: $receiveExpectDate)';
   }
 
   @override
@@ -242,7 +248,7 @@ class _$_OrderModel implements _OrderModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.seller, seller) || other.seller == seller) &&
             (identical(other.buyer, buyer) || other.buyer == buyer) &&
-            const DeepCollectionEquality().equals(other._products, _products) &&
+            (identical(other.product, product) || other.product == product) &&
             (identical(other.boughtDate, boughtDate) ||
                 other.boughtDate == boughtDate) &&
             (identical(other.receiveExpectDate, receiveExpectDate) ||
@@ -252,13 +258,7 @@ class _$_OrderModel implements _OrderModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      seller,
-      buyer,
-      const DeepCollectionEquality().hash(_products),
-      boughtDate,
-      receiveExpectDate);
+      runtimeType, id, seller, buyer, product, boughtDate, receiveExpectDate);
 
   @JsonKey(ignore: true)
   @override
@@ -279,7 +279,7 @@ abstract class _OrderModel implements OrderModel {
       {final String? id,
       final SellerModel? seller,
       final BuyerModel? buyer,
-      final List<ProductModel>? products,
+      final ProductModel? product,
       final DateTime? boughtDate,
       final DateTime? receiveExpectDate}) = _$_OrderModel;
 
@@ -293,7 +293,7 @@ abstract class _OrderModel implements OrderModel {
   @override
   BuyerModel? get buyer;
   @override
-  List<ProductModel>? get products;
+  ProductModel? get product;
   @override
   DateTime? get boughtDate;
   @override
