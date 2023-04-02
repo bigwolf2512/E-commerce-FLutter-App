@@ -26,7 +26,7 @@ class ConfirmOrderItemWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                      image: NetworkImage(data.images.first),
+                      image: NetworkImage(data.images.first.path ?? ''),
                       fit: BoxFit.cover),
                   color: kSecondaryColor),
             ),

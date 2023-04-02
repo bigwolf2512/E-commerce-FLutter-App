@@ -12,7 +12,9 @@ class OrderModel with _$OrderModel {
   const factory OrderModel({
     String? id,
     SellerModel? seller,
+    String? sellerId,
     BuyerModel? buyer,
+    String? buyerId,
     ProductModel? product,
     DateTime? boughtDate,
     DateTime? receiveExpectDate,

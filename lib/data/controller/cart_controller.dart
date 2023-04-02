@@ -8,18 +8,24 @@ import '../../presentation/feature_shared/home/home_screen.dart';
 import '../../share/widget/widget_dialog_helper.dart';
 import '../../share/widget/widget_loading_indicator.dart';
 import '../model/buyer_model.dart';
+import '../model/notification_model.dart';
 import '../model/order_model.dart';
 import '../model/product_model.dart';
 import '../repo/auth_repo.dart';
+import '../repo/notification_repo.dart';
 import '../repo/order_repo.dart';
 import '../repo/pref_repo.dart';
+import 'notification_controller.dart';
 
 class CartController extends GetxController {
-  CartController(this.prefRepo, this.buyerRepo, this.orderRepo);
+  CartController(this.prefRepo, this.buyerRepo, this.orderRepo, this.notiRepo);
 
   final PrefRepo prefRepo;
   final BuyerAuthRepo buyerRepo;
   final OrderRepo orderRepo;
+  final NotificationRepo notiRepo;
+
+  final NotificationController notificationController = Get.find();
 
   @override
   void onInit() async {
@@ -38,12 +44,12 @@ class CartController extends GetxController {
 
   createOrder(BuildContext context) async {
     LoadingIndicator.show(context);
-
     List<Future> future = [];
+    String orderId = Get.find<Uuid>().v1();
 
     for (var item in _productsInCart) {
       final OrderModel order = OrderModel(
-        id: Get.find<Uuid>().v1(),
+        id: orderId,
         seller: item.seller,
         buyer: _userModel.copyWith(productInCart: []),
         product: item,
@@ -51,7 +57,17 @@ class CartController extends GetxController {
         receiveExpectDate: DateTime.now(),
       );
 
-      future.add(orderRepo.create(order.toJson()));
+      future
+        ..add(orderRepo.create(order.toJson()))
+        ..add(notiRepo.create(NotificationModel(
+                id: Get.find<Uuid>().v1(),
+                buyerId: _userModel.id,
+                sellerId: item.sellerId,
+                title: 'Đặt hàng thành công',
+                description:
+                    'Đơn hàng ${item.name} của ban đang được xác nhận, vui lòng kiểm tra thường xuyên khi có thông báo mới.',
+                sendAt: DateTime.now())
+            .toJson()));
     }
 
     await Future.wait(future).then((_) async {
@@ -60,6 +76,8 @@ class CartController extends GetxController {
       await buyerRepo.update(
           data: _userModel.copyWith(productInCart: []).toJson(),
           id: _userModel.id);
+
+      notificationController.onInit();
 
       Push.to(context, HomePage());
     });
@@ -151,6 +169,7 @@ class CartController extends GetxController {
 
         _userModel = _userModel.copyWith(productInCart: _productsInCart);
         await buyerRepo.update(data: _userModel.toJson(), id: _userModel.id);
+
         update();
         LoadingIndicator.hide(context);
 

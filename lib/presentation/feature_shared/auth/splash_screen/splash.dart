@@ -38,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return page ?? OnLoadingIndicator();
+    return page ?? Scaffold(body: OnLoadingIndicator());
   }
 
   Future<Widget> getCurrentUser() async {
@@ -48,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
         final SellerModel sellerModel = await sellerRepo
             .getOne(repo.getCurrentUser().sellerModel?.id ?? '');
 
-        if (sellerModel.isSetupStore ?? false) {
+        if (!(sellerModel.isSetupStore ?? false)) {
           return SetupStoreScreen();
         }
       }

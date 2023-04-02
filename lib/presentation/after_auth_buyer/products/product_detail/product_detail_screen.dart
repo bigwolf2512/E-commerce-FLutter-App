@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../data/constant/path_collection.dart';
 import '../../../../data/controller/cart_controller.dart';
 import '../../../../data/controller/load_one_controller.dart';
+import '../../../../data/controller/product_controller.dart';
 import '../../../../data/model/product_model.dart';
 import '../../../../design/extension/double_extension.dart';
 import '../../../../helper/load_one_helper.dart';
@@ -330,55 +331,59 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
-  Container _buildAppBarAndProductImage(BuildContext context) {
-    return Container(
-        height: 0.3.h,
-        width: double.maxFinite,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(widget.data.images.first ?? ''),
-              fit: BoxFit.cover,
-            ),
-            color: kSecondaryColor),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: ButtonFlat(
-                  itemsNumber: 0,
-                  icon: Icon(CupertinoIcons.back),
-                  padding: 16,
-                  color: Colors.white,
-                ),
+  Widget _buildAppBarAndProductImage(BuildContext context) {
+    Get.find<ProductController>().getImage(widget.data.images.first.path);
+
+    return GetBuilder<ProductController>(builder: (controller) {
+      return Container(
+          height: 0.3.h,
+          width: double.maxFinite,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(controller.image),
+                fit: BoxFit.cover,
               ),
-              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  height: 0.13.w,
-                  width: 0.2.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text.rich(TextSpan(children: const [
-                        TextSpan(
-                            text: '4.5',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: kTextColor)),
-                      ])),
-                      SvgPicture.asset('assets/icons/Star Icon.svg'),
-                    ],
-                  ))
-            ],
-          ),
-        ));
+              color: kSecondaryColor),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: ButtonFlat(
+                    itemsNumber: 0,
+                    icon: Icon(CupertinoIcons.back),
+                    padding: 16,
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    height: 0.13.w,
+                    width: 0.2.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text.rich(TextSpan(children: const [
+                          TextSpan(
+                              text: '4.5',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: kTextColor)),
+                        ])),
+                        SvgPicture.asset('assets/icons/Star Icon.svg'),
+                      ],
+                    ))
+              ],
+            ),
+          ));
+    });
   }
 }

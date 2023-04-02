@@ -4,6 +4,8 @@ import 'package:uuid/uuid.dart';
 
 import 'data/controller/auth_controller.dart';
 import 'data/controller/cart_controller.dart';
+import 'data/controller/notification_controller.dart';
+import 'data/controller/product_controller.dart';
 import 'data/repo/auth_repo.dart';
 import 'data/repo/notification_repo.dart';
 import 'data/repo/order_repo.dart';
@@ -24,6 +26,10 @@ Future<void> init() async {
 
   Get.lazyPut<AuthController>(() => AuthController(Get.find(), Get.find(),
       sharedPreferences, Get.find(), Get.find(), Get.find()));
-  Get.lazyPut<CartController>(
-      () => CartController(Get.find(), Get.find(), Get.find())..onInit());
+  Get.lazyPut<CartController>(() =>
+      CartController(Get.find(), Get.find(), Get.find(), Get.find())..onInit());
+  Get.lazyPut<NotificationController>(
+      () => NotificationController(Get.find(), Get.find())..onInit());
+  Get.lazyPut<ProductController>(
+      () => ProductController(Get.find(), Get.find(), Get.find())..onInit());
 }

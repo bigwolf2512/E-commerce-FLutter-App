@@ -16,9 +16,9 @@ _$_ProductModel _$$_ProductModelFromJson(Map<String, dynamic> json) =>
       totalQuantity: json['totalQuantity'] as num?,
       status: json['status'] as String?,
       images: (json['images'] as List<dynamic>?)
-              ?.map((e) => e as String)
+              ?.map((e) => ImageModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          const <String>[],
+          const <ImageModel>[],
       sellerId: json['sellerId'] as String?,
       seller: json['seller'] == null
           ? null
@@ -40,7 +40,7 @@ Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
       'quantity': instance.quantity,
       'totalQuantity': instance.totalQuantity,
       'status': instance.status,
-      'images': instance.images,
+      'images': instance.images.map((e) => e.toJson()).toList(),
       'sellerId': instance.sellerId,
       'seller': instance.seller?.toJson(),
       'createdAt': instance.createdAt?.toIso8601String(),

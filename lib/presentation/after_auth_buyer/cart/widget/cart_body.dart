@@ -75,7 +75,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                      image: NetworkImage(product.images.first ?? ''),
+                      image: NetworkImage(product.images.first.path ?? ''),
                       fit: BoxFit.cover),
                   color: kSecondaryColor),
             ),

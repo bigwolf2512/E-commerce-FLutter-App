@@ -128,6 +128,33 @@ abstract class LoadMoreStatelessHelper<T> extends StatelessWidget {
   }
 }
 
+abstract class LoadMore<T> extends StatelessWidget {
+  const LoadMore({Key? key}) : super(key: key);
+
+  LoadMoreController<T> init();
+
+  Widget itemBuilder(T data);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<LoadMoreController<T>>(
+        init: init(),
+        builder: (controller) {
+          if (controller.data.isEmpty) return OnLoadingIndicator();
+          return ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: controller.data.length,
+              itemBuilder: (c, i) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8, right: 8, bottom: 8),
+                  child: itemBuilder(controller.data[i]),
+                );
+              });
+        });
+  }
+}
+
 class LoadMoreConfig {
   final Axis scrollDirection;
   final Size size;

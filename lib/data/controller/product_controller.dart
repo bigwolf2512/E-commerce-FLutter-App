@@ -1,24 +1,34 @@
-// import 'dart:convert';
+import 'package:ecommerceshop/data/firebase/firebase_storage_core.dart';
+import 'package:ecommerceshop/data/repo/auth_repo.dart';
+import 'package:ecommerceshop/design/extension/object_extension.dart';
+import 'package:get/get.dart';
 
-// import 'package:ecommerceshop/data/api/api_client.dart';
-// import 'package:ecommerceshop/data/repo/product_repo.dart';
-// import 'package:get/get.dart';
+import '../model/seller_model.dart';
+import '../repo/pref_repo.dart';
 
-// import '../model/product_model.dart';
-// import 'package:http/http.dart' as http;
+class ProductController extends GetxController {
+  ProductController(this.sellerRepo, this.buyerRepo, this.prefRepo);
 
-// class ProductController extends GetxController {
-//   final ApiClient apiClient;
-//   ProductController({required this.apiClient});
-//   List<dynamic> _productList = [];
-//   List<dynamic> get productList => _productList;
-//   Future getproductList() async {
-//     http.Response response = await apiClient.getProducts();
-//     if (response.statusCode == 200) {
-//       _productList = [];
-//       _productList
-//           .addAll(ProductModel.fromJson(jsonDecode(response.body)).products!);
-//     } else {}
-//     update();
-//   }
-// }
+  final SellerAuthRepo sellerRepo;
+  final BuyerAuthRepo buyerRepo;
+  final PrefRepo prefRepo;
+
+  SellerModel? sellerModel;
+
+  @override
+  void onInit() async {
+    super.onInit();
+    sellerModel = await sellerRepo
+        .getOne(prefRepo.getCurrentUser().sellerModel?.id ?? '');
+    update();
+  }
+
+  String image = '';
+
+  getImage(String? path) async {
+    path.log();
+    String _path = await FirebaseStorageCore.getFileUrl(path: path);
+    image = _path;
+    update();
+  }
+}

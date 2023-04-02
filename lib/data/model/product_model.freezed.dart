@@ -27,7 +27,7 @@ mixin _$ProductModel {
   num? get quantity => throw _privateConstructorUsedError;
   num? get totalQuantity => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
-  List<String> get images => throw _privateConstructorUsedError;
+  List<ImageModel> get images => throw _privateConstructorUsedError;
   String? get sellerId => throw _privateConstructorUsedError;
   SellerModel? get seller => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ abstract class $ProductModelCopyWith<$Res> {
       num? quantity,
       num? totalQuantity,
       String? status,
-      List<String> images,
+      List<ImageModel> images,
       String? sellerId,
       SellerModel? seller,
       DateTime? createdAt,
@@ -120,7 +120,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ImageModel>,
       sellerId: freezed == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ abstract class _$$_ProductModelCopyWith<$Res>
       num? quantity,
       num? totalQuantity,
       String? status,
-      List<String> images,
+      List<ImageModel> images,
       String? sellerId,
       SellerModel? seller,
       DateTime? createdAt,
@@ -235,7 +235,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ImageModel>,
       sellerId: freezed == sellerId
           ? _value.sellerId
           : sellerId // ignore: cast_nullable_to_non_nullable
@@ -267,7 +267,7 @@ class _$_ProductModel implements _ProductModel {
       this.quantity,
       this.totalQuantity,
       this.status,
-      final List<String> images = const <String>[],
+      final List<ImageModel> images = const <ImageModel>[],
       this.sellerId,
       this.seller,
       this.createdAt,
@@ -291,10 +291,10 @@ class _$_ProductModel implements _ProductModel {
   final num? totalQuantity;
   @override
   final String? status;
-  final List<String> _images;
+  final List<ImageModel> _images;
   @override
   @JsonKey()
-  List<String> get images {
+  List<ImageModel> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -379,7 +379,7 @@ abstract class _ProductModel implements ProductModel {
       final num? quantity,
       final num? totalQuantity,
       final String? status,
-      final List<String> images,
+      final List<ImageModel> images,
       final String? sellerId,
       final SellerModel? seller,
       final DateTime? createdAt,
@@ -403,7 +403,7 @@ abstract class _ProductModel implements ProductModel {
   @override
   String? get status;
   @override
-  List<String> get images;
+  List<ImageModel> get images;
   @override
   String? get sellerId;
   @override

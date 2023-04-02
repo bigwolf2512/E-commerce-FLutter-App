@@ -11,7 +11,7 @@ import '../../../share/widget/widget_dialog_helper.dart';
 class SetupProductPage extends StatelessWidget {
   SetupProductPage({Key? key}) : super(key: key);
 
-  final AuthController controller = Get.find();
+  final AuthController controller = Get.find()..initSellerInfo();
 
   @override
   Widget build(BuildContext context) {
@@ -108,28 +108,28 @@ class SetupProductPage extends StatelessWidget {
               _buildTextField(
                   hintext: "Name of your product",
                   onChanged: (p0) {
-                    controller.updateNewProducts(
+                    controller.updateProducts(
                         index: indexOfNewProduct, name: p0);
                   }),
               const SizedBox(height: 8),
               _buildTextField(
                   hintext: "Price of your product",
                   onChanged: (p0) {
-                    controller.updateNewProducts(
+                    controller.updateProducts(
                         index: indexOfNewProduct, price: num.parse(p0));
                   }),
               const SizedBox(height: 8),
               _buildTextField(
                   hintext: "Description of your product",
                   onChanged: (p0) {
-                    controller.updateNewProducts(
+                    controller.updateProducts(
                         index: indexOfNewProduct, description: p0);
                   }),
               const SizedBox(height: 8),
               _buildTextField(
                   hintext: "Total of your product",
                   onChanged: (p0) {
-                    controller.updateNewProducts(
+                    controller.updateProducts(
                         index: indexOfNewProduct, totalQuantity: num.parse(p0));
                   }),
             ],
@@ -167,7 +167,7 @@ class SetupProductPage extends StatelessWidget {
                         await DialogHelper.imagePickerSelections(context);
 
                     if (path != null) {
-                      controller.updateNewProducts(
+                      controller.updateProducts(
                           index: indexOfNewProduct, path: path);
                     }
                   },

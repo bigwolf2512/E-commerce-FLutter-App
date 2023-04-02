@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerceshop/data/firebase/firebase_storage_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +20,7 @@ import '../../share/widget/widget_snack_bar_helper.dart';
 import '../constant/path_collection.dart';
 import '../constant/path_spref.dart';
 import '../model/buyer_model.dart';
-import '../model/notification_model.dart';
+import '../model/image_model.dart';
 import '../model/product_model.dart';
 import '../model/seller_model.dart';
 import '../model/user_model.dart';
@@ -49,32 +50,22 @@ class AuthController extends GetxController {
   final storeAddress = TextEditingController();
   final storeAvatar = TextEditingController();
 
+  SellerModel _sellerModel = SellerModel();
+  SellerModel get sellerModel => _sellerModel;
+
+  initSellerInfo() async {
+    SellerModel? sellerModel = prefRepo.getCurrentUser().sellerModel;
+    _sellerModel = await sellerRepo.getOne(sellerModel?.id ?? '');
+    update();
+  }
+
   final List<ProductModel> _newProducts = [];
   List<ProductModel> get newProducts => _newProducts;
 
-  uploadNotification() async {
-    List<Future> futures = [];
-    List<NotificationModel> notifications = [];
-    NotificationModel noti = NotificationModel(
-        id: Get.find<Uuid>().v1(),
-        buyerId: prefRepo.getCurrentUser().buyerModel?.id,
-        title: 'Day la thong bao',
-        description: 'Day la noi dung thong bao');
-
-    notifications
-      ..add(noti)
-      ..add(noti)
-      ..add(noti);
-
-    for (var item in notifications) {
-      futures.add(notificationRepo.create(item.toJson()));
-    }
-
-    await Future.wait(futures);
-  }
-
   insertNewProducts() {
-    _newProducts.add(ProductModel());
+    _newProducts.add(ProductModel(
+      id: Get.find<Uuid>().v1(),
+    ));
     update();
   }
 
@@ -82,10 +73,10 @@ class AuthController extends GetxController {
     if (_newProducts.isEmpty) return '';
     if (_newProducts[indexProduct].images.isEmpty) return '';
 
-    return _newProducts[indexProduct].images[indexImage];
+    return _newProducts[indexProduct].images[indexImage].localPath ?? '';
   }
 
-  updateNewProducts({
+  updateProducts({
     required int index,
     String? name,
     num? totalQuantity,
@@ -95,13 +86,20 @@ class AuthController extends GetxController {
   }) {
     ProductModel productModel = _newProducts[index];
 
+    String _path = 'images/${sellerModel.storeId}/${productModel.id}';
+    String _imageId = Get.find<Uuid>().v1();
+
     productModel = productModel.copyWith(
       name: name ?? productModel.name,
       totalQuantity: totalQuantity ?? productModel.totalQuantity,
       price: price ?? productModel.price,
       description: description ?? description,
       images: path != null
-          ? [...productModel.images, path]
+          ? [
+              ...productModel.images,
+              ImageModel(
+                  id: _imageId, path: '$_path/$_imageId', localPath: path)
+            ]
           : [...productModel.images],
     );
 
@@ -113,46 +111,29 @@ class AuthController extends GetxController {
     try {
       LoadingIndicator.show(context);
 
-      SellerModel? sellerModel = prefRepo.getCurrentUser().sellerModel;
-
-      if (sellerModel == null) return;
-
-      _newProducts.clear();
-
-      for (int i = 0; i < 10; i++) {
-        _newProducts.add(ProductModel(
-          id: Get.find<Uuid>().v1(),
-          seller: sellerModel,
-          sellerId: sellerModel.id,
-          price: 10000 * (i + 1),
-          name: 'product $i',
-          totalQuantity: 100 * i,
-          images: [
-            'https://assets.grab.com/wp-content/uploads/sites/11/2020/03/05000908/kaiwaii.food_69339317_366915090886222_2114771019841597291_n-e1583338157148.jpg',
-            'https://anchoivungtau.vn/wp-content/uploads/2021/11/215360235_346602173494765_1620482742499148206_n.jpg',
-            'https://nuocmamlegia.com/wp-content/uploads/2019/09/bun-dau-mam-tom-le-gia.jpg'
-          ],
-          description:
-              'Bún đậu mắm tôm là một trong những món ăn khoái khẩu của người dân Việt. Món ăn đơn giản chỉ từ các nguyên liệu cơ bản như: bún tươi, đậu hũ, mắm tôm đã làm nên cái hồn cho món ăn. Qua bài viết dưới đây, mắm Lê Gia xin chia sẻ bí kíp làm món bún đậu mắm tôm chuẩn vị ngay tại nhà nhé! ',
-        ));
-      }
+      if (_sellerModel == SellerModel()) return;
 
       List<Future> _futures = [];
 
-      for (var item in _newProducts) {
-        _futures.add(productRepo.create(item.toJson()));
+      for (ProductModel product in _newProducts) {
+        _futures.add(productRepo.create(product.toJson()));
+
+        for (ImageModel image in product.images) {
+          _futures.add(FirebaseStorageCore.uploadImagePath(
+            firebaseStoragePath: image.path,
+            localPath: image.localPath,
+          ));
+        }
       }
 
       await Future.wait(_futures).then((_) async {
-        sellerModel = sellerModel?.copyWith(
+        _sellerModel = _sellerModel.copyWith(
           productOnSale: _newProducts,
           isSetupStore: true,
         );
 
-        debugPrint(sellerModel?.toJson().toString());
-
         await sellerRepo
-            .update(data: sellerModel!.toJson(), id: sellerModel?.id)
+            .update(data: _sellerModel.toJson(), id: _sellerModel.id)
             .then((_) {
           LoadingIndicator.hide(context);
           Push.to(context, HomePage());
@@ -305,6 +286,8 @@ class AuthController extends GetxController {
         storeName: storeName.text,
         storeAddress: storeAddress.text,
       );
+
+      print(sellerModel.toJson().toString());
 
       await sellerRepo
           .update(data: sellerModel.toJson(), id: sellerModel.id)

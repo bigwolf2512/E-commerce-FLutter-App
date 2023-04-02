@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/constant/path_spref.dart';
-import '../../../data/controller/auth_controller.dart';
 import '../../../data/controller/cart_controller.dart';
+import '../../../data/controller/notification_controller.dart';
 import '../../../data/repo/pref_repo.dart';
 import '../../../design/extension/double_extension.dart';
 import '../../../helper/navigator_helper.dart';
 import '../../../share/constant/constant.dart';
+import '../../../share/widget/widget_button_flat.dart';
 import '../../../share/widget/widget_loading_indicator.dart';
 import '../../../share/widget/widget_snack_bar_helper.dart';
-import '../../../share/widget/widget_button_flat.dart';
 import '../../after_auth_buyer/cart/cart_screen.dart';
 import '../notification/notification_page.dart';
 import 'components/list_store_widget.dart';
@@ -153,13 +153,13 @@ class _DashboardPageState extends State<DashboardPage> {
                   );
                 }),
                 SizedBox(width: 0.03.w),
-                GetBuilder<AuthController>(builder: (controller) {
+                GetBuilder<NotificationController>(builder: (controller) {
                   return ButtonFlat(
                     onTap: () {
                       Push.noBottomBar(context, NotificationPage());
                     },
                     color: kSecondaryColor,
-                    itemsNumber: 12,
+                    itemsNumber: controller.getTotalNotifications,
                     padding: 0.025.w,
                     icon: Icon(CupertinoIcons.bell),
                   );

@@ -24,11 +24,11 @@ class ListStoreWidget extends LoadMoreStatelessHelper<SellerModel> {
 
   @override
   Widget itemBuilder(SellerModel data) {
-    return data.id != null
+    return ((data.productOnSale ?? []).isNotEmpty)
         ? Column(
             children: [
               TitleWidget(title: data.storeName ?? data.name ?? ''),
-              ListProductsByStoreIdWidget(sellerId: data.id)
+              ListProductsByStoreIdWidget(sellerModel: data)
             ],
           )
         : const SizedBox();
@@ -45,7 +45,7 @@ class OwnStoreWidget extends LoadOneHelper<SellerModel> {
     return Column(
       children: [
         TitleWidget(title: data.storeName),
-        ListProductsByStoreIdWidget(sellerId: data.id)
+        ListProductsByStoreIdWidget(sellerModel: data)
       ],
     );
   }

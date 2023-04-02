@@ -22,7 +22,9 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) {
 mixin _$OrderModel {
   String? get id => throw _privateConstructorUsedError;
   SellerModel? get seller => throw _privateConstructorUsedError;
+  String? get sellerId => throw _privateConstructorUsedError;
   BuyerModel? get buyer => throw _privateConstructorUsedError;
+  String? get buyerId => throw _privateConstructorUsedError;
   ProductModel? get product => throw _privateConstructorUsedError;
   DateTime? get boughtDate => throw _privateConstructorUsedError;
   DateTime? get receiveExpectDate => throw _privateConstructorUsedError;
@@ -42,7 +44,9 @@ abstract class $OrderModelCopyWith<$Res> {
   $Res call(
       {String? id,
       SellerModel? seller,
+      String? sellerId,
       BuyerModel? buyer,
+      String? buyerId,
       ProductModel? product,
       DateTime? boughtDate,
       DateTime? receiveExpectDate});
@@ -67,7 +71,9 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
   $Res call({
     Object? id = freezed,
     Object? seller = freezed,
+    Object? sellerId = freezed,
     Object? buyer = freezed,
+    Object? buyerId = freezed,
     Object? product = freezed,
     Object? boughtDate = freezed,
     Object? receiveExpectDate = freezed,
@@ -81,10 +87,18 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.seller
           : seller // ignore: cast_nullable_to_non_nullable
               as SellerModel?,
+      sellerId: freezed == sellerId
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
+              as String?,
       buyer: freezed == buyer
           ? _value.buyer
           : buyer // ignore: cast_nullable_to_non_nullable
               as BuyerModel?,
+      buyerId: freezed == buyerId
+          ? _value.buyerId
+          : buyerId // ignore: cast_nullable_to_non_nullable
+              as String?,
       product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -148,7 +162,9 @@ abstract class _$$_OrderModelCopyWith<$Res>
   $Res call(
       {String? id,
       SellerModel? seller,
+      String? sellerId,
       BuyerModel? buyer,
+      String? buyerId,
       ProductModel? product,
       DateTime? boughtDate,
       DateTime? receiveExpectDate});
@@ -174,7 +190,9 @@ class __$$_OrderModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? seller = freezed,
+    Object? sellerId = freezed,
     Object? buyer = freezed,
+    Object? buyerId = freezed,
     Object? product = freezed,
     Object? boughtDate = freezed,
     Object? receiveExpectDate = freezed,
@@ -188,10 +206,18 @@ class __$$_OrderModelCopyWithImpl<$Res>
           ? _value.seller
           : seller // ignore: cast_nullable_to_non_nullable
               as SellerModel?,
+      sellerId: freezed == sellerId
+          ? _value.sellerId
+          : sellerId // ignore: cast_nullable_to_non_nullable
+              as String?,
       buyer: freezed == buyer
           ? _value.buyer
           : buyer // ignore: cast_nullable_to_non_nullable
               as BuyerModel?,
+      buyerId: freezed == buyerId
+          ? _value.buyerId
+          : buyerId // ignore: cast_nullable_to_non_nullable
+              as String?,
       product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -214,7 +240,9 @@ class _$_OrderModel implements _OrderModel {
   const _$_OrderModel(
       {this.id,
       this.seller,
+      this.sellerId,
       this.buyer,
+      this.buyerId,
       this.product,
       this.boughtDate,
       this.receiveExpectDate});
@@ -227,7 +255,11 @@ class _$_OrderModel implements _OrderModel {
   @override
   final SellerModel? seller;
   @override
+  final String? sellerId;
+  @override
   final BuyerModel? buyer;
+  @override
+  final String? buyerId;
   @override
   final ProductModel? product;
   @override
@@ -237,7 +269,7 @@ class _$_OrderModel implements _OrderModel {
 
   @override
   String toString() {
-    return 'OrderModel(id: $id, seller: $seller, buyer: $buyer, product: $product, boughtDate: $boughtDate, receiveExpectDate: $receiveExpectDate)';
+    return 'OrderModel(id: $id, seller: $seller, sellerId: $sellerId, buyer: $buyer, buyerId: $buyerId, product: $product, boughtDate: $boughtDate, receiveExpectDate: $receiveExpectDate)';
   }
 
   @override
@@ -247,7 +279,10 @@ class _$_OrderModel implements _OrderModel {
             other is _$_OrderModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.seller, seller) || other.seller == seller) &&
+            (identical(other.sellerId, sellerId) ||
+                other.sellerId == sellerId) &&
             (identical(other.buyer, buyer) || other.buyer == buyer) &&
+            (identical(other.buyerId, buyerId) || other.buyerId == buyerId) &&
             (identical(other.product, product) || other.product == product) &&
             (identical(other.boughtDate, boughtDate) ||
                 other.boughtDate == boughtDate) &&
@@ -257,8 +292,8 @@ class _$_OrderModel implements _OrderModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, seller, buyer, product, boughtDate, receiveExpectDate);
+  int get hashCode => Object.hash(runtimeType, id, seller, sellerId, buyer,
+      buyerId, product, boughtDate, receiveExpectDate);
 
   @JsonKey(ignore: true)
   @override
@@ -278,7 +313,9 @@ abstract class _OrderModel implements OrderModel {
   const factory _OrderModel(
       {final String? id,
       final SellerModel? seller,
+      final String? sellerId,
       final BuyerModel? buyer,
+      final String? buyerId,
       final ProductModel? product,
       final DateTime? boughtDate,
       final DateTime? receiveExpectDate}) = _$_OrderModel;
@@ -291,7 +328,11 @@ abstract class _OrderModel implements OrderModel {
   @override
   SellerModel? get seller;
   @override
+  String? get sellerId;
+  @override
   BuyerModel? get buyer;
+  @override
+  String? get buyerId;
   @override
   ProductModel? get product;
   @override
