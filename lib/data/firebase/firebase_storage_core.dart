@@ -16,9 +16,6 @@ class FirebaseStorageCore {
   static uploadImagePath(
       {required String? localPath,
       required String? firebaseStoragePath}) async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: 'tunt.developer@gmail.com', password: 'Tunt0912394945');
-
     if (localPath == null || firebaseStoragePath == null) return;
 
     final File file = File(localPath);

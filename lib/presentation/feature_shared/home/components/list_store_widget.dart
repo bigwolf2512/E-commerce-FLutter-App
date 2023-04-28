@@ -44,7 +44,7 @@ class OwnStoreWidget extends LoadOneHelper<SellerModel> {
   Widget buildUI(SellerModel data) {
     return Column(
       children: [
-        TitleWidget(title: data.storeName),
+        TitleWidget(title: 'Your products on sale'),
         ListProductsByStoreIdWidget(sellerModel: data)
       ],
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/controller/cart_controller.dart';
+import '../../../../data/controller/product_controller.dart';
 import '../../../../data/model/product_model.dart';
 import '../../../../design/extension/double_extension.dart';
 import '../../../../helper/navigator_helper.dart';
@@ -44,7 +45,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
                     itemCount: controller.productsInCart.length,
                     itemBuilder: (context, index) {
                       return _buildCartItemWidget(
-                          controller.productsInCart[index]);
+                          product: controller.productsInCart[index]);
                     },
                   ),
                 ),
@@ -53,7 +54,8 @@ class _CartScreenBodyState extends State<CartScreenBody> {
     );
   }
 
-  Widget _buildCartItemWidget(ProductModel product) {
+  Widget _buildCartItemWidget({required ProductModel product}) {
+    Get.find<ProductController>().getImage(product.images.first.path);
     return InkWell(
       onTap: () {
         Push.to(context, ProductDetail(product.id ?? ''));
@@ -75,7 +77,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                      image: NetworkImage(product.images.first.path ?? ''),
+                      image: NetworkImage(Get.find<ProductController>().image),
                       fit: BoxFit.cover),
                   color: kSecondaryColor),
             ),

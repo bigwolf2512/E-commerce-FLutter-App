@@ -1,12 +1,13 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:ecommerceshop/presentation/feature_shared/auth/splash_screen/splash.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
 import 'independences.dart' as dep;
+import 'presentation/feature_shared/auth/splash_screen/splash.dart';
 import 'share/constant/constant.dart';
 
 Future<void> main() async {
@@ -15,7 +16,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: 'tunt.developer@gmail.com',
+    password: 'Tunt0912394945',
+  );
   await FirebaseAppCheck.instance.activate(
     webRecaptchaSiteKey: 'recaptcha-v3-site-key',
   );
@@ -28,22 +32,8 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    // final PrefRepo repo = Get.find();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-    //   repo.getCurrentUser();
-    // });
-  }
 
   @override
   Widget build(BuildContext context) {
