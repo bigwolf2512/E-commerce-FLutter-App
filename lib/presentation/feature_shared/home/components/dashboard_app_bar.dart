@@ -1,5 +1,6 @@
 import 'package:ecommerceshop/data/repo/pref_repo.dart';
 import 'package:ecommerceshop/design/extension/double_extension.dart';
+import 'package:ecommerceshop/presentation/feature_shared/chat/chat_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,6 +66,9 @@ class _BuildBuyerAppBar extends StatelessWidget {
             child: Row(
               children: [
                 ButtonFlat(
+                  onTap: () {
+                    Push.noBottomBar(context, ChatScreen());
+                  },
                   color: kSecondaryColor,
                   itemsNumber: 0,
                   padding: 0.025.w,

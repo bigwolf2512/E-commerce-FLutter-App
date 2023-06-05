@@ -5,23 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "E-Food User",
+            "name": "E-Food Staging",
             "request": "launch",
             "type": "dart",
             "args": [
                 "--flavor",
-                "user",
+                "staging",
                 "-t",
                 "lib/main.dart"
             ]
         },
                 {
-            "name": "E-Food Merchant",
+            "name": "E-Food",
             "request": "launch",
             "type": "dart",
             "args": [
                 "--flavor",
-                "merchant",
+                "production",
                 "-t",
                 "lib/main.merchant.dart"
             ]

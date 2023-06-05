@@ -61,15 +61,15 @@ android {
     flavorDimensions "app"
 
     productFlavors {
-        user {
+        staging {
             dimension "app"
             applicationId "com.example.ecommerceshop.user"
-            resValue "string", "app_name", "E-Food User"
+            resValue "string", "app_name", "E-Food Staging"
         }
-        merchant {
+        production {
             dimension "app"
             applicationId "com.example.ecommerceshop.merchant"
-            resValue "string", "app_name", "E-Food Merchant"
+            resValue "string", "app_name", "E-Food"
         }
     }
 }

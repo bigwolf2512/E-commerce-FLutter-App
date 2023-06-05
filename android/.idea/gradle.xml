@@ -9,8 +9,6 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/cloud_firestore-4.4.3/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_app_check-0.1.1+14/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_auth-4.3.0/android" />
@@ -25,6 +23,8 @@
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.0.16/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.2.5/android" />
             <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/webview_flutter_android-2.10.4/android" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
       </GradleProjectSettings>

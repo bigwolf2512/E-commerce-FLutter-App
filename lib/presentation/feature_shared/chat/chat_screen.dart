@@ -36,6 +36,6 @@ class ChatScreen extends LoadMoreStatelessHelper<ChatModel> {
 
   @override
   Widget itemBuilder(ChatModel data) {
-    return Text((data.userId ?? '') + '///' + (data.chatterId ?? ''));
+    return Text('');
   }
 }

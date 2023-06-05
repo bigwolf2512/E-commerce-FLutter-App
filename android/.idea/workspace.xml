@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3361533-82ed-4eb9-840b-2c35d9009d42" name="Changes" comment="">
+      <change beforePath=".idea/ecommerceshop.iml" beforeDir="false" afterPath=".idea/ecommerceshop.iml" afterDir="false" />
+      <change beforePath=".idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath=".idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath=".idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath=".idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath=".idea/misc.xml" beforeDir="false" afterPath=".idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
@@ -15,10 +19,6 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecommerceshop_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ecommerceshop_android.iml" afterDir="false" />
-      <change beforePath=".idea/ecommerceshop.iml" beforeDir="false" afterPath=".idea/ecommerceshop.iml" afterDir="false" />
-      <change beforePath=".idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath=".idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath=".idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath=".idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath=".idea/misc.xml" beforeDir="false" afterPath=".idea/misc.xml" afterDir="false" />
       <change beforePath="lib/data/controller/cart_controller.dart" beforeDir="false" afterPath="lib/data/controller/cart_controller.dart" afterDir="false" />
       <change beforePath="lib/data/model/order_model.dart" beforeDir="false" afterPath="lib/data/model/order_model.dart" afterDir="false" />
       <change beforePath="lib/data/model/order_model.freezed.dart" beforeDir="false" afterPath="lib/data/model/order_model.freezed.dart" afterDir="false" />
