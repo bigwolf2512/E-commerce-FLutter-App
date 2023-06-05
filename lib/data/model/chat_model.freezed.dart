@@ -22,7 +22,7 @@ ChatModel _$ChatModelFromJson(Map<String, dynamic> json) {
 mixin _$ChatModel {
   String? get userId => throw _privateConstructorUsedError;
   String? get chatterId => throw _privateConstructorUsedError;
-  List<MessageModel>? get messages => throw _privateConstructorUsedError;
+  String? get lastMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $ChatModelCopyWith<$Res> {
   factory $ChatModelCopyWith(ChatModel value, $Res Function(ChatModel) then) =
       _$ChatModelCopyWithImpl<$Res, ChatModel>;
   @useResult
-  $Res call({String? userId, String? chatterId, List<MessageModel>? messages});
+  $Res call({String? userId, String? chatterId, String? lastMessage});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$ChatModelCopyWithImpl<$Res, $Val extends ChatModel>
   $Res call({
     Object? userId = freezed,
     Object? chatterId = freezed,
-    Object? messages = freezed,
+    Object? lastMessage = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -64,10 +64,10 @@ class _$ChatModelCopyWithImpl<$Res, $Val extends ChatModel>
           ? _value.chatterId
           : chatterId // ignore: cast_nullable_to_non_nullable
               as String?,
-      messages: freezed == messages
-          ? _value.messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<MessageModel>?,
+      lastMessage: freezed == lastMessage
+          ? _value.lastMessage
+          : lastMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -79,7 +79,7 @@ abstract class _$$_ChatModelCopyWith<$Res> implements $ChatModelCopyWith<$Res> {
       __$$_ChatModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? userId, String? chatterId, List<MessageModel>? messages});
+  $Res call({String? userId, String? chatterId, String? lastMessage});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$$_ChatModelCopyWithImpl<$Res>
   $Res call({
     Object? userId = freezed,
     Object? chatterId = freezed,
-    Object? messages = freezed,
+    Object? lastMessage = freezed,
   }) {
     return _then(_$_ChatModel(
       userId: freezed == userId
@@ -106,10 +106,10 @@ class __$$_ChatModelCopyWithImpl<$Res>
           ? _value.chatterId
           : chatterId // ignore: cast_nullable_to_non_nullable
               as String?,
-      messages: freezed == messages
-          ? _value._messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<MessageModel>?,
+      lastMessage: freezed == lastMessage
+          ? _value.lastMessage
+          : lastMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -117,9 +117,7 @@ class __$$_ChatModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ChatModel implements _ChatModel {
-  const _$_ChatModel(
-      {this.userId, this.chatterId, final List<MessageModel>? messages})
-      : _messages = messages;
+  const _$_ChatModel({this.userId, this.chatterId, this.lastMessage});
 
   factory _$_ChatModel.fromJson(Map<String, dynamic> json) =>
       _$$_ChatModelFromJson(json);
@@ -128,19 +126,12 @@ class _$_ChatModel implements _ChatModel {
   final String? userId;
   @override
   final String? chatterId;
-  final List<MessageModel>? _messages;
   @override
-  List<MessageModel>? get messages {
-    final value = _messages;
-    if (value == null) return null;
-    if (_messages is EqualUnmodifiableListView) return _messages;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final String? lastMessage;
 
   @override
   String toString() {
-    return 'ChatModel(userId: $userId, chatterId: $chatterId, messages: $messages)';
+    return 'ChatModel(userId: $userId, chatterId: $chatterId, lastMessage: $lastMessage)';
   }
 
   @override
@@ -151,13 +142,13 @@ class _$_ChatModel implements _ChatModel {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.chatterId, chatterId) ||
                 other.chatterId == chatterId) &&
-            const DeepCollectionEquality().equals(other._messages, _messages));
+            (identical(other.lastMessage, lastMessage) ||
+                other.lastMessage == lastMessage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, chatterId,
-      const DeepCollectionEquality().hash(_messages));
+  int get hashCode => Object.hash(runtimeType, userId, chatterId, lastMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -177,7 +168,7 @@ abstract class _ChatModel implements ChatModel {
   const factory _ChatModel(
       {final String? userId,
       final String? chatterId,
-      final List<MessageModel>? messages}) = _$_ChatModel;
+      final String? lastMessage}) = _$_ChatModel;
 
   factory _ChatModel.fromJson(Map<String, dynamic> json) =
       _$_ChatModel.fromJson;
@@ -187,7 +178,7 @@ abstract class _ChatModel implements ChatModel {
   @override
   String? get chatterId;
   @override
-  List<MessageModel>? get messages;
+  String? get lastMessage;
   @override
   @JsonKey(ignore: true)
   _$$_ChatModelCopyWith<_$_ChatModel> get copyWith =>

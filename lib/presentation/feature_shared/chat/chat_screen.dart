@@ -1,31 +1,36 @@
+import 'package:ecommerceshop/helper/navigator_helper.dart';
+import 'package:ecommerceshop/presentation/feature_shared/chat/message_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/constant/path_collection.dart';
 import '../../../data/controller/load_more_controller.dart';
-import '../../../data/model/buyer_model.dart';
 import '../../../data/model/chat_model.dart';
-import '../../../data/model/seller_model.dart';
 import '../../../data/repo/pref_repo.dart';
 import '../../../helper/load_more_helper.dart';
 
-class ChatScreen extends LoadMoreStatelessHelper<ChatModel> {
-  ChatScreen({Key? key}) : super(key: key);
+class ChatListWidget extends StatefulWidget {
+  const ChatListWidget({Key? key}) : super(key: key);
 
+  @override
+  State<ChatListWidget> createState() => _ChatListWidgetState();
+}
+
+class _ChatListWidgetState
+    extends LoadMoreStatefulHelper<ChatModel, ChatListWidget> {
   final PrefRepo repo = Get.find();
+  String? id;
 
-  String id = '';
+  @override
+  void initState() {
+    super.initState();
+    final currentUser = repo.getCurrentUser();
+
+    id = currentUser.buyerModel?.id ?? '';
+  }
 
   @override
   LoadMoreController<ChatModel> init() {
-    final currentUser = repo.getCurrentUser();
-
-    if (currentUser is SellerModel) {
-      id = currentUser.sellerModel?.id ?? '';
-    } else if (currentUser is BuyerModel) {
-      id = currentUser.buyerModel?.id ?? '';
-    }
-
     return LoadMoreController(
       id: id,
       field: 'userId',
@@ -36,6 +41,18 @@ class ChatScreen extends LoadMoreStatelessHelper<ChatModel> {
 
   @override
   Widget itemBuilder(ChatModel data) {
-    return Text('');
+    return InkWell(
+      onTap: () {
+        Push.to(context, MessageScreen(data.chatterId));
+      },
+      child: Container(
+        height: 80,
+        margin: EdgeInsets.only(left: 12),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16), color: Colors.blue),
+        child: Text(data.lastMessage ?? ''),
+      ),
+    );
   }
 }

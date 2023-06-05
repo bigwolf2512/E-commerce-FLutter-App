@@ -20,7 +20,7 @@ class ProductDetail extends LoadOneHelper<ProductModel> {
 
   @override
   Widget buildUI(ProductModel data) {
-    return ProductDetailScreen(data: data);
+    return _ProductDetailScreen(data: data);
   }
 
   @override
@@ -34,15 +34,15 @@ class ProductDetail extends LoadOneHelper<ProductModel> {
   }
 }
 
-class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({Key? key, required this.data}) : super(key: key);
+class _ProductDetailScreen extends StatefulWidget {
+  const _ProductDetailScreen({Key? key, required this.data}) : super(key: key);
   final ProductModel data;
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  State<_ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class _ProductDetailScreenState extends State<_ProductDetailScreen> {
   @override
   void initState() {
     super.initState();

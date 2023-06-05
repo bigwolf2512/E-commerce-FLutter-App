@@ -10,7 +10,7 @@ class ChatModel with _$ChatModel {
   const factory ChatModel({
     String? userId,
     String? chatterId,
-    List<MessageModel>? messages,
+    String? lastMessage,
   }) = _ChatModel;
 
   factory ChatModel.fromJson(Map<String, Object?> json) =>

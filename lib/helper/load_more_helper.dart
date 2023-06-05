@@ -51,23 +51,25 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
                       });
                 }),
           )
-        : GetBuilder<LoadMoreController<T>>(
-            init: init(),
-            builder: (controller) {
-              if (controller.data.isEmpty) return OnLoadingIndicator();
-              return ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: controller.data.length,
-                  itemBuilder: (c, i) {
-                    return Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8, right: 8, bottom: 8),
-                      child: itemBuilder(controller.data[i]),
-                    );
-                  });
-            });
+        : Scaffold(
+            body: GetBuilder<LoadMoreController<T>>(
+                init: init(),
+                builder: (controller) {
+                  if (controller.data.isEmpty) return OnLoadingIndicator();
+                  return ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: controller.data.length,
+                      itemBuilder: (c, i) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8, right: 8, bottom: 8),
+                          child: itemBuilder(controller.data[i]),
+                        );
+                      });
+                }),
+          );
   }
 }
 
