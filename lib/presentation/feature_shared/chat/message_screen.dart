@@ -4,6 +4,7 @@ import 'package:ecommerceshop/data/controller/load_more_controller.dart';
 import 'package:ecommerceshop/data/firebase/firebase_curd_core.dart';
 import 'package:ecommerceshop/data/model/message_model.dart';
 import 'package:ecommerceshop/helper/load_more_helper.dart';
+import 'package:ecommerceshop/share/widget/widget_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,7 @@ class _MessageScreenState extends State<MessageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(title: 'Message'),
       body: Stack(
         children: [
           _MessageBodyWidget(widget.chatId),
@@ -93,7 +95,6 @@ class _MessageBodyWidgetState
       field: 'chatId',
       pathCollection: kPathCollectionMessage,
       fromJson: MessageModel.fromJson,
-      queryData: QueryData(fieldSorbBy: 'createdAt', isDesc: false),
     );
   }
 

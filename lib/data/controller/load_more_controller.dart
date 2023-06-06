@@ -10,9 +10,15 @@ class LoadMoreController<T> extends GetxController {
     required this.fromJson,
     this.queryData,
   }) {
-    isLoading = true;
-    initController().then((_) => isLoading = false);
-    update();
+    try {
+      isLoading = true;
+      initController();
+      isLoading = false;
+      update();
+    } catch (e) {
+      isLoading = false;
+      update();
+    }
   }
   bool isLoading = false;
   final String? id;

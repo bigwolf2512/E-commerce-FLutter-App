@@ -35,7 +35,7 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
             child: GetBuilder<LoadMoreController<T>>(
                 init: init(),
                 builder: (controller) {
-                  if (_data.isEmpty) {
+                  if (controller.isLoading) {
                     return OnLoadingIndicator();
                   }
                   return ListView.builder(
@@ -56,19 +56,24 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
             body: GetBuilder<LoadMoreController<T>>(
                 init: init(),
                 builder: (controller) {
-                  if (controller.data.isEmpty) return OnLoadingIndicator();
-                  return ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: false,
-                      scrollDirection: Axis.vertical,
-                      itemCount: controller.data.length,
-                      itemBuilder: (c, i) {
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, right: 8, bottom: 8),
-                          child: itemBuilder(controller.data[i]),
-                        );
-                      });
+                  if (controller.isLoading) return OnLoadingIndicator();
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      _data = [];
+                      _data = await init().getAll();
+                    },
+                    child: ListView.builder(
+                        shrinkWrap: false,
+                        scrollDirection: Axis.vertical,
+                        itemCount: controller.data.length,
+                        itemBuilder: (c, i) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                top: 8, right: 8, bottom: 8),
+                            child: itemBuilder(controller.data[i]),
+                          );
+                        }),
+                  );
                 }),
           );
   }
@@ -114,7 +119,7 @@ abstract class LoadMoreStatelessHelper<T> extends StatelessWidget {
             child: GetBuilder<LoadMoreController<T>>(
                 init: init(),
                 builder: (controller) {
-                  if (controller.data.isEmpty) return OnLoadingIndicator();
+                  if (controller.isLoading) return OnLoadingIndicator();
                   return ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
@@ -143,7 +148,7 @@ abstract class LoadMore<T> extends StatelessWidget {
     return GetBuilder<LoadMoreController<T>>(
         init: init(),
         builder: (controller) {
-          if (controller.data.isEmpty) return OnLoadingIndicator();
+          if (controller.isLoading) return OnLoadingIndicator();
           return ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
