@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
   const CustomAppBar({Key? key, required this.title}) : super(key: key);
@@ -8,9 +9,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.black),
+      ),
       automaticallyImplyLeading: true,
-      backgroundColor: Colors.blue,
+      iconTheme: IconThemeData(color: Colors.black),
+      backgroundColor: Colors.white,
     );
   }
 

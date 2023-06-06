@@ -76,10 +76,17 @@ class _ChatListWidgetState
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16), color: Colors.blue),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(data.memberId ?? ''),
-                  Text(data.lastMessage ?? ''),
+                  Text(
+                    data.memberId ?? '',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  Text(
+                    data.lastMessage ?? '',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ],
               ),
             ),

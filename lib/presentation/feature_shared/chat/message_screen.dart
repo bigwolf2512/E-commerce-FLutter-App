@@ -99,6 +99,9 @@ class _MessageBodyWidgetState
   }
 
   @override
+  double get paddingBottom => 24;
+
+  @override
   Widget itemBuilder(MessageModel data) {
     return Align(
       alignment:

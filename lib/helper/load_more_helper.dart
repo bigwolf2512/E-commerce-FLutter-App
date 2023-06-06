@@ -15,6 +15,8 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
 
   LoadMoreConfig? loadMoreConfig() => null;
 
+  double get paddingBottom => 12.0;
+
   List<T> _data = [];
 
   @override
@@ -38,17 +40,23 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
                   if (controller.isLoading) {
                     return OnLoadingIndicator();
                   }
-                  return ListView.builder(
-                      shrinkWrap: false,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _data.length,
-                      itemBuilder: (c, i) {
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8, right: 8, bottom: 8),
-                          child: itemBuilder(_data[i]),
-                        );
-                      });
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListView.builder(
+                          shrinkWrap: false,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _data.length,
+                          itemBuilder: (c, i) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8, right: 8, bottom: 8),
+                              child: itemBuilder(_data[i]),
+                            );
+                          }),
+                      SizedBox(height: paddingBottom),
+                    ],
+                  );
                 }),
           )
         : Scaffold(
