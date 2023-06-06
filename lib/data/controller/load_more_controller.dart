@@ -8,6 +8,7 @@ class LoadMoreController<T> extends GetxController {
     this.field,
     required this.pathCollection,
     required this.fromJson,
+    this.queryData,
   }) {
     isLoading = true;
     initController().then((_) => isLoading = false);
@@ -19,6 +20,7 @@ class LoadMoreController<T> extends GetxController {
   final String pathCollection;
   final T Function(Map<String, dynamic> json) fromJson;
   late final LoadMoreRepo<T> repo;
+  final QueryData? queryData;
 
   Future<void> initController() async {
     repo = LoadMoreRepo<T>(
@@ -32,7 +34,7 @@ class LoadMoreController<T> extends GetxController {
 
   Future<List<T>> getAll() async {
     if (id != null) {
-      _data = await repo.getAll(id: id, field: field ?? 'id');
+      _data = await repo.getAll(id: id, field: field ?? 'id', query: queryData);
     } else {
       _data = await repo.getAll();
     }

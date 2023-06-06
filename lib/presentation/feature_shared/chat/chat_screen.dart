@@ -43,7 +43,7 @@ class _ChatListWidgetState
   Widget itemBuilder(ChatModel data) {
     return InkWell(
       onTap: () {
-        Push.to(context, MessageScreen(data.chatterId));
+        Push.to(context, MessageScreen(data.chatId));
       },
       child: Container(
         height: 80,
@@ -51,7 +51,13 @@ class _ChatListWidgetState
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16), color: Colors.blue),
-        child: Text(data.lastMessage ?? ''),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(data.memberId ?? ''),
+            Text(data.lastMessage ?? ''),
+          ],
+        ),
       ),
     );
   }

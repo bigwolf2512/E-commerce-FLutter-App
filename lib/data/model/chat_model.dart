@@ -9,8 +9,10 @@ part 'chat_model.g.dart';
 class ChatModel with _$ChatModel {
   const factory ChatModel({
     String? userId,
-    String? chatterId,
+    String? memberId,
+    String? chatId,
     String? lastMessage,
+    DateTime? updatedAt,
   }) = _ChatModel;
 
   factory ChatModel.fromJson(Map<String, Object?> json) =>

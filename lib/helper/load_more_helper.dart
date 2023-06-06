@@ -52,13 +52,14 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
                 }),
           )
         : Scaffold(
+            backgroundColor: Colors.grey.withOpacity(0.1),
             body: GetBuilder<LoadMoreController<T>>(
                 init: init(),
                 builder: (controller) {
                   if (controller.data.isEmpty) return OnLoadingIndicator();
                   return ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
+                      shrinkWrap: false,
                       scrollDirection: Axis.vertical,
                       itemCount: controller.data.length,
                       itemBuilder: (c, i) {

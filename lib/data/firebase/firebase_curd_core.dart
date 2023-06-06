@@ -49,15 +49,22 @@ abstract class FirebaseCRUDCore<T> extends FirebaseCRUDCoreBase {
   }
 
   @override
-  Future<List<T>> getAll({String? field, String? id}) async {
+  Future<List<T>> getAll({String? field, String? id, QueryData? query}) async {
     List<T> data = [];
     late final Query<Map<String, dynamic>> response;
 
     if (id != null && field != null) {
-      response = FirebaseFirestore.instance
-          .collection(pathCollection)
-          .limit(100)
-          .where(field, isEqualTo: id);
+      if (query != null) {
+        response = FirebaseFirestore.instance
+            .collection(pathCollection)
+            .limit(100)
+            .where(field, isEqualTo: id);
+      } else {
+        response = FirebaseFirestore.instance
+            .collection(pathCollection)
+            .limit(100)
+            .where(field, isEqualTo: id);
+      }
     } else {
       response =
           FirebaseFirestore.instance.collection(pathCollection).limit(100);
@@ -84,4 +91,11 @@ abstract class FirebaseCRUDCore<T> extends FirebaseCRUDCoreBase {
     return fromJson(
         documentReference.docs.first.data() as Map<String, dynamic>);
   }
+}
+
+class QueryData {
+  final bool isDesc;
+  final String fieldSorbBy;
+
+  QueryData({required this.isDesc, required this.fieldSorbBy});
 }
