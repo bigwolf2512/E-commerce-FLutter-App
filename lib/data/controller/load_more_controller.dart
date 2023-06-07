@@ -28,6 +28,11 @@ class LoadMoreController<T> extends GetxController {
   late final LoadMoreRepo<T> repo;
   final QueryData? queryData;
 
+  Future<void> onRefresh() async {
+    _data = [];
+    await getAll();
+  }
+
   Future<void> initController() async {
     repo = LoadMoreRepo<T>(
         pathCollection: pathCollection, fromJsonFunction: fromJson);

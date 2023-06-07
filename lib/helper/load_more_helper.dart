@@ -1,9 +1,74 @@
+import 'package:ecommerceshop/share/constant/constant.dart';
+import 'package:ecommerceshop/share/widget/widget_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../data/controller/load_more_controller.dart';
 import '../design/extension/double_extension.dart';
 import '../share/widget/widget_loading_indicator.dart';
+
+abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
+    extends State<Screen> {
+  LoadMoreHelper({Key? key});
+
+  LoadMoreController<T> init();
+
+  Widget itemBuilder(T data);
+
+  String get title => '';
+
+  Widget get child => const SizedBox();
+
+  Widget get titleWidget => const SizedBox();
+
+  Color get backgroundColor => appBackgroundColor;
+
+  void get onRefresh => init().onRefresh();
+
+  double get paddingTop => 8.0;
+  double get paddingBottom => 8.0;
+  double get paddingLeft => 8.0;
+  double get paddingRight => 8.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: this.backgroundColor,
+      appBar: CustomAppBar(title: title, titleWidget: titleWidget),
+      body: GetBuilder<LoadMoreController<T>>(
+          init: init(),
+          builder: (controller) {
+            if (controller.isLoading) {
+              return OnLoadingIndicator();
+            }
+            if (controller.data.isEmpty) {}
+
+            return Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: paddingTop,
+                    bottom: paddingBottom,
+                    left: paddingLeft,
+                    right: paddingRight,
+                  ),
+                  child: ListView.builder(
+                      itemCount: controller.data.length,
+                      itemBuilder: (c, i) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8, right: 8, bottom: 8),
+                          child: itemBuilder(controller.data[i]),
+                        );
+                      }),
+                ),
+                child,
+              ],
+            );
+          }),
+    );
+  }
+}
 
 abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
     extends State<Screen> {
@@ -22,6 +87,8 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
   Color get backgroundColor => Colors.white;
 
   List<T> _data = [];
+
+  void get onRefresh => initState();
 
   @override
   void initState() {
@@ -157,33 +224,6 @@ abstract class LoadMoreStatelessHelper<T> extends StatelessWidget {
                       });
                 }),
           );
-  }
-}
-
-abstract class LoadMore<T> extends StatelessWidget {
-  const LoadMore({Key? key}) : super(key: key);
-
-  LoadMoreController<T> init();
-
-  Widget itemBuilder(T data);
-
-  @override
-  Widget build(BuildContext context) {
-    return GetBuilder<LoadMoreController<T>>(
-        init: init(),
-        builder: (controller) {
-          if (controller.isLoading) return OnLoadingIndicator();
-          return ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: controller.data.length,
-              itemBuilder: (c, i) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8, right: 8, bottom: 8),
-                  child: itemBuilder(controller.data[i]),
-                );
-              });
-        });
   }
 }
 

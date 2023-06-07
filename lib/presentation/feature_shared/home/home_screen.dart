@@ -1,6 +1,8 @@
+import 'package:ecommerceshop/data/repo/pref_repo.dart';
 import 'package:ecommerceshop/presentation/after_auth_buyer/order/order_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../share/constant/constant.dart';
@@ -16,14 +18,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _MainFoodPageState extends State<HomePage> {
-  final List<Widget> _buildScreens = [
+  final List<Widget> _buildBuyerScreens = [
     DashboardPage(),
     CartHomePage(),
     OrderScreen(),
     PersonalPage(),
   ];
 
-  final List<PersistentBottomNavBarItem> _navBarsItems = [
+  final List<Widget> _buildSellerScreens = [
+    DashboardPage(),
+    CartHomePage(),
+    OrderScreen(),
+    PersonalPage(),
+  ];
+
+  final List<PersistentBottomNavBarItem> _navBuyerBarsItems = [
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.home),
       title: ("Home"),
@@ -50,7 +59,36 @@ class _MainFoodPageState extends State<HomePage> {
     ),
   ];
 
+  final List<PersistentBottomNavBarItem> _navSellerBarsItems = [
+    PersistentBottomNavBarItem(
+      icon: Icon(CupertinoIcons.home),
+      title: ("Home"),
+      activeColorPrimary: kPrimaryColor,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),
+    PersistentBottomNavBarItem(
+      icon: Icon(Icons.production_quantity_limits),
+      title: ("Product Manager"),
+      activeColorPrimary: kPrimaryColor,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),
+    PersistentBottomNavBarItem(
+      icon: Icon(Icons.add_card),
+      title: ("Order Manager"),
+      activeColorPrimary: kPrimaryColor,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),
+    PersistentBottomNavBarItem(
+      icon: Icon(CupertinoIcons.person),
+      title: ("Personal"),
+      activeColorPrimary: kPrimaryColor,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),
+  ];
+
   final PersistentTabController _controller = PersistentTabController();
+
+  final prefRepo = Get.find<PrefRepo>();
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +97,12 @@ class _MainFoodPageState extends State<HomePage> {
         body: PersistentTabView(
           context,
           controller: _controller,
-          screens: _buildScreens,
-          items: _navBarsItems,
+          screens: prefRepo.isCurrentSeller()
+              ? _buildSellerScreens
+              : _buildBuyerScreens,
+          items: prefRepo.isCurrentSeller()
+              ? _navSellerBarsItems
+              : _navBuyerBarsItems,
           confineInSafeArea: true,
           backgroundColor: Colors.white, // Default is Colors.white.
           handleAndroidBackButtonPress: true, // Default is true.

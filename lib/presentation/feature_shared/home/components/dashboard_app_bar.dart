@@ -90,7 +90,7 @@ class _BuildBuyerAppBar extends StatelessWidget {
                 GetBuilder<NotificationController>(builder: (controller) {
                   return ButtonFlat(
                     onTap: () {
-                      Push.noBottomBar(context, NotificationPage());
+                      Push.noBottomBar(context, NotificationScreen());
                     },
                     color: kSecondaryColor,
                     itemsNumber: controller.getTotalNotifications,
@@ -162,7 +162,7 @@ class _BuildSellerAppBar extends StatelessWidget {
                 GetBuilder<NotificationController>(builder: (controller) {
                   return ButtonFlat(
                     onTap: () {
-                      Push.noBottomBar(context, NotificationPage());
+                      Push.noBottomBar(context, NotificationScreen());
                     },
                     color: kSecondaryColor,
                     itemsNumber: controller.getTotalNotifications,

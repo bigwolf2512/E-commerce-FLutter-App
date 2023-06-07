@@ -3,7 +3,6 @@ import 'package:ecommerceshop/data/controller/chat_controller.dart';
 import 'package:ecommerceshop/data/controller/load_more_controller.dart';
 import 'package:ecommerceshop/data/model/message_model.dart';
 import 'package:ecommerceshop/helper/load_more_helper.dart';
-import 'package:ecommerceshop/share/widget/widget_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,97 +15,19 @@ class MessageScreen extends StatefulWidget {
   State<MessageScreen> createState() => _MessageScreenState();
 }
 
-class _MessageScreenState extends State<MessageScreen> {
+class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
   final controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(title: 'Message'),
-      body: Stack(
-        children: [
-          _MessageBodyWidget(widget.chatId),
-          _MessageBottomSendWidget(controller: controller, widget: widget),
-        ],
-      ),
-    );
-  }
-}
-
-class _MessageBottomSendWidget extends StatelessWidget {
-  const _MessageBottomSendWidget({
-    Key? key,
-    required this.controller,
-    required this.widget,
-  }) : super(key: key);
-
-  final TextEditingController controller;
-  final MessageScreen widget;
+  double get paddingBottom => 24;
 
   @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        height: 100,
-        width: double.maxFinite,
-        color: Colors.white,
-        child: Row(
-          children: [
-            Container(
-              height: 80,
-              width: 300,
-              margin: const EdgeInsets.only(left: 12),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(width: 1)),
-              child: TextFormField(
-                controller: controller,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-            const SizedBox(width: 20),
-            InkWell(
-              onTap: () {
-                Get.find<ChatController>()
-                    .onSend(controller.text, widget.chatId)
-                    .then((_) {
-                  controller.clear();
-                  Get.find<LoadMoreController<MessageModel>>().getAll();
-                });
-              },
-              child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-                  child: Text('Send',
-                      style: context.textTheme.titleMedium
-                          ?.copyWith(color: Colors.white))),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+  String get title => 'Message';
 
-class _MessageBodyWidget extends StatefulWidget {
-  const _MessageBodyWidget(this.chatterId, {Key? key}) : super(key: key);
-
-  final String? chatterId;
-  @override
-  State<_MessageBodyWidget> createState() => _MessageBodyWidgetState();
-}
-
-class _MessageBodyWidgetState
-    extends LoadMoreStatefulHelper<MessageModel, _MessageBodyWidget> {
   @override
   LoadMoreController<MessageModel> init() {
     return LoadMoreController(
-      sortFieldValue: widget.chatterId,
+      sortFieldValue: widget.chatId,
       sortFieldName: 'chatId',
       pathCollection: kPathCollectionMessage,
       fromJson: MessageModel.fromJson,
@@ -114,10 +35,50 @@ class _MessageBodyWidgetState
   }
 
   @override
-  Color get backgroundColor => Colors.grey.withOpacity(0.1);
-
-  @override
-  double get paddingBottom => 24;
+  Widget get child => Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          height: 100,
+          width: double.maxFinite,
+          color: Colors.white,
+          child: Row(
+            children: [
+              Container(
+                height: 80,
+                width: 300,
+                margin: const EdgeInsets.only(left: 12),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(width: 1)),
+                child: TextFormField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+              InkWell(
+                onTap: () {
+                  Get.find<ChatController>()
+                      .onSend(controller.text, widget.chatId)
+                      .then((_) {
+                    controller.clear();
+                  });
+                },
+                child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.blue),
+                    child: Text('Send',
+                        style: context.textTheme.titleMedium
+                            ?.copyWith(color: Colors.white))),
+              ),
+            ],
+          ),
+        ),
+      );
 
   @override
   Widget itemBuilder(MessageModel data) {
