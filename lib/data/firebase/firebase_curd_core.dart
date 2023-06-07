@@ -58,6 +58,7 @@ abstract class FirebaseCRUDCore<T> extends FirebaseCRUDCoreBase {
         response = FirebaseFirestore.instance
             .collection(pathCollection)
             .limit(100)
+            .orderBy(query.fieldSorbBy, descending: query.isDesc)
             .where(field, isEqualTo: id);
       } else {
         response = FirebaseFirestore.instance

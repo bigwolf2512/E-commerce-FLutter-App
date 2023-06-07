@@ -4,8 +4,8 @@ import '../firebase/firebase_curd_core.dart';
 
 class LoadMoreController<T> extends GetxController {
   LoadMoreController({
-    this.id,
-    this.field,
+    this.sortFieldValue,
+    this.sortFieldName,
     required this.pathCollection,
     required this.fromJson,
     this.queryData,
@@ -21,8 +21,8 @@ class LoadMoreController<T> extends GetxController {
     }
   }
   bool isLoading = false;
-  final String? id;
-  final String? field;
+  final String? sortFieldValue;
+  final String? sortFieldName;
   final String pathCollection;
   final T Function(Map<String, dynamic> json) fromJson;
   late final LoadMoreRepo<T> repo;
@@ -39,8 +39,9 @@ class LoadMoreController<T> extends GetxController {
   List<T> get data => _data;
 
   Future<List<T>> getAll() async {
-    if (id != null) {
-      _data = await repo.getAll(id: id, field: field ?? 'id', query: queryData);
+    if (sortFieldValue != null) {
+      _data = await repo.getAll(
+          id: sortFieldValue, field: sortFieldName ?? 'id', query: queryData);
     } else {
       _data = await repo.getAll();
     }

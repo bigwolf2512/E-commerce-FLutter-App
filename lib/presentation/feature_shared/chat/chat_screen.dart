@@ -49,8 +49,8 @@ class _ChatListWidgetState
   @override
   LoadMoreController<ChatModel> init() {
     return LoadMoreController(
-      id: id,
-      field: 'userId',
+      sortFieldValue: id,
+      sortFieldName: 'userId',
       pathCollection: kPathCollectionChat,
       fromJson: ChatModel.fromJson,
     );

@@ -23,6 +23,7 @@ class WidgetBasePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: true,
         shadowColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: appBarBackgroundColor,

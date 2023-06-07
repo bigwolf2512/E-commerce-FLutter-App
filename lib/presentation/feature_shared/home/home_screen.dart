@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/presentation/after_auth_buyer/order/order_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -18,7 +19,7 @@ class _MainFoodPageState extends State<HomePage> {
   final List<Widget> _buildScreens = [
     DashboardPage(),
     CartHomePage(),
-    Container(),
+    OrderScreen(),
     PersonalPage(),
   ];
 

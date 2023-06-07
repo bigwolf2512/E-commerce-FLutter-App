@@ -17,6 +17,10 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
 
   double get paddingBottom => 12.0;
 
+  Widget get widgetEmpty => const SizedBox();
+
+  Color get backgroundColor => Colors.white;
+
   List<T> _data = [];
 
   @override
@@ -40,6 +44,11 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
                   if (controller.isLoading) {
                     return OnLoadingIndicator();
                   }
+
+                  if (controller.data.isEmpty) {
+                    return widgetEmpty;
+                  }
+
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -60,11 +69,18 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
                 }),
           )
         : Scaffold(
-            backgroundColor: Colors.grey.withOpacity(0.1),
+            backgroundColor: backgroundColor,
             body: GetBuilder<LoadMoreController<T>>(
                 init: init(),
                 builder: (controller) {
-                  if (controller.isLoading) return OnLoadingIndicator();
+                  if (controller.isLoading) {
+                    return OnLoadingIndicator();
+                  }
+
+                  if (controller.data.isEmpty) {
+                    return Center(child: widgetEmpty);
+                  }
+
                   return RefreshIndicator(
                     onRefresh: () async {
                       _data = [];

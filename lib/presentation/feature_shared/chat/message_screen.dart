@@ -1,7 +1,6 @@
 import 'package:ecommerceshop/data/constant/path_collection.dart';
 import 'package:ecommerceshop/data/controller/chat_controller.dart';
 import 'package:ecommerceshop/data/controller/load_more_controller.dart';
-import 'package:ecommerceshop/data/firebase/firebase_curd_core.dart';
 import 'package:ecommerceshop/data/model/message_model.dart';
 import 'package:ecommerceshop/helper/load_more_helper.dart';
 import 'package:ecommerceshop/share/widget/widget_appbar.dart';
@@ -27,52 +26,68 @@ class _MessageScreenState extends State<MessageScreen> {
       body: Stack(
         children: [
           _MessageBodyWidget(widget.chatId),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 100,
-              width: double.maxFinite,
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Container(
-                    height: 80,
-                    width: 300,
-                    margin: const EdgeInsets.only(left: 12),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(width: 1)),
-                    child: TextFormField(
-                      controller: controller,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  InkWell(
-                    onTap: () {
-                      Get.find<ChatController>()
-                          .onSend(controller.text, widget.chatId)
-                          .then((_) {
-                        controller.clear();
-                        Get.find<LoadMoreController<MessageModel>>().getAll();
-                      });
-                    },
-                    child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.blue),
-                        child: Text('Send',
-                            style: context.textTheme.titleMedium
-                                ?.copyWith(color: Colors.white))),
-                  ),
-                ],
+          _MessageBottomSendWidget(controller: controller, widget: widget),
+        ],
+      ),
+    );
+  }
+}
+
+class _MessageBottomSendWidget extends StatelessWidget {
+  const _MessageBottomSendWidget({
+    Key? key,
+    required this.controller,
+    required this.widget,
+  }) : super(key: key);
+
+  final TextEditingController controller;
+  final MessageScreen widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: 100,
+        width: double.maxFinite,
+        color: Colors.white,
+        child: Row(
+          children: [
+            Container(
+              height: 80,
+              width: 300,
+              margin: const EdgeInsets.only(left: 12),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(width: 1)),
+              child: TextFormField(
+                controller: controller,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                ),
               ),
             ),
-          ),
-        ],
+            const SizedBox(width: 20),
+            InkWell(
+              onTap: () {
+                Get.find<ChatController>()
+                    .onSend(controller.text, widget.chatId)
+                    .then((_) {
+                  controller.clear();
+                  Get.find<LoadMoreController<MessageModel>>().getAll();
+                });
+              },
+              child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration:
+                      BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+                  child: Text('Send',
+                      style: context.textTheme.titleMedium
+                          ?.copyWith(color: Colors.white))),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -91,12 +106,15 @@ class _MessageBodyWidgetState
   @override
   LoadMoreController<MessageModel> init() {
     return LoadMoreController(
-      id: widget.chatterId,
-      field: 'chatId',
+      sortFieldValue: widget.chatterId,
+      sortFieldName: 'chatId',
       pathCollection: kPathCollectionMessage,
       fromJson: MessageModel.fromJson,
     );
   }
+
+  @override
+  Color get backgroundColor => Colors.grey.withOpacity(0.1);
 
   @override
   double get paddingBottom => 24;

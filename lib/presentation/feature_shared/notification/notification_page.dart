@@ -68,15 +68,15 @@ class NotificationView extends LoadMore<NotificationModel> {
   LoadMoreController<NotificationModel> init() {
     if (repo.getCurrentUser().buyerModel != null) {
       return LoadMoreController(
-        id: repo.getCurrentUser().buyerModel?.id,
-        field: 'buyerId',
+        sortFieldValue: repo.getCurrentUser().buyerModel?.id,
+        sortFieldName: 'buyerId',
         pathCollection: kPathCollectionNotification,
         fromJson: NotificationModel.fromJson,
       );
     }
     return LoadMoreController(
-      id: repo.getCurrentUser().sellerModel?.id,
-      field: 'sellerId',
+      sortFieldValue: repo.getCurrentUser().sellerModel?.id,
+      sortFieldName: 'sellerId',
       pathCollection: kPathCollectionNotification,
       fromJson: NotificationModel.fromJson,
     );

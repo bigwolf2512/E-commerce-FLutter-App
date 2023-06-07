@@ -29,8 +29,8 @@ class _ListProductsByStoreIdWidgetState
   @override
   LoadMoreController<ProductModel> init() {
     return LoadMoreController(
-        id: widget.sellerModel.id,
-        field: 'sellerId',
+        sortFieldValue: widget.sellerModel.id,
+        sortFieldName: 'sellerId',
         pathCollection: kPathCollectionProduct,
         fromJson: (json) => ProductModel.fromJson(json));
   }
