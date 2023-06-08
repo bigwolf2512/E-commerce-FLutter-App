@@ -67,3 +67,6 @@ android/local.properties
 # Generated Files
 *.g.dart
 *.freezed.dart
+*.bin
+*.lock
+*.xml
