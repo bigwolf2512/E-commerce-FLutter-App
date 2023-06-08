@@ -69,3 +69,4 @@ android/local.properties
 *.freezed.dart
 *.bin
 *.lock
+*.xml
