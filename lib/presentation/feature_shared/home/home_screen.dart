@@ -1,5 +1,6 @@
 import 'package:ecommerceshop/data/repo/pref_repo.dart';
 import 'package:ecommerceshop/presentation/after_auth_buyer/order/order_screen.dart';
+import 'package:ecommerceshop/presentation/after_auth_seller/manage_product/manage_product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,7 @@ class _MainFoodPageState extends State<HomePage> {
 
   final List<Widget> _buildSellerScreens = [
     DashboardPage(),
-    CartHomePage(),
+    ManageProductScreen(),
     OrderScreen(),
     PersonalPage(),
   ];
@@ -92,10 +93,10 @@ class _MainFoodPageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 24.0),
-        child: PersistentTabView(
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        body: PersistentTabView(
           context,
           controller: _controller,
           screens: prefRepo.isCurrentSeller()

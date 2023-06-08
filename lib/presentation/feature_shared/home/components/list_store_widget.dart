@@ -11,8 +11,8 @@ import '../../../../helper/load_one_helper.dart';
 import '../../../after_auth_buyer/products/list_product_by_storeid_widget.dart';
 import 'title_widget.dart';
 
-class ListStoreWidget extends LoadMoreStatelessHelper<SellerModel> {
-  const ListStoreWidget({Key? key}) : super(key: key);
+class HomeListStoreProductWidget extends LoadMoreStatelessHelper<SellerModel> {
+  const HomeListStoreProductWidget({Key? key}) : super(key: key);
 
   @override
   LoadMoreController<SellerModel> init() {

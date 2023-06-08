@@ -48,9 +48,7 @@ class _ChatScreenState extends LoadMoreHelper<ChatModel, ChatScreen> {
   @override
   Widget itemBuilder(ChatModel data) {
     return InkWell(
-      onTap: () {
-        Push.to(context, MessageScreen(data.chatId));
-      },
+      onTap: () => Push.to(context, MessageScreen(data.chatId)),
       child: Row(
         children: [
           const SizedBox(width: 12),

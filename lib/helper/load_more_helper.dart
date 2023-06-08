@@ -33,8 +33,8 @@ abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: this.backgroundColor,
-      appBar: CustomAppBar(title: title, titleWidget: titleWidget),
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(title: title, titleWidget: this.titleWidget),
       body: GetBuilder<LoadMoreController<T>>(
           init: controller(),
           builder: (controller) {

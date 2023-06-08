@@ -33,8 +33,9 @@ class _DashboardPageState extends State<DashboardPage> {
         return SingleChildScrollView(
           child: Column(
             children: [
-              DashBoardAppBar(),
-              _buildDiscount(),
+              const SizedBox(height: 24),
+              HomeAppBarWidget(),
+              HomeDiscountWidget(),
               OwnStoreWidget(),
               HomeRevenueWidget(),
               HomeOrderWidget(),
@@ -44,10 +45,11 @@ class _DashboardPageState extends State<DashboardPage> {
       } else {
         return SingleChildScrollView(
           child: Column(
-            children: [
-              DashBoardAppBar(),
-              _buildDiscount(),
-              ListStoreWidget(),
+            children: const [
+              SizedBox(height: 24),
+              HomeAppBarWidget(),
+              HomeDiscountWidget(),
+              HomeListStoreProductWidget(),
             ],
           ),
         );
@@ -55,8 +57,15 @@ class _DashboardPageState extends State<DashboardPage> {
     }
     return OnLoadingIndicator();
   }
+}
 
-  Widget _buildDiscount() {
+class HomeDiscountWidget extends StatelessWidget {
+  const HomeDiscountWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

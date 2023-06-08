@@ -1,4 +1,5 @@
 import 'package:ecommerceshop/data/controller/chat_controller.dart';
+import 'package:ecommerceshop/data/controller/manage_product_controller.dart';
 import 'package:ecommerceshop/data/repo/chat_repo.dart';
 import 'package:ecommerceshop/data/repo/message_repo.dart';
 import 'package:get/get.dart';
@@ -39,4 +40,5 @@ Future<void> init() async {
       () => ProductController(Get.find(), Get.find(), Get.find())..onInit());
   Get.lazyPut<ChatController>(
       () => ChatController(Get.find(), Get.find(), Get.find()));
+  Get.lazyPut<ManageProductController>(() => ManageProductController());
 }

@@ -32,4 +32,11 @@ class PrefRepo {
     if (userModel.buyerModel != null) return false;
     return true;
   }
+
+  getCurrentUserId() {
+    if (isCurrentSeller()) {
+      return getCurrentUser().sellerModel?.id;
+    }
+    return getCurrentUser().buyerModel?.id;
+  }
 }

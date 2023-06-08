@@ -14,14 +14,14 @@ import '../../../../share/widget/widget_button_flat.dart';
 import '../../../after_auth_buyer/cart/cart_screen.dart';
 import '../../notification/notification_page.dart';
 
-class DashBoardAppBar extends StatefulWidget {
-  const DashBoardAppBar({Key? key}) : super(key: key);
+class HomeAppBarWidget extends StatefulWidget {
+  const HomeAppBarWidget({Key? key}) : super(key: key);
 
   @override
-  State<DashBoardAppBar> createState() => _DashBoardAppBarState();
+  State<HomeAppBarWidget> createState() => _HomeAppBarWidgetState();
 }
 
-class _DashBoardAppBarState extends State<DashBoardAppBar> {
+class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
   final PrefRepo repo = Get.find();
 
   @override
@@ -126,7 +126,7 @@ class _BuildSellerAppBar extends StatelessWidget {
           Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
-              width: 0.4.w,
+              width: 0.56.w,
               height: 0.13.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
@@ -155,14 +155,6 @@ class _BuildSellerAppBar extends StatelessWidget {
                   itemsNumber: 0,
                   padding: 0.025.w,
                   icon: Icon(CupertinoIcons.chat_bubble_2),
-                ),
-                SizedBox(width: 0.03.w),
-                ButtonFlat(
-                  onTap: () {},
-                  color: kSecondaryColor,
-                  itemsNumber: 0,
-                  padding: 0.025.w,
-                  icon: Icon(CupertinoIcons.profile_circled),
                 ),
                 SizedBox(width: 0.03.w),
                 GetBuilder<NotificationController>(builder: (controller) {
