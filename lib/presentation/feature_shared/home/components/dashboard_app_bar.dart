@@ -148,6 +148,9 @@ class _BuildSellerAppBar extends StatelessWidget {
             child: Row(
               children: [
                 ButtonFlat(
+                  onTap: () {
+                    Push.noBottomBar(context, ChatScreen());
+                  },
                   color: kSecondaryColor,
                   itemsNumber: 0,
                   padding: 0.025.w,

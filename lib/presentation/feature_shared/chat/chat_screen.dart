@@ -10,7 +10,7 @@ import '../../../data/repo/pref_repo.dart';
 import '../../../helper/load_more_helper.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen();
+  const ChatScreen({Key? key}) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -25,7 +25,11 @@ class _ChatScreenState extends LoadMoreHelper<ChatModel, ChatScreen> {
     super.initState();
     final currentUser = repo.getCurrentUser();
 
-    id = currentUser.buyerModel?.id ?? '';
+    if (currentUser.buyerModel != null) {
+      id = currentUser.buyerModel?.id ?? '';
+    } else {
+      id = currentUser.sellerModel?.id ?? '';
+    }
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:ecommerceshop/presentation/after_auth_seller/home_order/home_order_widget.dart';
+import 'package:ecommerceshop/presentation/after_auth_seller/home_revenue/home_revenue_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +36,8 @@ class _DashboardPageState extends State<DashboardPage> {
               DashBoardAppBar(),
               _buildDiscount(),
               OwnStoreWidget(),
+              HomeRevenueWidget(),
+              HomeOrderWidget(),
             ],
           ),
         );
