@@ -1,3 +1,5 @@
+import 'package:ecommerceshop/helper/navigator_helper.dart';
+import 'package:ecommerceshop/presentation/feature_shared/chat/chat_screen.dart';
 import 'package:ecommerceshop/share/widget/widget_image_network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -311,6 +313,47 @@ class _ProductDetailScreenState extends State<_ProductDetailScreen> {
                     child: SvgPicture.asset(
                       'assets/icons/Heart Icon_2.svg',
                       color: Colors.redAccent,
+                    ),
+                  )),
+            ],
+          ),
+          SizedBox(height: 0.01.h),
+          InkWell(
+            onTap: () => Push.to(context, const ChatScreen()),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(),
+                Container(
+                    height: 0.06.h,
+                    width: 0.2.w,
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            bottomLeft: Radius.circular(20)),
+                        color: Colors.blue[100]),
+                    child: Center(
+                      child: Icon(CupertinoIcons.chat_bubble_2),
+                    )),
+              ],
+            ),
+          ),
+          SizedBox(height: 0.01.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(),
+              Container(
+                  height: 0.06.h,
+                  width: 0.2.w,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomLeft: Radius.circular(20)),
+                      color: Colors.blue[100]),
+                  child: Center(
+                    child: Icon(
+                      Icons.chat_bubble_rounded,
                     ),
                   )),
             ],

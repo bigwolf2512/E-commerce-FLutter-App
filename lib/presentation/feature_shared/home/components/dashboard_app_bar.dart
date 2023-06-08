@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/data/controller/chat_controller.dart';
 import 'package:ecommerceshop/data/repo/pref_repo.dart';
 import 'package:ecommerceshop/design/extension/double_extension.dart';
 import 'package:ecommerceshop/presentation/feature_shared/chat/chat_screen.dart';
@@ -65,15 +66,17 @@ class _BuildBuyerAppBar extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               children: [
-                ButtonFlat(
-                  onTap: () {
-                    Push.noBottomBar(context, ChatScreen());
-                  },
-                  color: kSecondaryColor,
-                  itemsNumber: 0,
-                  padding: 0.025.w,
-                  icon: Icon(CupertinoIcons.chat_bubble_2),
-                ),
+                GetBuilder<ChatController>(builder: (controller) {
+                  return ButtonFlat(
+                    onTap: () {
+                      Push.noBottomBar(context, ChatScreen());
+                    },
+                    color: kSecondaryColor,
+                    itemsNumber: controller.chatTotal,
+                    padding: 0.025.w,
+                    icon: Icon(CupertinoIcons.chat_bubble_2),
+                  );
+                }),
                 SizedBox(width: 0.03.w),
                 GetBuilder<CartController>(builder: (controller) {
                   return ButtonFlat(

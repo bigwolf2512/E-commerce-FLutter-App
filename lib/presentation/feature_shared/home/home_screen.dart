@@ -92,9 +92,10 @@ class _MainFoodPageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: PersistentTabView(
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 24.0),
+        child: PersistentTabView(
           context,
           controller: _controller,
           screens: prefRepo.isCurrentSeller()
