@@ -28,11 +28,6 @@ class LoadMoreController<T> extends GetxController {
   late final LoadMoreRepo<T> repo;
   final QueryData? queryData;
 
-  Future<void> onRefresh() async {
-    _data = [];
-    await getAll();
-  }
-
   Future<void> initController() async {
     repo = LoadMoreRepo<T>(
         pathCollection: pathCollection, fromJsonFunction: fromJson);
@@ -44,6 +39,7 @@ class LoadMoreController<T> extends GetxController {
   List<T> get data => _data;
 
   Future<List<T>> getAll() async {
+    _data = [];
     if (sortFieldValue != null) {
       _data = await repo.getAll(
           id: sortFieldValue, field: sortFieldName ?? 'id', query: queryData);

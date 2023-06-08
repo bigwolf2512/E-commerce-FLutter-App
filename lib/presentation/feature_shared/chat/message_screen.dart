@@ -16,16 +16,16 @@ class MessageScreen extends StatefulWidget {
 }
 
 class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
-  final controller = TextEditingController();
+  final tedController = TextEditingController();
 
   @override
-  double get paddingBottom => 24;
+  double get paddingBottom => 80;
 
   @override
   String get title => 'Message';
 
   @override
-  LoadMoreController<MessageModel> init() {
+  LoadMoreController<MessageModel> controller() {
     return LoadMoreController(
       sortFieldValue: widget.chatId,
       sortFieldName: 'chatId',
@@ -38,13 +38,13 @@ class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
   Widget get child => Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: 100,
+          height: 80,
           width: double.maxFinite,
           color: Colors.white,
           child: Row(
             children: [
               Container(
-                height: 80,
+                height: 60,
                 width: 300,
                 margin: const EdgeInsets.only(left: 12),
                 padding: const EdgeInsets.all(12),
@@ -52,7 +52,7 @@ class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(width: 1)),
                 child: TextFormField(
-                  controller: controller,
+                  controller: tedController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
@@ -62,9 +62,10 @@ class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
               InkWell(
                 onTap: () {
                   Get.find<ChatController>()
-                      .onSend(controller.text, widget.chatId)
+                      .onSend(tedController.text, widget.chatId)
                       .then((_) {
-                    controller.clear();
+                    tedController.clear();
+                    sController.jumpTo(sController.position.maxScrollExtent);
                   });
                 },
                 child: Container(

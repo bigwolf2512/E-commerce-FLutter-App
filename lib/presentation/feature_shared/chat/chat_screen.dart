@@ -1,6 +1,5 @@
 import 'package:ecommerceshop/helper/navigator_helper.dart';
 import 'package:ecommerceshop/presentation/feature_shared/chat/message_screen.dart';
-import 'package:ecommerceshop/share/widget/widget_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,31 +9,14 @@ import '../../../data/model/chat_model.dart';
 import '../../../data/repo/pref_repo.dart';
 import '../../../helper/load_more_helper.dart';
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+class ChatScreen extends StatefulWidget {
+  const ChatScreen();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(title: 'Chat'),
-      body: Stack(
-        children: const [
-          ChatListWidget(),
-        ],
-      ),
-    );
-  }
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class ChatListWidget extends StatefulWidget {
-  const ChatListWidget({Key? key}) : super(key: key);
-
-  @override
-  State<ChatListWidget> createState() => _ChatListWidgetState();
-}
-
-class _ChatListWidgetState
-    extends LoadMoreStatefulHelper<ChatModel, ChatListWidget> {
+class _ChatScreenState extends LoadMoreHelper<ChatModel, ChatScreen> {
   final PrefRepo repo = Get.find();
   String? id;
 
@@ -47,7 +29,10 @@ class _ChatListWidgetState
   }
 
   @override
-  LoadMoreController<ChatModel> init() {
+  String get title => 'Chat';
+
+  @override
+  LoadMoreController<ChatModel> controller() {
     return LoadMoreController(
       sortFieldValue: id,
       sortFieldName: 'userId',

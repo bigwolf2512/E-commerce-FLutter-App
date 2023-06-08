@@ -21,6 +21,15 @@ class _NotificationScreenState
   final PrefRepo repo = Get.find();
 
   @override
+  double get paddingTop => 8.0;
+
+  @override
+  double get paddingLeft => 12.0;
+
+  @override
+  double get paddingRight => 8.0;
+
+  @override
   Widget get titleWidget => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -37,7 +46,7 @@ class _NotificationScreenState
       );
 
   @override
-  LoadMoreController<NotificationModel> init() {
+  LoadMoreController<NotificationModel> controller() {
     if (repo.getCurrentUser().buyerModel != null) {
       return LoadMoreController(
         sortFieldValue: repo.getCurrentUser().buyerModel?.id,
@@ -58,12 +67,11 @@ class _NotificationScreenState
   Widget itemBuilder(NotificationModel data) {
     return Container(
         padding: const EdgeInsets.all(12),
-        margin: EdgeInsets.only(left: 8),
         width: 0.8.w,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.white,
-            boxShadow: const [BoxShadow(blurRadius: 1)]),
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

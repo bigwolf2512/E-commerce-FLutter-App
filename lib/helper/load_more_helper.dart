@@ -9,9 +9,11 @@ import '../share/widget/widget_loading_indicator.dart';
 
 abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
     extends State<Screen> {
+  final sController = ScrollController();
+
   LoadMoreHelper({Key? key});
 
-  LoadMoreController<T> init();
+  LoadMoreController<T> controller();
 
   Widget itemBuilder(T data);
 
@@ -19,16 +21,14 @@ abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
 
   Widget get child => const SizedBox();
 
-  Widget get titleWidget => const SizedBox();
+  Widget? get titleWidget => null;
 
   Color get backgroundColor => appBackgroundColor;
 
-  void get onRefresh => init().onRefresh();
-
-  double get paddingTop => 8.0;
-  double get paddingBottom => 8.0;
-  double get paddingLeft => 8.0;
-  double get paddingRight => 8.0;
+  double get paddingTop => 0;0
+  double get paddingBottom => 0;
+  double get paddingLeft => 0;
+  double get paddingRight => 0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +36,14 @@ abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
       backgroundColor: this.backgroundColor,
       appBar: CustomAppBar(title: title, titleWidget: titleWidget),
       body: GetBuilder<LoadMoreController<T>>(
-          init: init(),
+          init: controller(),
           builder: (controller) {
             if (controller.isLoading) {
               return OnLoadingIndicator();
             }
-            if (controller.data.isEmpty) {}
+            // if (controller.data.isEmpty) {
+            //   return OnLoadingIndicator();
+            // }
 
             return Stack(
               children: [
@@ -53,6 +55,7 @@ abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
                     right: paddingRight,
                   ),
                   child: ListView.builder(
+                      controller: sController,
                       itemCount: controller.data.length,
                       itemBuilder: (c, i) {
                         return Padding(
@@ -94,6 +97,7 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _data = [];
       _data = await init().getAll();
       if (mounted) setState(() {});
     });
