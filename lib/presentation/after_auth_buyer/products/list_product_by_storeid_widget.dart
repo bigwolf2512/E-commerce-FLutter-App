@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'package:ecommerceshop/share/widget/widget_image_network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,7 +36,6 @@ class _ListProductsByStoreIdWidgetState
 
   @override
   Widget itemBuilder(ProductModel data) {
-    Get.find<ProductController>().getImage(data.images.first.path);
     return InkWell(
       onTap: () {
         Push.noBottomBar(context, ProductDetail(data.id ?? ''));
@@ -46,27 +44,14 @@ class _ListProductsByStoreIdWidgetState
         children: [
           GetBuilder<ProductController>(
             builder: (controller) {
-              return Container(
-                margin: const EdgeInsets.only(left: 15),
-                height: 0.15.h,
-                width: 0.4.w,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors
-                        .primaries[Random().nextInt(Colors.primaries.length)],
-                    image: (data.images.isEmpty)
-                        ? DecorationImage(
-                            colorFilter: ColorFilter.mode(
-                                Colors.grey.withOpacity(0.4), BlendMode.darken),
-                            image: AssetImage(
-                              "assets/images/Image Banner 2.png",
-                            ),
-                            fit: BoxFit.cover)
-                        : DecorationImage(
-                            colorFilter: ColorFilter.mode(
-                                Colors.grey.withOpacity(0.4), BlendMode.darken),
-                            image: NetworkImage(controller.image),
-                            fit: BoxFit.cover)),
+              return Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: CustomNetworkImageWidget(
+                  height: 0.15.h,
+                  width: 0.4.w,
+                  borderRadius: 16,
+                  product: data,
+                ),
               );
             },
           ),

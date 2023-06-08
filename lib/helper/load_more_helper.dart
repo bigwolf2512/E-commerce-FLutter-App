@@ -25,7 +25,7 @@ abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
 
   Color get backgroundColor => appBackgroundColor;
 
-  double get paddingTop => 0;0
+  double get paddingTop => 0.0;
   double get paddingBottom => 0;
   double get paddingLeft => 0;
   double get paddingRight => 0;
@@ -120,23 +120,17 @@ abstract class LoadMoreStatefulHelper<T, Screen extends StatefulWidget>
                     return widgetEmpty;
                   }
 
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListView.builder(
-                          shrinkWrap: false,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: _data.length,
-                          itemBuilder: (c, i) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 8, right: 8, bottom: 8),
-                              child: itemBuilder(_data[i]),
-                            );
-                          }),
-                      SizedBox(height: paddingBottom),
-                    ],
-                  );
+                  return ListView.builder(
+                      shrinkWrap: false,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _data.length,
+                      itemBuilder: (c, i) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8, right: 8, bottom: 8),
+                          child: itemBuilder(_data[i]),
+                        );
+                      });
                 }),
           )
         : Scaffold(

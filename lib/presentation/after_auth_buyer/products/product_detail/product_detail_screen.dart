@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/share/widget/widget_image_network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -43,12 +44,6 @@ class _ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<_ProductDetailScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Get.find<CartController>().initQuantity();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -332,18 +327,11 @@ class _ProductDetailScreenState extends State<_ProductDetailScreen> {
   }
 
   Widget _buildAppBarAndProductImage(BuildContext context) {
-    Get.find<ProductController>().getImage(widget.data.images.first.path);
-
     return GetBuilder<ProductController>(builder: (controller) {
-      return Container(
+      return CustomNetworkImageWidget(
           height: 0.3.h,
           width: double.maxFinite,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(controller.image),
-                fit: BoxFit.cover,
-              ),
-              color: kSecondaryColor),
+          product: widget.data,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
             child: Row(

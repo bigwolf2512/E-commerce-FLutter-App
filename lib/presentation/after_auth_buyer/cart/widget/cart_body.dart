@@ -1,8 +1,8 @@
+import 'package:ecommerceshop/share/widget/widget_image_network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/controller/cart_controller.dart';
-import '../../../../data/controller/product_controller.dart';
 import '../../../../data/model/product_model.dart';
 import '../../../../design/extension/double_extension.dart';
 import '../../../../helper/navigator_helper.dart';
@@ -55,7 +55,6 @@ class _CartScreenBodyState extends State<CartScreenBody> {
   }
 
   Widget _buildCartItemWidget({required ProductModel product}) {
-    Get.find<ProductController>().getImage(product.images.first.path);
     return InkWell(
       onTap: () {
         Push.to(context, ProductDetail(product.id ?? ''));
@@ -71,16 +70,11 @@ class _CartScreenBodyState extends State<CartScreenBody> {
         width: double.maxFinite,
         child: Row(
           children: [
-            Container(
-              height: 0.14.h,
-              width: 0.14.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      image: NetworkImage(Get.find<ProductController>().image),
-                      fit: BoxFit.cover),
-                  color: kSecondaryColor),
-            ),
+            CustomNetworkImageWidget(
+                height: 0.14.h,
+                width: 0.14.h,
+                borderRadius: 20,
+                product: product),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(

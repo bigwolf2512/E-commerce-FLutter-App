@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/data/firebase/firebase_storage_core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'image_model.dart';
@@ -25,4 +26,13 @@ class ProductModel with _$ProductModel {
 
   factory ProductModel.fromJson(Map<String, Object?> json) =>
       _$ProductModelFromJson(json);
+}
+
+extension ProductModelExtension on ProductModel {
+  Future<String> getFirstImage() async {
+    if (images.isEmpty) return '';
+    final path = images.first.path;
+    final firebasePath = await FirebaseStorageCore.getFileUrl(path: path);
+    return firebasePath;
+  }
 }
