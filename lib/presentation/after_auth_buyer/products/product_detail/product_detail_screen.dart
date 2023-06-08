@@ -1,4 +1,5 @@
 import 'package:ecommerceshop/helper/navigator_helper.dart';
+import 'package:ecommerceshop/presentation/after_auth_buyer/products/product_detail/product_detail_comment_screen.dart';
 import 'package:ecommerceshop/presentation/feature_shared/chat/chat_screen.dart';
 import 'package:ecommerceshop/share/widget/widget_image_network.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +10,6 @@ import 'package:get/get.dart';
 import '../../../../data/constant/path_collection.dart';
 import '../../../../data/controller/cart_controller.dart';
 import '../../../../data/controller/load_one_controller.dart';
-import '../../../../data/controller/product_controller.dart';
 import '../../../../data/model/product_model.dart';
 import '../../../../design/extension/double_extension.dart';
 import '../../../../helper/load_one_helper.dart';
@@ -17,35 +17,15 @@ import '../../../../share/constant/constant.dart';
 import '../../../../share/widget/widget_button_flat.dart';
 import 'widget/description_page_view.dart';
 
-class ProductDetail extends LoadOneHelper<ProductModel> {
-  const ProductDetail(this.id, {Key? key}) : super(key: key);
-  final String id;
-
-  @override
-  Widget buildUI(ProductModel data) {
-    return _ProductDetailScreen(data: data);
-  }
-
-  @override
-  ProductModel fromJson(Map<String, dynamic> json) {
-    return ProductModel.fromJson(json);
-  }
-
-  @override
-  LoadOneController<ProductModel> init() {
-    return LoadOneController(pathCollection: kPathCollectionProduct, id: id);
-  }
-}
-
-class _ProductDetailScreen extends StatefulWidget {
-  const _ProductDetailScreen({Key? key, required this.data}) : super(key: key);
+class ProductDetailScreen extends StatefulWidget {
+  const ProductDetailScreen({Key? key, required this.data}) : super(key: key);
   final ProductModel data;
 
   @override
-  State<_ProductDetailScreen> createState() => _ProductDetailScreenState();
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<_ProductDetailScreen> {
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -339,24 +319,30 @@ class _ProductDetailScreenState extends State<_ProductDetailScreen> {
             ),
           ),
           SizedBox(height: 0.01.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(),
-              Container(
-                  height: 0.06.h,
-                  width: 0.2.w,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          bottomLeft: Radius.circular(20)),
-                      color: Colors.blue[100]),
-                  child: Center(
-                    child: Icon(
-                      Icons.chat_bubble_rounded,
-                    ),
-                  )),
-            ],
+          InkWell(
+            onTap: () {
+              Push.to(
+                  context, ProductDetailCommentScreen(product: widget.data));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(),
+                Container(
+                    height: 0.06.h,
+                    width: 0.2.w,
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            bottomLeft: Radius.circular(20)),
+                        color: Colors.blue[100]),
+                    child: Center(
+                      child: Icon(
+                        Icons.chat_bubble_rounded,
+                      ),
+                    )),
+              ],
+            ),
           ),
           SizedBox(height: 0.01.h),
           Container(
@@ -370,51 +356,49 @@ class _ProductDetailScreenState extends State<_ProductDetailScreen> {
   }
 
   Widget _buildAppBarAndProductImage(BuildContext context) {
-    return GetBuilder<ProductController>(builder: (controller) {
-      return CustomNetworkImageWidget(
-          height: 0.3.h,
-          width: double.maxFinite,
-          product: widget.data,
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: ButtonFlat(
-                    itemsNumber: 0,
-                    icon: Icon(CupertinoIcons.back),
-                    padding: 16,
-                    color: Colors.white,
-                  ),
+    return CustomNetworkImageWidget(
+        height: 0.3.h,
+        width: double.maxFinite,
+        product: widget.data,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: ButtonFlat(
+                  itemsNumber: 0,
+                  icon: Icon(CupertinoIcons.back),
+                  padding: 16,
+                  color: Colors.white,
                 ),
-                Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    height: 0.13.w,
-                    width: 0.2.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text.rich(TextSpan(children: const [
-                          TextSpan(
-                              text: '4.5',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: kTextColor)),
-                        ])),
-                        SvgPicture.asset('assets/icons/Star Icon.svg'),
-                      ],
-                    ))
-              ],
-            ),
-          ));
-    });
+              ),
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  height: 0.13.w,
+                  width: 0.2.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text.rich(TextSpan(children: const [
+                        TextSpan(
+                            text: '4.5',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: kTextColor)),
+                      ])),
+                      SvgPicture.asset('assets/icons/Star Icon.svg'),
+                    ],
+                  ))
+            ],
+          ),
+        ));
   }
 }

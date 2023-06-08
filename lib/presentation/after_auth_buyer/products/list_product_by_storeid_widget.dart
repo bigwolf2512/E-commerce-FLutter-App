@@ -1,3 +1,5 @@
+import 'package:ecommerceshop/data/repo/pref_repo.dart';
+import 'package:ecommerceshop/presentation/after_auth_seller/manage_product/manage_product_detail_screen.dart';
 import 'package:ecommerceshop/share/widget/widget_image_network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,6 +27,8 @@ class ListProductsByStoreIdWidget extends StatefulWidget {
 
 class _ListProductsByStoreIdWidgetState
     extends LoadMoreStatefulHelper<ProductModel, ListProductsByStoreIdWidget> {
+  final prefRepo = Get.find<PrefRepo>();
+
   @override
   LoadMoreController<ProductModel> init() {
     return LoadMoreController(
@@ -38,7 +42,9 @@ class _ListProductsByStoreIdWidgetState
   Widget itemBuilder(ProductModel data) {
     return InkWell(
       onTap: () {
-        Push.noBottomBar(context, ProductDetail(data.id ?? ''));
+        prefRepo.isCurrentSeller()
+            ? Push.noBottomBar(context, ManageProductDetailScreen(data: data))
+            : Push.noBottomBar(context, ProductDetailScreen(data: data));
       },
       child: Stack(
         children: [

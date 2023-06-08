@@ -35,7 +35,7 @@ class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
   }
 
   @override
-  Widget get child => Align(
+  Widget get underChild => Align(
         alignment: Alignment.bottomCenter,
         child: Container(
           height: 80,
@@ -46,7 +46,6 @@ class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
               Container(
                 height: 60,
                 width: 300,
-                margin: const EdgeInsets.only(left: 12),
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),

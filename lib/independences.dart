@@ -40,5 +40,6 @@ Future<void> init() async {
       () => ProductController(Get.find(), Get.find(), Get.find())..onInit());
   Get.lazyPut<ChatController>(
       () => ChatController(Get.find(), Get.find(), Get.find()));
-  Get.lazyPut<ManageProductController>(() => ManageProductController());
+  Get.lazyPut<ManageProductController>(
+      () => ManageProductController(Get.find(), Get.find()));
 }

@@ -24,7 +24,7 @@ class _NotificationScreenState
   double get paddingTop => 8.0;
 
   @override
-  double get paddingLeft => 12.0;
+  double get paddingLeft => 8.0;
 
   @override
   double get paddingRight => 8.0;

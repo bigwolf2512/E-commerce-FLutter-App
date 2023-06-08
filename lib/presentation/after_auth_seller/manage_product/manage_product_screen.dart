@@ -27,15 +27,25 @@ class _ManageProductScreenState
 
   @override
   Widget? get titleWidget => Row(
-        children: const [
-          Text(
+        children: [
+          const Text(
             'Manage Product',
             style: TextStyle(color: Colors.black),
           ),
-          Spacer(),
-          Text(
-            'Add Product',
-            style: TextStyle(color: Colors.black),
+          const Spacer(),
+          InkWell(
+            onTap: () {
+              Push.noBottomBar(
+                  context,
+                  ManageProductDetailScreen(
+                    data: ProductModel(),
+                    isAddProduct: true,
+                  ));
+            },
+            child: Text(
+              'Add Product',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ],
       );
@@ -63,7 +73,7 @@ class _ManageProductScreenState
         ),
         margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        height: 0.16.h,
+        height: 0.18.h,
         width: double.maxFinite,
         child: Row(
           children: [
@@ -89,14 +99,13 @@ class _ManageProductScreenState
                         children: [
                           Text(
                             data.name ?? '',
-                            maxLines: 1,
+                            maxLines: 2,
                             style: TextStyle(
                               fontSize: 0.022.h,
                             ),
                           ),
                           SizedBox(height: 0.01.h),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Wrap(
                             children: [
                               Text.rich(
                                 TextSpan(children: [

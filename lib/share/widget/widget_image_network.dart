@@ -41,10 +41,27 @@ class _CustomNetworkImageWidgetState extends State<CustomNetworkImageWidget> {
     return ValueListenableBuilder<String>(
         valueListenable: image,
         builder: (_, data, __) {
-          if (data.isEmpty) {
-            return SizedBox(
+          if (widget.product.images.isEmpty) {
+            return Container(
               height: widget.height ?? 0.3.w,
               width: widget.width ?? 0.3.w,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(defaultImage),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                  color: kSecondaryColor),
+              child: widget.child,
+            );
+          }
+          if (data.isEmpty) {
+            return Container(
+              height: widget.height ?? 0.3.w,
+              width: widget.width ?? 0.3.w,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                  color: kSecondaryColor),
               child: OnLoadingIndicator(),
             );
           }
@@ -53,7 +70,7 @@ class _CustomNetworkImageWidgetState extends State<CustomNetworkImageWidget> {
             width: widget.width ?? 0.3.w,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(data ?? ''),
+                  image: NetworkImage(data),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -63,3 +80,6 @@ class _CustomNetworkImageWidgetState extends State<CustomNetworkImageWidget> {
         });
   }
 }
+
+const defaultImage =
+    'https://img.freepik.com/free-vector/white-product-podium-with-green-tropical-palm-leaves-golden-round-arch-green-wall_87521-3023.jpg?w=1380&t=st=1686233299~exp=1686233899~hmac=d727bc186f7989729e776608195721cd8acaaa82699b0e4dec6ce4e2494934a3';

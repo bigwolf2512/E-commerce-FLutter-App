@@ -19,7 +19,8 @@ abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
 
   String get title => '';
 
-  Widget get child => const SizedBox();
+  Widget get underChild => const SizedBox();
+  Widget get upperChild => const SizedBox();
 
   Widget? get titleWidget => null;
 
@@ -38,15 +39,13 @@ abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
       body: GetBuilder<LoadMoreController<T>>(
           init: controller(),
           builder: (controller) {
-            if (controller.isLoading) {
+            if (controller.isLoading || controller.data.isEmpty) {
               return OnLoadingIndicator();
             }
-            // if (controller.data.isEmpty) {
-            //   return OnLoadingIndicator();
-            // }
 
             return Stack(
               children: [
+                upperChild,
                 Padding(
                   padding: EdgeInsets.only(
                     top: paddingTop,
@@ -60,12 +59,12 @@ abstract class LoadMoreHelper<T, Screen extends StatefulWidget>
                       itemBuilder: (c, i) {
                         return Padding(
                           padding: const EdgeInsets.only(
-                              top: 8, right: 8, bottom: 8),
+                              top: 8, left: 8, right: 8, bottom: 8),
                           child: itemBuilder(controller.data[i]),
                         );
                       }),
                 ),
-                child,
+                underChild,
               ],
             );
           }),

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../../share/constant/constant.dart';
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget({Key? key, required this.title}) : super(key: key);
+  const TitleWidget({Key? key, required this.title, this.showSeeMore = true})
+      : super(key: key);
 
   final String? title;
+  final bool showSeeMore;
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +26,19 @@ class TitleWidget extends StatelessWidget {
               ],
             ),
           ),
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                    text: "See more",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: kBodyTextColor.withOpacity(0.5))),
-              ],
+          Visibility(
+            visible: showSeeMore,
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                      text: "See more",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: kBodyTextColor.withOpacity(0.5))),
+                ],
+              ),
             ),
           ),
         ],

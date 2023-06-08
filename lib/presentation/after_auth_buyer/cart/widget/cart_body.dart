@@ -57,7 +57,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
   Widget _buildCartItemWidget({required ProductModel product}) {
     return InkWell(
       onTap: () {
-        Push.to(context, ProductDetail(product.id ?? ''));
+        Push.to(context, ProductDetailScreen(data: product));
       },
       child: Container(
         decoration: BoxDecoration(
