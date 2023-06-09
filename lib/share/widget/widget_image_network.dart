@@ -5,20 +5,22 @@ import 'package:ecommerceshop/share/widget/widget_loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 class CustomNetworkImageWidget extends StatefulWidget {
-  const CustomNetworkImageWidget(
-      {Key? key,
-      required this.product,
-      this.height,
-      this.width,
-      this.borderRadius = 0,
-      this.child = const SizedBox()})
-      : super(key: key);
+  const CustomNetworkImageWidget({
+    Key? key,
+    required this.product,
+    this.height,
+    this.width,
+    this.borderRadius = 0,
+    this.child = const SizedBox(),
+    this.isList = false,
+  }) : super(key: key);
 
   final ProductModel product;
   final double? height;
   final double? width;
   final Widget child;
   final double borderRadius;
+  final bool isList;
 
   @override
   State<CustomNetworkImageWidget> createState() =>
@@ -26,20 +28,24 @@ class CustomNetworkImageWidget extends StatefulWidget {
 }
 
 class _CustomNetworkImageWidgetState extends State<CustomNetworkImageWidget> {
-  final image = ValueNotifier<String>('');
+  final images = ValueNotifier<List<String>>(<String>[]);
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      image.value = await widget.product.getFirstImage();
+      if (!widget.isList) {
+        images.value = [await widget.product.getFirstImage()];
+      } else {
+        images.value = await widget.product.getImages();
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<String>(
-        valueListenable: image,
+    return ValueListenableBuilder<List<String>>(
+        valueListenable: images,
         builder: (_, data, __) {
           if (widget.product.images.isEmpty) {
             return Container(
@@ -65,18 +71,37 @@ class _CustomNetworkImageWidgetState extends State<CustomNetworkImageWidget> {
               child: OnLoadingIndicator(),
             );
           }
-          return Container(
-            height: widget.height ?? 0.3.w,
-            width: widget.width ?? 0.3.w,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(data),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(widget.borderRadius),
-                color: kSecondaryColor),
-            child: widget.child,
-          );
+          return widget.isList
+              ? Wrap(
+                  children: List.generate(
+                      data.length,
+                      (index) => Container(
+                            margin: const EdgeInsets.only(right: 8),
+                            height: widget.height ?? 0.3.w,
+                            width: widget.width ?? 0.3.w,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(data[index]),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius:
+                                    BorderRadius.circular(widget.borderRadius),
+                                color: kSecondaryColor),
+                            child: widget.child,
+                          )),
+                )
+              : Container(
+                  height: widget.height ?? 0.3.w,
+                  width: widget.width ?? 0.3.w,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(data.first),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(widget.borderRadius),
+                      color: kSecondaryColor),
+                  child: widget.child,
+                );
         });
   }
 }

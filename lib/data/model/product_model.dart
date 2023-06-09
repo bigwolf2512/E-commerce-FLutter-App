@@ -35,4 +35,18 @@ extension ProductModelExtension on ProductModel {
     final firebasePath = await FirebaseStorageCore.getFileUrl(path: path);
     return firebasePath;
   }
+
+  Future<List<String>> getImages() async {
+    if (images.isEmpty) return [];
+
+    final futures = <Future<String>>[];
+
+    for (final item in images) {
+      futures.add(FirebaseStorageCore.getFileUrl(path: item.path));
+    }
+
+    final result = await Future.wait(futures);
+
+    return result;
+  }
 }
