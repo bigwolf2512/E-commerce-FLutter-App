@@ -1,3 +1,5 @@
+import 'package:ecommerceshop/data/repo/product_repo.dart';
+import 'package:ecommerceshop/share/widget/widget_snack_bar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -18,9 +20,11 @@ import '../repo/pref_repo.dart';
 import 'notification_controller.dart';
 
 class CartController extends GetxController {
-  CartController(this.prefRepo, this.buyerRepo, this.orderRepo, this.notiRepo);
+  CartController(this.prefRepo, this.buyerRepo, this.orderRepo, this.notiRepo,
+      this.productRepo);
 
   final PrefRepo prefRepo;
+  final ProductRepo productRepo;
   final BuyerAuthRepo buyerRepo;
   final OrderRepo orderRepo;
   final NotificationRepo notiRepo;
@@ -51,13 +55,23 @@ class CartController extends GetxController {
       final OrderModel order = OrderModel(
         id: orderId,
         seller: item.seller,
-        buyer: _userModel.copyWith(productInCart: []),
+        sellerId: item.sellerId,
+        buyer:
+            prefRepo.getCurrentUser().buyerModel?.copyWith(productInCart: []),
+        buyerId: prefRepo.getCurrentUserId(),
         product: item,
         boughtDate: DateTime.now(),
         receiveExpectDate: DateTime.now(),
       );
 
       future
+        ..add(prefRepo.setCurrentBuyer(
+            prefRepo.getCurrentUser().buyerModel!.copyWith(productInCart: [])))
+        ..add(buyerRepo.update(
+            data: prefRepo
+                .getCurrentUser()
+                .buyerModel!
+                .copyWith(productInCart: []).toJson()))
         ..add(orderRepo.create(order.toJson()))
         ..add(notiRepo.create(NotificationModel(
                 id: Get.find<Uuid>().v1(),
@@ -66,6 +80,15 @@ class CartController extends GetxController {
                 title: 'Đặt hàng thành công',
                 description:
                     'Đơn hàng ${item.name} của ban đang được xác nhận, vui lòng kiểm tra thường xuyên khi có thông báo mới.',
+                sendAt: DateTime.now())
+            .toJson()))
+        ..add(notiRepo.create(NotificationModel(
+                id: Get.find<Uuid>().v1(),
+                buyerId: _userModel.id,
+                sellerId: item.sellerId,
+                title: 'Ban co mot don hang moi!',
+                description:
+                    'Chuc mung. Ban co 1 don hang moi cua khach hang ${prefRepo.getCurrentUser().buyerModel?.name ?? ''}',
                 sendAt: DateTime.now())
             .toJson()));
     }
@@ -77,6 +100,7 @@ class CartController extends GetxController {
           data: _userModel.copyWith(productInCart: []).toJson(),
           id: _userModel.id);
 
+      SnackBarHelper.showSnackBar(context, title: 'Create Order Success');
       notificationController.onInit();
 
       Push.to(context, HomePage());
@@ -89,8 +113,7 @@ class CartController extends GetxController {
   Future<void> initProductsInCart() async {
     _quantity = 1;
     if (_userModel == BuyerModel()) {
-      _userModel = await buyerRepo
-          .getOne(prefRepo.getCurrentUser().buyerModel?.id ?? '');
+      _userModel = prefRepo.getCurrentUser().buyerModel!;
       _productsInCart.clear();
       if ((_userModel.productInCart ?? []).isNotEmpty) {
         _productsInCart.addAll(_userModel.productInCart!);

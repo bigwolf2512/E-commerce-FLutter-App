@@ -26,6 +26,7 @@ mixin _$NotificationModel {
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   bool get seen => throw _privateConstructorUsedError;
+  bool get sendByBuyer => throw _privateConstructorUsedError;
   DateTime? get sendAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $NotificationModelCopyWith<$Res> {
       String? title,
       String? description,
       bool seen,
+      bool sendByBuyer,
       DateTime? sendAt});
 }
 
@@ -69,6 +71,7 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
     Object? title = freezed,
     Object? description = freezed,
     Object? seen = null,
+    Object? sendByBuyer = null,
     Object? sendAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -96,6 +99,10 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
           ? _value.seen
           : seen // ignore: cast_nullable_to_non_nullable
               as bool,
+      sendByBuyer: null == sendByBuyer
+          ? _value.sendByBuyer
+          : sendByBuyer // ignore: cast_nullable_to_non_nullable
+              as bool,
       sendAt: freezed == sendAt
           ? _value.sendAt
           : sendAt // ignore: cast_nullable_to_non_nullable
@@ -119,6 +126,7 @@ abstract class _$$_NotificationModelCopyWith<$Res>
       String? title,
       String? description,
       bool seen,
+      bool sendByBuyer,
       DateTime? sendAt});
 }
 
@@ -139,6 +147,7 @@ class __$$_NotificationModelCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? seen = null,
+    Object? sendByBuyer = null,
     Object? sendAt = freezed,
   }) {
     return _then(_$_NotificationModel(
@@ -166,6 +175,10 @@ class __$$_NotificationModelCopyWithImpl<$Res>
           ? _value.seen
           : seen // ignore: cast_nullable_to_non_nullable
               as bool,
+      sendByBuyer: null == sendByBuyer
+          ? _value.sendByBuyer
+          : sendByBuyer // ignore: cast_nullable_to_non_nullable
+              as bool,
       sendAt: freezed == sendAt
           ? _value.sendAt
           : sendAt // ignore: cast_nullable_to_non_nullable
@@ -184,6 +197,7 @@ class _$_NotificationModel implements _NotificationModel {
       this.title,
       this.description,
       this.seen = false,
+      this.sendByBuyer = false,
       this.sendAt});
 
   factory _$_NotificationModel.fromJson(Map<String, dynamic> json) =>
@@ -203,11 +217,14 @@ class _$_NotificationModel implements _NotificationModel {
   @JsonKey()
   final bool seen;
   @override
+  @JsonKey()
+  final bool sendByBuyer;
+  @override
   final DateTime? sendAt;
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, buyerId: $buyerId, sellerId: $sellerId, title: $title, description: $description, seen: $seen, sendAt: $sendAt)';
+    return 'NotificationModel(id: $id, buyerId: $buyerId, sellerId: $sellerId, title: $title, description: $description, seen: $seen, sendByBuyer: $sendByBuyer, sendAt: $sendAt)';
   }
 
   @override
@@ -223,13 +240,15 @@ class _$_NotificationModel implements _NotificationModel {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.seen, seen) || other.seen == seen) &&
+            (identical(other.sendByBuyer, sendByBuyer) ||
+                other.sendByBuyer == sendByBuyer) &&
             (identical(other.sendAt, sendAt) || other.sendAt == sendAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, buyerId, sellerId, title, description, seen, sendAt);
+  int get hashCode => Object.hash(runtimeType, id, buyerId, sellerId, title,
+      description, seen, sendByBuyer, sendAt);
 
   @JsonKey(ignore: true)
   @override
@@ -254,6 +273,7 @@ abstract class _NotificationModel implements NotificationModel {
       final String? title,
       final String? description,
       final bool seen,
+      final bool sendByBuyer,
       final DateTime? sendAt}) = _$_NotificationModel;
 
   factory _NotificationModel.fromJson(Map<String, dynamic> json) =
@@ -271,6 +291,8 @@ abstract class _NotificationModel implements NotificationModel {
   String? get description;
   @override
   bool get seen;
+  @override
+  bool get sendByBuyer;
   @override
   DateTime? get sendAt;
   @override

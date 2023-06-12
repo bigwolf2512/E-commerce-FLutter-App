@@ -4,7 +4,7 @@ abstract class FirebaseCRUDCoreBase<T> {
   Future<void> update(
       {required Map<String, dynamic> data, String id, String field});
   Future<void> create(Map<String, dynamic> data);
-  Future<void> delete(String id);
+  Future<void> delete({String? id, String? field});
   Future<List<T>> getAll();
   Future<T> getOne(String id);
 }
@@ -24,12 +24,18 @@ abstract class FirebaseCRUDCore<T> extends FirebaseCRUDCoreBase {
   }
 
   @override
-  Future<void> delete(String id) async {
+  Future<void> delete({String? id, String? field}) async {
     final CollectionReference response =
         FirebaseFirestore.instance.collection(pathCollection);
-    DocumentReference documentReference = response.doc(id);
+    var documentReference = response.where(field ?? 'id', isEqualTo: id);
 
-    await documentReference.delete();
+    final result = await documentReference.get();
+
+    final _id = result.docs.first.id;
+
+    DocumentReference doc = response.doc(_id);
+
+    await doc.delete();
   }
 
   @override

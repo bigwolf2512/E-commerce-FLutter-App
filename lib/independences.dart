@@ -1,5 +1,6 @@
 import 'package:ecommerceshop/data/controller/chat_controller.dart';
 import 'package:ecommerceshop/data/controller/manage_product_controller.dart';
+import 'package:ecommerceshop/data/controller/order_controller.dart';
 import 'package:ecommerceshop/data/repo/chat_repo.dart';
 import 'package:ecommerceshop/data/repo/message_repo.dart';
 import 'package:get/get.dart';
@@ -33,7 +34,8 @@ Future<void> init() async {
   Get.lazyPut<AuthController>(() => AuthController(Get.find(), Get.find(),
       sharedPreferences, Get.find(), Get.find(), Get.find()));
   Get.lazyPut<CartController>(() =>
-      CartController(Get.find(), Get.find(), Get.find(), Get.find())..onInit());
+      CartController(Get.find(), Get.find(), Get.find(), Get.find(), Get.find())
+        ..onInit());
   Get.lazyPut<NotificationController>(
       () => NotificationController(Get.find(), Get.find())..onInit());
   Get.lazyPut<ProductController>(
@@ -42,4 +44,5 @@ Future<void> init() async {
       () => ChatController(Get.find(), Get.find(), Get.find()));
   Get.lazyPut<ManageProductController>(
       () => ManageProductController(Get.find(), Get.find()));
+  Get.lazyPut<OrderController>(() => OrderController(Get.find(), Get.find()));
 }

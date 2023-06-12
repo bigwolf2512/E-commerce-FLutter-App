@@ -18,6 +18,8 @@ class OrderModel with _$OrderModel {
     ProductModel? product,
     DateTime? boughtDate,
     DateTime? receiveExpectDate,
+    String? address,
+    int? totalPrice,
   }) = _OrderModel;
 
   factory OrderModel.fromJson(Map<String, Object?> json) =>

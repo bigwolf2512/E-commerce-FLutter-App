@@ -28,6 +28,8 @@ mixin _$OrderModel {
   ProductModel? get product => throw _privateConstructorUsedError;
   DateTime? get boughtDate => throw _privateConstructorUsedError;
   DateTime? get receiveExpectDate => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  int? get totalPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +51,9 @@ abstract class $OrderModelCopyWith<$Res> {
       String? buyerId,
       ProductModel? product,
       DateTime? boughtDate,
-      DateTime? receiveExpectDate});
+      DateTime? receiveExpectDate,
+      String? address,
+      int? totalPrice});
 
   $SellerModelCopyWith<$Res>? get seller;
   $BuyerModelCopyWith<$Res>? get buyer;
@@ -77,6 +81,8 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
     Object? product = freezed,
     Object? boughtDate = freezed,
     Object? receiveExpectDate = freezed,
+    Object? address = freezed,
+    Object? totalPrice = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -111,6 +117,14 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.receiveExpectDate
           : receiveExpectDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalPrice: freezed == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -167,7 +181,9 @@ abstract class _$$_OrderModelCopyWith<$Res>
       String? buyerId,
       ProductModel? product,
       DateTime? boughtDate,
-      DateTime? receiveExpectDate});
+      DateTime? receiveExpectDate,
+      String? address,
+      int? totalPrice});
 
   @override
   $SellerModelCopyWith<$Res>? get seller;
@@ -196,6 +212,8 @@ class __$$_OrderModelCopyWithImpl<$Res>
     Object? product = freezed,
     Object? boughtDate = freezed,
     Object? receiveExpectDate = freezed,
+    Object? address = freezed,
+    Object? totalPrice = freezed,
   }) {
     return _then(_$_OrderModel(
       id: freezed == id
@@ -230,6 +248,14 @@ class __$$_OrderModelCopyWithImpl<$Res>
           ? _value.receiveExpectDate
           : receiveExpectDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalPrice: freezed == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -245,7 +271,9 @@ class _$_OrderModel implements _OrderModel {
       this.buyerId,
       this.product,
       this.boughtDate,
-      this.receiveExpectDate});
+      this.receiveExpectDate,
+      this.address,
+      this.totalPrice});
 
   factory _$_OrderModel.fromJson(Map<String, dynamic> json) =>
       _$$_OrderModelFromJson(json);
@@ -266,10 +294,14 @@ class _$_OrderModel implements _OrderModel {
   final DateTime? boughtDate;
   @override
   final DateTime? receiveExpectDate;
+  @override
+  final String? address;
+  @override
+  final int? totalPrice;
 
   @override
   String toString() {
-    return 'OrderModel(id: $id, seller: $seller, sellerId: $sellerId, buyer: $buyer, buyerId: $buyerId, product: $product, boughtDate: $boughtDate, receiveExpectDate: $receiveExpectDate)';
+    return 'OrderModel(id: $id, seller: $seller, sellerId: $sellerId, buyer: $buyer, buyerId: $buyerId, product: $product, boughtDate: $boughtDate, receiveExpectDate: $receiveExpectDate, address: $address, totalPrice: $totalPrice)';
   }
 
   @override
@@ -287,13 +319,16 @@ class _$_OrderModel implements _OrderModel {
             (identical(other.boughtDate, boughtDate) ||
                 other.boughtDate == boughtDate) &&
             (identical(other.receiveExpectDate, receiveExpectDate) ||
-                other.receiveExpectDate == receiveExpectDate));
+                other.receiveExpectDate == receiveExpectDate) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, seller, sellerId, buyer,
-      buyerId, product, boughtDate, receiveExpectDate);
+      buyerId, product, boughtDate, receiveExpectDate, address, totalPrice);
 
   @JsonKey(ignore: true)
   @override
@@ -318,7 +353,9 @@ abstract class _OrderModel implements OrderModel {
       final String? buyerId,
       final ProductModel? product,
       final DateTime? boughtDate,
-      final DateTime? receiveExpectDate}) = _$_OrderModel;
+      final DateTime? receiveExpectDate,
+      final String? address,
+      final int? totalPrice}) = _$_OrderModel;
 
   factory _OrderModel.fromJson(Map<String, dynamic> json) =
       _$_OrderModel.fromJson;
@@ -339,6 +376,10 @@ abstract class _OrderModel implements OrderModel {
   DateTime? get boughtDate;
   @override
   DateTime? get receiveExpectDate;
+  @override
+  String? get address;
+  @override
+  int? get totalPrice;
   @override
   @JsonKey(ignore: true)
   _$$_OrderModelCopyWith<_$_OrderModel> get copyWith =>

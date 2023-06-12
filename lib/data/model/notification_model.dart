@@ -12,6 +12,7 @@ class NotificationModel with _$NotificationModel {
     String? title,
     String? description,
     @Default(false) bool seen,
+    @Default(false) bool sendByBuyer,
     DateTime? sendAt,
   }) = _NotificationModel;
 

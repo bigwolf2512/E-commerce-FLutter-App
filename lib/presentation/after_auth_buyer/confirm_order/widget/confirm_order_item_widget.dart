@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/share/widget/widget_image_network.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/model/product_model.dart';
@@ -20,15 +21,11 @@ class ConfirmOrderItemWidget extends StatelessWidget {
         color: Colors.white,
         child: Row(
           children: [
-            Container(
+            CustomNetworkImageFromProductWidget(
               height: 0.08.h,
               width: 0.08.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      image: NetworkImage(data.images.first.path ?? ''),
-                      fit: BoxFit.cover),
-                  color: kSecondaryColor),
+              borderRadius: 16,
+              product: data,
             ),
             Expanded(
               child: Container(

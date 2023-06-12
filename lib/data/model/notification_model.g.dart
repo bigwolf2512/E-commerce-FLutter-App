@@ -14,6 +14,7 @@ _$_NotificationModel _$$_NotificationModelFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String?,
       description: json['description'] as String?,
       seen: json['seen'] as bool? ?? false,
+      sendByBuyer: json['sendByBuyer'] as bool? ?? false,
       sendAt: json['sendAt'] == null
           ? null
           : DateTime.parse(json['sendAt'] as String),
@@ -28,5 +29,6 @@ Map<String, dynamic> _$$_NotificationModelToJson(
       'title': instance.title,
       'description': instance.description,
       'seen': instance.seen,
+      'sendByBuyer': instance.sendByBuyer,
       'sendAt': instance.sendAt?.toIso8601String(),
     };

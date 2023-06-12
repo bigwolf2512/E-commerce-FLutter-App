@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ecommerceshop/data/model/buyer_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/path_spref.dart';
@@ -9,6 +10,11 @@ class PrefRepo {
   final SharedPreferences sharedPreferences;
 
   PrefRepo(this.sharedPreferences);
+
+  setCurrentBuyer(BuyerModel buyer) async {
+    await sharedPreferences.setString(
+        kPathPrefUser, jsonEncode(UserModel(buyerModel: buyer)));
+  }
 
   UserModel getCurrentUser() {
     UserModel userModel = UserModel();
