@@ -52,7 +52,7 @@ class _ListProductsByStoreIdWidgetState
             builder: (controller) {
               return Padding(
                 padding: const EdgeInsets.only(left: 12.0),
-                child: CustomNetworkImageWidget(
+                child: CustomNetworkImageFromProductWidget(
                   height: 0.15.h,
                   width: 0.4.w,
                   borderRadius: 16,

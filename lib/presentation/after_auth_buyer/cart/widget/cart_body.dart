@@ -70,7 +70,7 @@ class _CartScreenBodyState extends State<CartScreenBody> {
         width: double.maxFinite,
         child: Row(
           children: [
-            CustomNetworkImageWidget(
+            CustomNetworkImageFromProductWidget(
                 height: 0.14.h,
                 width: 0.14.h,
                 borderRadius: 20,

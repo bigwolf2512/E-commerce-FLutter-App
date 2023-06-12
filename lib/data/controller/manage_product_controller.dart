@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/data/firebase/firebase_storage_core.dart';
 import 'package:ecommerceshop/data/model/image_model.dart';
 import 'package:ecommerceshop/data/model/product_model.dart';
 import 'package:ecommerceshop/data/repo/pref_repo.dart';
@@ -15,40 +16,11 @@ class ManageProductController extends GetxController {
   final ProductRepo productRepo;
   final PrefRepo prefRepo;
 
-  final List<ProductModel> _newProducts = [];
-
   ProductModel addProductModel = ProductModel();
-
-  updateProducts({
-    required int index,
-    String? name,
-    num? totalQuantity,
-    String? description,
-    num? price,
-    String? path,
-  }) {
-    final sellerModel = prefRepo.getCurrentUser().sellerModel;
-    ProductModel productModel = _newProducts[index];
-
-    String _path = 'images/${sellerModel?.storeId}/${productModel.id}';
-    String _imageId = Get.find<Uuid>().v1();
-
-    productModel = productModel.copyWith(
-      name: name ?? productModel.name,
-      totalQuantity: totalQuantity ?? productModel.totalQuantity,
-      price: price ?? productModel.price,
-      description: description ?? description,
-      images: path != null
-          ? [
-              ...productModel.images,
-              ImageModel(
-                  id: _imageId, path: '$_path/$_imageId', localPath: path)
-            ]
-          : [...productModel.images],
-    );
-
-    _newProducts[index] = productModel;
-    update();
+  initData(ProductModel product) {
+    if (product != ProductModel()) {
+      addProductModel = product;
+    }
   }
 
   onChangedData({
@@ -57,26 +29,59 @@ class ManageProductController extends GetxController {
     int? quantity,
     int? totalQuantity,
     int? price,
-  }) {
+    String? imagePath,
+  }) async {
+    final sellerModel = prefRepo.getCurrentUser().sellerModel;
+    var image = ImageModel();
+
     addProductModel = addProductModel.copyWith(
+      id: addProductModel.id ?? Get.find<Uuid>().v1(),
+    );
+
+    if (imagePath != null) {
+      image = image.copyWith(
+        id: Get.find<Uuid>().v1(),
+        path: 'images/${sellerModel?.storeId}/${addProductModel.id}',
+        localPath: imagePath,
+      );
+
+      await FirebaseStorageCore.uploadImagePath(
+        firebaseStoragePath: image.path,
+        localPath: image.localPath,
+      );
+    }
+
+    addProductModel = addProductModel.copyWith(
+      id: addProductModel.id ?? Get.find<Uuid>().v1(),
+      sellerId: addProductModel.sellerId ?? prefRepo.getCurrentUserId(),
+      seller: addProductModel.seller ?? prefRepo.getCurrentUser().sellerModel,
       name: name ?? addProductModel.name,
       description: description ?? addProductModel.description,
       quantity: quantity ?? addProductModel.quantity,
       totalQuantity: totalQuantity ?? addProductModel.totalQuantity,
       price: price ?? addProductModel.price,
+      images: imagePath != null
+          ? [...addProductModel.images, image]
+          : addProductModel.images,
     );
+
+    update();
   }
 
   onAddProduct(BuildContext context) async {
     LoadingIndicator.show(context);
 
-    addProductModel = addProductModel.copyWith(
-      id: Get.find<Uuid>().v1(),
-      sellerId: prefRepo.getCurrentUserId(),
-      seller: prefRepo.getCurrentUser().sellerModel,
-    );
-
     await productRepo.create(addProductModel.toJson()).then((_) {
+      SnackBarHelper.showSnackBar(context);
+      LoadingIndicator.hide(context);
+      Push.to(context, const HomePage());
+    });
+  }
+
+  onUpdateProduct(BuildContext context) async {
+    LoadingIndicator.show(context);
+
+    await productRepo.update(data: addProductModel.toJson()).then((_) {
       SnackBarHelper.showSnackBar(context);
       LoadingIndicator.hide(context);
       Push.to(context, const HomePage());

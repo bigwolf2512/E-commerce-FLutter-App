@@ -40,7 +40,7 @@ class _ProductDetailCommentScreenState
   @override
   Widget get upperChild => Column(
         children: [
-          CustomNetworkImageWidget(
+          CustomNetworkImageFromProductWidget(
             height: 200,
             width: double.infinity,
             product: widget.product,

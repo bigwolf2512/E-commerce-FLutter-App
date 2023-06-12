@@ -5,7 +5,7 @@ import 'package:ecommerceshop/presentation/feature_shared/home/components/title_
 import 'package:ecommerceshop/share/constant/constant.dart';
 import 'package:ecommerceshop/share/widget/widget_appbar.dart';
 import 'package:ecommerceshop/share/widget/widget_custom_text_field.dart';
-import 'package:ecommerceshop/share/widget/widget_image_network.dart';
+import 'package:ecommerceshop/share/widget/widget_image_network_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,7 +29,7 @@ class _ManageProductDetailScreenState extends State<ManageProductDetailScreen> {
         title: widget.isAddProduct ? 'Add Product' : widget.data.name,
       ),
       body: GetBuilder<ManageProductController>(
-        init: Get.find<ManageProductController>(),
+        init: Get.find<ManageProductController>()..initData(widget.data),
         builder: (controller) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -82,15 +82,19 @@ class _ManageProductDetailScreenState extends State<ManageProductDetailScreen> {
                   Row(
                     children: [
                       const SizedBox(width: 16),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0, top: 12),
-                        child: CustomNetworkImageWidget(
-                          height: 0.1.h,
-                          width: 0.1.h,
-                          product: widget.data,
-                          borderRadius: 16,
-                          isList: true,
-                        ),
+                      Wrap(
+                        children: List.generate(
+                            controller.addProductModel.images.length,
+                            (index) => Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: CustomNetworkImageWidget(
+                                    height: 0.1.h,
+                                    width: 0.1.h,
+                                    borderRadius: 16,
+                                    image: controller
+                                        .addProductModel.images[index],
+                                  ),
+                                )),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 12.0),
@@ -99,6 +103,10 @@ class _ManageProductDetailScreenState extends State<ManageProductDetailScreen> {
                             final path =
                                 await DialogHelper.imagePickerSelections(
                                     context);
+
+                            if (path != null) {
+                              controller.onChangedData(imagePath: path);
+                            }
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(16),
@@ -124,7 +132,9 @@ class _ManageProductDetailScreenState extends State<ManageProductDetailScreen> {
                           ? () async {
                               await controller.onAddProduct(context);
                             }
-                          : () {},
+                          : () async {
+                              await controller.onUpdateProduct(context);
+                            },
                       child: Text(
                         widget.isAddProduct ? "Add Product" : "Update Product",
                         style: TextStyle(color: Colors.white),

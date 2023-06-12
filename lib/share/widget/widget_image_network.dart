@@ -4,8 +4,8 @@ import 'package:ecommerceshop/share/constant/constant.dart';
 import 'package:ecommerceshop/share/widget/widget_loading_indicator.dart';
 import 'package:flutter/material.dart';
 
-class CustomNetworkImageWidget extends StatefulWidget {
-  const CustomNetworkImageWidget({
+class CustomNetworkImageFromProductWidget extends StatefulWidget {
+  const CustomNetworkImageFromProductWidget({
     Key? key,
     required this.product,
     this.height,
@@ -25,11 +25,12 @@ class CustomNetworkImageWidget extends StatefulWidget {
   final Function(int)? getIndex;
 
   @override
-  State<CustomNetworkImageWidget> createState() =>
-      _CustomNetworkImageWidgetState();
+  State<CustomNetworkImageFromProductWidget> createState() =>
+      _CustomNetworkImageFromProductWidgetState();
 }
 
-class _CustomNetworkImageWidgetState extends State<CustomNetworkImageWidget> {
+class _CustomNetworkImageFromProductWidgetState
+    extends State<CustomNetworkImageFromProductWidget> {
   final images = ValueNotifier<List<String>>(<String>[]);
 
   @override

@@ -280,7 +280,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomNetworkImageWidget(
+          CustomNetworkImageFromProductWidget(
             height: 0.1.h,
             width: 0.1.h,
             product: widget.data,
@@ -372,7 +372,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   Widget _buildAppBarAndProductImage(BuildContext context) {
-    return CustomNetworkImageWidget(
+    return CustomNetworkImageFromProductWidget(
         height: 0.3.h,
         width: double.maxFinite,
         product: widget.data,
