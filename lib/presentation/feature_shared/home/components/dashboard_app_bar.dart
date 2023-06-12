@@ -31,9 +31,7 @@ class _HomeAppBarWidgetState extends State<HomeAppBarWidget> {
 }
 
 class _BuildBuyerAppBar extends StatelessWidget {
-  const _BuildBuyerAppBar({
-    Key? key,
-  }) : super(key: key);
+  const _BuildBuyerAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +94,7 @@ class _BuildBuyerAppBar extends StatelessWidget {
                       Push.noBottomBar(context, NotificationScreen());
                     },
                     color: kSecondaryColor,
-                    itemsNumber: controller.getTotalNotifications,
+                    itemsNumber: controller.getTotalNotificationsBuyer,
                     padding: 0.025.w,
                     icon: Icon(CupertinoIcons.bell),
                   );
@@ -163,7 +161,7 @@ class _BuildSellerAppBar extends StatelessWidget {
                       Push.noBottomBar(context, NotificationScreen());
                     },
                     color: kSecondaryColor,
-                    itemsNumber: controller.getTotalNotifications,
+                    itemsNumber: controller.getTotalNotificationsSeller,
                     padding: 0.025.w,
                     icon: Icon(CupertinoIcons.bell),
                   );

@@ -31,13 +31,12 @@ import '../repo/product_repo.dart';
 
 class AuthController extends GetxController {
   AuthController(this.sellerRepo, this.buyerRepo, this.sharedPreferences,
-      this.prefRepo, this.productRepo, this.notificationRepo);
+      this.prefRepo, this.productRepo);
 
   final SellerAuthRepo sellerRepo;
   final BuyerAuthRepo buyerRepo;
   final PrefRepo prefRepo;
   final ProductRepo productRepo;
-  final NotificationRepo notificationRepo;
   final SharedPreferences sharedPreferences;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 

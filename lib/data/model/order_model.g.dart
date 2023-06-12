@@ -26,7 +26,9 @@ _$_OrderModel _$$_OrderModelFromJson(Map<String, dynamic> json) =>
       receiveExpectDate: json['receiveExpectDate'] == null
           ? null
           : DateTime.parse(json['receiveExpectDate'] as String),
-      address: json['address'] as String?,
+      nameOrder: json['nameOrder'] as String?,
+      phoneOrder: json['phoneOrder'] as String?,
+      addressOrder: json['addressOrder'] as String?,
       totalPrice: json['totalPrice'] as int?,
     );
 
@@ -40,6 +42,8 @@ Map<String, dynamic> _$$_OrderModelToJson(_$_OrderModel instance) =>
       'product': instance.product?.toJson(),
       'boughtDate': instance.boughtDate?.toIso8601String(),
       'receiveExpectDate': instance.receiveExpectDate?.toIso8601String(),
-      'address': instance.address,
+      'nameOrder': instance.nameOrder,
+      'phoneOrder': instance.phoneOrder,
+      'addressOrder': instance.addressOrder,
       'totalPrice': instance.totalPrice,
     };

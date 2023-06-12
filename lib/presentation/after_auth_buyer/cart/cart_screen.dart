@@ -16,42 +16,40 @@ class CartHomePage extends StatefulWidget {
 class _CartPageState extends State<CartHomePage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[350],
-        appBar: AppBar(
-          shadowColor: Colors.transparent,
-          iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Colors.white,
-          flexibleSpace: GetBuilder<CartController>(builder: (controller) {
-            return Column(
-              children: [
-                Spacer(),
-                Row(
-                  children: [
-                    SizedBox(width: 0.16.w),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Your Cart',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Text('${controller.getTotalProductsInCart} products',
-                            style: Theme.of(context).textTheme.caption)
-                      ],
-                    ),
-                  ],
-                ),
-                Spacer(),
-              ],
-            );
-          }),
-        ),
-        body: CartScreenBody(),
-        bottomNavigationBar: CartScreenBottomBar(),
+    return Scaffold(
+      backgroundColor: Colors.grey[350],
+      appBar: AppBar(
+        shadowColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        flexibleSpace: GetBuilder<CartController>(builder: (controller) {
+          return Column(
+            children: [
+              const Spacer(),
+              Row(
+                children: [
+                  SizedBox(width: 0.16.w),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Your Cart',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Text('${controller.getTotalProductsInCart} products',
+                          style: Theme.of(context).textTheme.caption)
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+            ],
+          );
+        }),
       ),
+      body: CartScreenBody(),
+      bottomNavigationBar: CartScreenBottomBar(),
     );
   }
 }

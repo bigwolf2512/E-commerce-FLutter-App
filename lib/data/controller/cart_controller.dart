@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/data/model/notification_seller_model.dart';
 import 'package:ecommerceshop/data/repo/product_repo.dart';
 import 'package:ecommerceshop/share/widget/widget_snack_bar_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +11,7 @@ import '../../presentation/feature_shared/home/home_screen.dart';
 import '../../share/widget/widget_dialog_helper.dart';
 import '../../share/widget/widget_loading_indicator.dart';
 import '../model/buyer_model.dart';
-import '../model/notification_model.dart';
+import '../model/notification_buyer_model.dart';
 import '../model/order_model.dart';
 import '../model/product_model.dart';
 import '../repo/auth_repo.dart';
@@ -20,14 +21,20 @@ import '../repo/pref_repo.dart';
 import 'notification_controller.dart';
 
 class CartController extends GetxController {
-  CartController(this.prefRepo, this.buyerRepo, this.orderRepo, this.notiRepo,
-      this.productRepo);
+  CartController(
+      this.prefRepo,
+      this.buyerRepo,
+      this.orderRepo,
+      this.notificationBuyerRepo,
+      this.productRepo,
+      this.notificationSellerRepo);
 
   final PrefRepo prefRepo;
   final ProductRepo productRepo;
   final BuyerAuthRepo buyerRepo;
   final OrderRepo orderRepo;
-  final NotificationRepo notiRepo;
+  final NotificationBuyerRepo notificationBuyerRepo;
+  final NotificationSellerRepo notificationSellerRepo;
 
   final NotificationController notificationController = Get.find();
 
@@ -73,24 +80,22 @@ class CartController extends GetxController {
                 .buyerModel!
                 .copyWith(productInCart: []).toJson()))
         ..add(orderRepo.create(order.toJson()))
-        ..add(notiRepo.create(NotificationModel(
-                id: Get.find<Uuid>().v1(),
-                buyerId: _userModel.id,
-                sellerId: item.sellerId,
-                title: 'Đặt hàng thành công',
-                description:
-                    'Đơn hàng ${item.name} của ban đang được xác nhận, vui lòng kiểm tra thường xuyên khi có thông báo mới.',
-                sendAt: DateTime.now())
-            .toJson()))
-        ..add(notiRepo.create(NotificationModel(
-                id: Get.find<Uuid>().v1(),
-                buyerId: _userModel.id,
-                sellerId: item.sellerId,
-                title: 'Ban co mot don hang moi!',
-                description:
-                    'Chuc mung. Ban co 1 don hang moi cua khach hang ${prefRepo.getCurrentUser().buyerModel?.name ?? ''}',
-                sendAt: DateTime.now())
-            .toJson()));
+        ..add(notificationBuyerRepo.create(NotificationBuyerModel(
+          id: Get.find<Uuid>().v1(),
+          userId: _userModel.id,
+          title: 'Đặt hàng thành công',
+          description:
+              'Đơn hàng ${item.name} của ban đang được xác nhận, vui lòng kiểm tra thường xuyên khi có thông báo mới.',
+          sendAt: DateTime.now(),
+        ).toJson()))
+        ..add(notificationSellerRepo.create(NotificationSellerModel(
+          id: Get.find<Uuid>().v1(),
+          userId: item.sellerId,
+          title: 'Ban co mot don hang moi!',
+          description:
+              'Chuc mung. Ban co 1 don hang moi cua khach hang ${prefRepo.getCurrentUser().buyerModel?.name ?? ''}',
+          sendAt: DateTime.now(),
+        ).toJson()));
     }
 
     await Future.wait(future).then((_) async {

@@ -27,17 +27,18 @@ Future<void> init() async {
   Get.lazyPut<PrefRepo>(() => PrefRepo(sharedPreferences));
   Get.lazyPut<ProductRepo>(() => ProductRepo());
   Get.lazyPut<OrderRepo>(() => OrderRepo());
-  Get.lazyPut<NotificationRepo>(() => NotificationRepo());
+  Get.lazyPut<NotificationBuyerRepo>(() => NotificationBuyerRepo());
+  Get.lazyPut<NotificationSellerRepo>(() => NotificationSellerRepo());
   Get.lazyPut<ChatRepo>(() => ChatRepo());
   Get.lazyPut<MessageRepo>(() => MessageRepo());
 
-  Get.lazyPut<AuthController>(() => AuthController(Get.find(), Get.find(),
-      sharedPreferences, Get.find(), Get.find(), Get.find()));
-  Get.lazyPut<CartController>(() =>
-      CartController(Get.find(), Get.find(), Get.find(), Get.find(), Get.find())
-        ..onInit());
-  Get.lazyPut<NotificationController>(
-      () => NotificationController(Get.find(), Get.find())..onInit());
+  Get.lazyPut<AuthController>(() => AuthController(
+      Get.find(), Get.find(), sharedPreferences, Get.find(), Get.find()));
+  Get.lazyPut<CartController>(() => CartController(
+      Get.find(), Get.find(), Get.find(), Get.find(), Get.find(), Get.find())
+    ..onInit());
+  Get.lazyPut<NotificationController>(() =>
+      NotificationController(Get.find(), Get.find(), Get.find())..onInit());
   Get.lazyPut<ProductController>(
       () => ProductController(Get.find(), Get.find(), Get.find())..onInit());
   Get.lazyPut<ChatController>(

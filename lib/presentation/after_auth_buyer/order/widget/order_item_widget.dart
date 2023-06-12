@@ -82,7 +82,7 @@ class OrderItemWidget extends StatelessWidget {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.all(10),
             child: Text(
-              "Status: Delivering to ${data.address ?? ''}",
+              "Status: Delivering to ${data.addressOrder ?? ''}",
               style: TextStyle(fontSize: 15),
             ),
             decoration: BoxDecoration(
@@ -124,7 +124,7 @@ class OrderItemWidget extends StatelessWidget {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
-                                    'Name: ${data.product?.name ?? ''}',
+                                    'Name: ${data.nameOrder ?? ''}',
                                     maxLines: 1,
                                     style: TextStyle(
                                       fontSize: 15,

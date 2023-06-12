@@ -18,7 +18,9 @@ class OrderModel with _$OrderModel {
     ProductModel? product,
     DateTime? boughtDate,
     DateTime? receiveExpectDate,
-    String? address,
+    String? nameOrder,
+    String? phoneOrder,
+    String? addressOrder,
     int? totalPrice,
   }) = _OrderModel;
 

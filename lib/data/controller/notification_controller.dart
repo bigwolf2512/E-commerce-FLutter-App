@@ -1,34 +1,52 @@
+import 'package:ecommerceshop/data/model/notification_buyer_model.dart';
+import 'package:ecommerceshop/data/model/notification_seller_model.dart';
+import 'package:ecommerceshop/data/repo/notification_repo.dart';
 import 'package:get/get.dart';
-
-import '../model/notification_model.dart';
-import '../repo/notification_repo.dart';
 import '../repo/pref_repo.dart';
 
 class NotificationController extends GetxController {
-  NotificationController(this.notificationRepo, this.prefRepo);
+  NotificationController(
+      this.prefRepo, this.notificationBuyerRepo, this.notificationSellerRepo);
 
-  final NotificationRepo notificationRepo;
+  final NotificationBuyerRepo notificationBuyerRepo;
+  final NotificationSellerRepo notificationSellerRepo;
   final PrefRepo prefRepo;
 
-  List<NotificationModel> _notifications = [];
-  List<NotificationModel> get notifications => _notifications;
+  final List<NotificationBuyerModel> _notificationsBuyer = [];
+  final List<NotificationSellerModel> _notificationsSeller = [];
 
-  int get getTotalNotifications {
-    return notifications.length;
+  int get getTotalNotificationsBuyer {
+    return _notificationsBuyer.length;
+  }
+
+  int get getTotalNotificationsSeller {
+    return _notificationsSeller.length;
   }
 
   @override
   void onInit() async {
     super.onInit();
 
-    String id = prefRepo.getCurrentUser().buyerModel?.id ?? '';
+    if (prefRepo.isCurrentSeller()) {
+      _notificationsBuyer.clear();
 
-    _notifications.clear();
-
-    await notificationRepo.getAll(id: id, field: 'buyerId').then((value) {
-      _notifications = value;
+      await notificationSellerRepo
+          .getAll(id: prefRepo.getCurrentUserId(), field: 'userId')
+          .then((value) {
+        _notificationsSeller.addAll(value);
+        update();
+      });
       update();
-    });
-    update();
+    } else {
+      _notificationsSeller.clear();
+
+      await notificationBuyerRepo
+          .getAll(id: prefRepo.getCurrentUserId(), field: 'userId')
+          .then((value) {
+        _notificationsBuyer.addAll(value);
+        update();
+      });
+      update();
+    }
   }
 }

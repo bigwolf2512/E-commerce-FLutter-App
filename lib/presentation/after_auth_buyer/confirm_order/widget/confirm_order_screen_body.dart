@@ -1,3 +1,4 @@
+import 'package:ecommerceshop/share/widget/widget_custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,6 +65,13 @@ class _ConfirmOrderBodyState extends State<ConfirmOrderBody> {
                   ],
                 ),
               ),
+              SizedBox(height: 0.01.h),
+              CustomTextFieldWidget(title: 'Your name'),
+              SizedBox(height: 0.01.h),
+              CustomTextFieldWidget(title: 'Phone number'),
+              SizedBox(height: 0.01.h),
+              CustomTextFieldWidget(title: 'Address'),
+              SizedBox(height: 0.04.h),
               Container(
                 padding: const EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
@@ -89,95 +97,6 @@ class _ConfirmOrderBodyState extends State<ConfirmOrderBody> {
                   },
                 ),
               ),
-              SizedBox(height: 0.01.h),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Your name', style: TextStyle(fontSize: 18)),
-              ),
-              SizedBox(height: 0.01.h),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(29),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  alignment: Alignment.centerLeft,
-                  height: 0.08.h,
-                  width: 0.9.w,
-                  color: Colors.grey.withOpacity(0.3),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text(buyerModel?.name ?? '',
-                              style: TextStyle(fontSize: 18))
-                        ],
-                      ),
-                      Icon(Icons.edit)
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 0.01.h),
-              Align(
-                alignment: Alignment.centerLeft,
-                child:
-                    Text('Your phone number', style: TextStyle(fontSize: 18)),
-              ),
-              SizedBox(height: 0.01.h),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(29),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  alignment: Alignment.centerLeft,
-                  height: 0.08.h,
-                  width: 0.9.w,
-                  color: Colors.grey.withOpacity(0.3),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text(buyerModel?.phoneNumber ?? '',
-                              style: TextStyle(fontSize: 18))
-                        ],
-                      ),
-                      Icon(Icons.edit)
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 0.01.h),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Your address', style: TextStyle(fontSize: 18)),
-              ),
-              SizedBox(height: 0.01.h),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(29),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  alignment: Alignment.centerLeft,
-                  height: 0.08.h,
-                  width: 0.9.w,
-                  color: Colors.grey.withOpacity(0.3),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text(buyerModel?.address ?? '',
-                              style: TextStyle(fontSize: 18))
-                        ],
-                      ),
-                      Icon(Icons.edit)
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 0.15.h)
             ],
           ),
         ),
