@@ -1,5 +1,6 @@
 import 'package:ecommerceshop/helper/navigator_helper.dart';
 import 'package:ecommerceshop/presentation/feature_shared/chat/message_screen.dart';
+import 'package:ecommerceshop/share/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -61,7 +62,8 @@ class _ChatScreenState extends LoadMoreHelper<ChatModel, ChatScreen> {
               margin: EdgeInsets.only(left: 12),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16), color: Colors.blue),
+                  borderRadius: BorderRadius.circular(16),
+                  color: kPrimaryColor),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,

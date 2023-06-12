@@ -3,6 +3,7 @@ import 'package:ecommerceshop/data/controller/chat_controller.dart';
 import 'package:ecommerceshop/data/controller/load_more_controller.dart';
 import 'package:ecommerceshop/data/model/message_model.dart';
 import 'package:ecommerceshop/helper/load_more_helper.dart';
+import 'package:ecommerceshop/share/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -70,7 +71,7 @@ class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
                 child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.blue),
+                        shape: BoxShape.circle, color: kPrimaryColor),
                     child: Text('Send',
                         style: context.textTheme.titleMedium
                             ?.copyWith(color: Colors.white))),
@@ -98,7 +99,7 @@ class _MessageScreenState extends LoadMoreHelper<MessageModel, MessageScreen> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24, vertical: 24),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: kPrimaryColor,
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
