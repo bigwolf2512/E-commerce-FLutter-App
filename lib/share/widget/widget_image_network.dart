@@ -13,6 +13,7 @@ class CustomNetworkImageWidget extends StatefulWidget {
     this.borderRadius = 0,
     this.child = const SizedBox(),
     this.isList = false,
+    this.getIndex,
   }) : super(key: key);
 
   final ProductModel product;
@@ -21,6 +22,7 @@ class CustomNetworkImageWidget extends StatefulWidget {
   final Widget child;
   final double borderRadius;
   final bool isList;
+  final Function(int)? getIndex;
 
   @override
   State<CustomNetworkImageWidget> createState() =>

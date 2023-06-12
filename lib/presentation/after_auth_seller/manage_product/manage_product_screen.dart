@@ -97,12 +97,24 @@ class _ManageProductScreenState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            data.name ?? '',
-                            maxLines: 2,
-                            style: TextStyle(
-                              fontSize: 0.022.h,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text.rich(
+                                TextSpan(children: [
+                                  TextSpan(
+                                    text: data.name ?? '',
+                                    style: TextStyle(
+                                        fontSize: 0.02.h, color: kTextColor),
+                                  ),
+                                  TextSpan(
+                                    text: '${data.price ?? 0}',
+                                    style: TextStyle(
+                                        fontSize: 0.022.h, color: kAccentColor),
+                                  ),
+                                ]),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 0.01.h),
                           Wrap(
@@ -137,7 +149,7 @@ class _ManageProductScreenState
                                         fontSize: 0.02.h, color: kTextColor),
                                   ),
                                   TextSpan(
-                                    text: '12',
+                                    text: '${data.quantity ?? 0}',
                                     style: TextStyle(
                                         fontSize: 0.022.h, color: kAccentColor),
                                   ),
@@ -156,7 +168,7 @@ class _ManageProductScreenState
                                         fontSize: 0.02.h, color: kTextColor),
                                   ),
                                   TextSpan(
-                                    text: '233',
+                                    text: '${data.totalQuantity ?? 0}',
                                     style: TextStyle(
                                         fontSize: 0.022.h, color: kAccentColor),
                                   ),

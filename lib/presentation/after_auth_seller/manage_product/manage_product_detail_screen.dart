@@ -39,22 +39,44 @@ class _ManageProductDetailScreenState extends State<ManageProductDetailScreen> {
                   const SizedBox(height: 8),
                   CustomTextFieldWidget(
                     title: 'Name',
-                    hint: 'Name',
+                    hint: 'Type Your Name',
                     text: widget.data.name,
+                    onChanged: (p0) {
+                      controller.onChangedData(name: p0);
+                    },
                   ),
                   CustomTextFieldWidget(
                     title: 'Description',
-                    hint: 'Description',
+                    hint: 'Type Your Description',
                     text: widget.data.description,
+                    onChanged: (p0) {
+                      controller.onChangedData(description: p0);
+                    },
                   ),
                   CustomTextFieldWidget(
-                      title: 'Quantity sold',
-                      hint: 'Quantity sold',
-                      text: '${widget.data.quantity ?? ''}'),
+                    title: 'Price',
+                    hint: 'Type Your Price',
+                    text: '${widget.data.price ?? ''}',
+                    onChanged: (p0) {
+                      controller.onChangedData(price: int.parse(p0));
+                    },
+                  ),
+                  CustomTextFieldWidget(
+                    shouldShow: !widget.isAddProduct,
+                    title: 'Quantity sold',
+                    hint: 'Type Your Quantity sold',
+                    text: '${widget.data.quantity ?? ''}',
+                    onChanged: (p0) {
+                      controller.onChangedData(quantity: int.parse(p0));
+                    },
+                  ),
                   CustomTextFieldWidget(
                     title: 'Quantity total',
-                    hint: 'Quantity total',
+                    hint: 'Type Your Quantity total',
                     text: '${widget.data.totalQuantity ?? ''}',
+                    onChanged: (p0) {
+                      controller.onChangedData(totalQuantity: int.parse(p0));
+                    },
                   ),
                   TitleWidget(title: 'Images', showSeeMore: false),
                   Row(

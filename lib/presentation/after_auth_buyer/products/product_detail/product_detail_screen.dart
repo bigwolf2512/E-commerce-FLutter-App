@@ -7,12 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../data/constant/path_collection.dart';
 import '../../../../data/controller/cart_controller.dart';
-import '../../../../data/controller/load_one_controller.dart';
 import '../../../../data/model/product_model.dart';
 import '../../../../design/extension/double_extension.dart';
-import '../../../../helper/load_one_helper.dart';
 import '../../../../share/constant/constant.dart';
 import '../../../../share/widget/widget_button_flat.dart';
 import 'widget/description_page_view.dart';
@@ -26,6 +23,16 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  String _image = '';
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.data.images.isNotEmpty) {
+      _image = widget.data.images.first.path ?? '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -273,6 +280,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          CustomNetworkImageWidget(
+            height: 0.1.h,
+            width: 0.1.h,
+            product: widget.data,
+            borderRadius: 16,
+            isList: true,
+            getIndex: (p0) {},
+          ),
+          SizedBox(height: 12),
           Text.rich(TextSpan(children: [
             TextSpan(
                 text: widget.data.name, style: const TextStyle(fontSize: 20)),
@@ -362,41 +378,46 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         product: widget.data,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: ButtonFlat(
-                  itemsNumber: 0,
-                  icon: Icon(CupertinoIcons.back),
-                  padding: 16,
-                  color: Colors.white,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: ButtonFlat(
+                      itemsNumber: 0,
+                      icon: Icon(CupertinoIcons.back),
+                      padding: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      height: 0.13.w,
+                      width: 0.2.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text.rich(TextSpan(children: const [
+                            TextSpan(
+                                text: '4.5',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: kTextColor)),
+                          ])),
+                          SvgPicture.asset('assets/icons/Star Icon.svg'),
+                        ],
+                      ))
+                ],
               ),
-              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  height: 0.13.w,
-                  width: 0.2.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text.rich(TextSpan(children: const [
-                        TextSpan(
-                            text: '4.5',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: kTextColor)),
-                      ])),
-                      SvgPicture.asset('assets/icons/Star Icon.svg'),
-                    ],
-                  ))
+              SizedBox(height: 0.1.h),
             ],
           ),
         ));
