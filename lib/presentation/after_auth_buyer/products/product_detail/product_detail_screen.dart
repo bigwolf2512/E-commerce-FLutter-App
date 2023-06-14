@@ -1,6 +1,5 @@
 import 'package:ecommerceshop/helper/navigator_helper.dart';
 import 'package:ecommerceshop/presentation/after_auth_buyer/products/product_detail/product_detail_comment_screen.dart';
-import 'package:ecommerceshop/presentation/feature_shared/chat/chat_screen.dart';
 import 'package:ecommerceshop/presentation/feature_shared/chat/message_screen.dart';
 import 'package:ecommerceshop/share/widget/widget_image_network.dart';
 import 'package:flutter/cupertino.dart';
@@ -316,7 +315,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           SizedBox(height: 0.01.h),
           InkWell(
-            onTap: () => Push.to(context, MessageScreen(widget.data.sellerId)),
+            onTap: () => Push.to(
+                context,
+                MessageScreen(
+                  chatId: widget.data.chatId,
+                  memberId: widget.data.sellerId,
+                  productId: widget.data.id,
+                )),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

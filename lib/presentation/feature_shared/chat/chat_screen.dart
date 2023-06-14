@@ -1,87 +1,44 @@
-import 'package:ecommerceshop/helper/navigator_helper.dart';
-import 'package:ecommerceshop/presentation/feature_shared/chat/message_screen.dart';
-import 'package:ecommerceshop/share/constant/constant.dart';
+import 'package:ecommerceshop/data/controller/chat_controller.dart';
+import 'package:ecommerceshop/data/model/chat_model.dart';
+import 'package:ecommerceshop/presentation/feature_shared/chat/chat_item_widget.dart';
+import 'package:ecommerceshop/share/widget/widget_appbar.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/constant/path_collection.dart';
-import '../../../data/controller/load_more_controller.dart';
-import '../../../data/model/chat_model.dart';
-import '../../../data/repo/pref_repo.dart';
-import '../../../helper/load_more_helper.dart';
-
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  const ChatScreen({super.key});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends LoadMoreHelper<ChatModel, ChatScreen> {
-  final PrefRepo repo = Get.find();
-  String? id;
+class _ChatScreenState extends State<ChatScreen> {
+  final _scrollController = ScrollController();
 
   @override
-  void initState() {
-    super.initState();
-    final currentUser = repo.getCurrentUser();
-
-    if (currentUser.buyerModel != null) {
-      id = currentUser.buyerModel?.id ?? '';
-    } else {
-      id = currentUser.sellerModel?.id ?? '';
-    }
-  }
-
-  @override
-  String get title => 'Chat';
-
-  @override
-  LoadMoreController<ChatModel> controller() {
-    return LoadMoreController(
-      sortFieldValue: id,
-      sortFieldName: 'userId',
-      pathCollection: kPathCollectionChat,
-      fromJson: ChatModel.fromJson,
-    );
-  }
-
-  @override
-  Widget itemBuilder(ChatModel data) {
-    return InkWell(
-      onTap: () => Push.to(context, MessageScreen(data.chatId)),
-      child: Row(
-        children: [
-          const SizedBox(width: 12),
-          const CircleAvatar(
-            child: Icon(Icons.person),
-          ),
-          Expanded(
-            child: Container(
-              height: 80,
-              margin: EdgeInsets.only(left: 12),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: kPrimaryColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    data.memberId ?? '',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    data.lastMessage ?? '',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  Widget build(BuildContext context) {
+    return GetBuilder<ChatController>(builder: (controller) {
+      return Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: CustomAppBar(title: 'Chat'),
+        body: FirebaseAnimatedList(
+          controller: _scrollController,
+          query: controller.getChatQuery,
+          itemBuilder: (context, snapshot, animation, index) {
+            final result = snapshot.value as Map<Object?, Object?>;
+            Map<String, dynamic> map = {};
+            result.forEach((key, value) {
+              map.putIfAbsent(key.toString(), () => value);
+            });
+            final chat = ChatModel.fromJson(map);
+            return Padding(
+              padding: const EdgeInsets.only(top: 12.0, left: 8.0, right: 8.0),
+              child: ChatWidget(data: chat),
+            );
+          },
+        ),
+      );
+    });
   }
 }

@@ -8,7 +8,7 @@ part of 'message_model.dart';
 
 _$_MessageModel _$$_MessageModelFromJson(Map<String, dynamic> json) =>
     _$_MessageModel(
-      chatId: json['chatId'] as String?,
+      id: json['id'] as String?,
       message: json['message'] as String?,
       sentAt: json['sentAt'] == null
           ? null
@@ -19,15 +19,15 @@ _$_MessageModel _$$_MessageModelFromJson(Map<String, dynamic> json) =>
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
-      isUserMessage: json['isUserMessage'] as bool? ?? false,
+      sendByBuyer: json['sendByBuyer'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_MessageModelToJson(_$_MessageModel instance) =>
     <String, dynamic>{
-      'chatId': instance.chatId,
+      'id': instance.id,
       'message': instance.message,
       'sentAt': instance.sentAt?.toIso8601String(),
       'seenAt': instance.seenAt?.toIso8601String(),
       'createdAt': instance.createdAt?.toIso8601String(),
-      'isUserMessage': instance.isUserMessage,
+      'sendByBuyer': instance.sendByBuyer,
     };

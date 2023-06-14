@@ -1,6 +1,7 @@
 import 'package:ecommerceshop/data/repo/pref_repo.dart';
 import 'package:ecommerceshop/presentation/after_auth_buyer/order/order_screen.dart';
 import 'package:ecommerceshop/presentation/after_auth_seller/manage_product/manage_product_screen.dart';
+import 'package:ecommerceshop/presentation/feature_shared/user_detail/user_detail_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,6 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../share/constant/constant.dart';
 import '../../after_auth_buyer/cart/cart_screen.dart';
-import '../../after_auth_buyer/user_detail/user_detail_screen.dart';
 import 'dashboard_page.dart';
 
 class HomePage extends StatefulWidget {

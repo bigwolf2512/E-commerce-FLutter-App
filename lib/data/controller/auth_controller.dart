@@ -25,13 +25,17 @@ import '../model/product_model.dart';
 import '../model/seller_model.dart';
 import '../model/user_model.dart';
 import '../repo/auth_repo.dart';
-import '../repo/notification_repo.dart';
 import '../repo/pref_repo.dart';
 import '../repo/product_repo.dart';
 
 class AuthController extends GetxController {
-  AuthController(this.sellerRepo, this.buyerRepo, this.sharedPreferences,
-      this.prefRepo, this.productRepo);
+  AuthController(
+    this.sellerRepo,
+    this.buyerRepo,
+    this.sharedPreferences,
+    this.prefRepo,
+    this.productRepo,
+  );
 
   final SellerAuthRepo sellerRepo;
   final BuyerAuthRepo buyerRepo;
@@ -248,6 +252,7 @@ class AuthController extends GetxController {
       );
 
       await sellerRepo.create(sellerModel.toJson()).whenComplete(() {
+        prefRepo.setCurrentSeller(sellerModel);
         LoadingIndicator.hide(context);
         Push.to(context, SignInMerchantScreen());
       });
@@ -261,6 +266,7 @@ class AuthController extends GetxController {
       );
 
       await buyerRepo.create(buyerModel.toJson()).whenComplete(() {
+        prefRepo.setCurrentBuyer(buyerModel);
         LoadingIndicator.hide(context);
         Push.to(context, SignInUserScreen());
       });
@@ -286,11 +292,10 @@ class AuthController extends GetxController {
         storeAddress: storeAddress.text,
       );
 
-      print(sellerModel.toJson().toString());
-
       await sellerRepo
           .update(data: sellerModel.toJson(), id: sellerModel.id)
           .then((_) {
+        prefRepo.setCurrentSeller(sellerModel);
         LoadingIndicator.hide(context);
         Push.to(context, SetupProductPage());
       });

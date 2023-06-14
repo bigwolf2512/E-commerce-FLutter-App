@@ -32,6 +32,7 @@ mixin _$ProductModel {
   SellerModel? get seller => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String? get chatId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +58,8 @@ abstract class $ProductModelCopyWith<$Res> {
       String? sellerId,
       SellerModel? seller,
       DateTime? createdAt,
-      DateTime? updatedAt});
+      DateTime? updatedAt,
+      String? chatId});
 
   $SellerModelCopyWith<$Res>? get seller;
 }
@@ -87,6 +89,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? seller = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? chatId = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -137,6 +140,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      chatId: freezed == chatId
+          ? _value.chatId
+          : chatId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -173,7 +180,8 @@ abstract class _$$_ProductModelCopyWith<$Res>
       String? sellerId,
       SellerModel? seller,
       DateTime? createdAt,
-      DateTime? updatedAt});
+      DateTime? updatedAt,
+      String? chatId});
 
   @override
   $SellerModelCopyWith<$Res>? get seller;
@@ -202,6 +210,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? seller = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? chatId = freezed,
   }) {
     return _then(_$_ProductModel(
       id: freezed == id
@@ -252,6 +261,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      chatId: freezed == chatId
+          ? _value.chatId
+          : chatId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -271,7 +284,8 @@ class _$_ProductModel implements _ProductModel {
       this.sellerId,
       this.seller,
       this.createdAt,
-      this.updatedAt})
+      this.updatedAt,
+      this.chatId})
       : _images = images;
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
@@ -308,10 +322,12 @@ class _$_ProductModel implements _ProductModel {
   final DateTime? createdAt;
   @override
   final DateTime? updatedAt;
+  @override
+  final String? chatId;
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, name: $name, price: $price, description: $description, quantity: $quantity, totalQuantity: $totalQuantity, status: $status, images: $images, sellerId: $sellerId, seller: $seller, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductModel(id: $id, name: $name, price: $price, description: $description, quantity: $quantity, totalQuantity: $totalQuantity, status: $status, images: $images, sellerId: $sellerId, seller: $seller, createdAt: $createdAt, updatedAt: $updatedAt, chatId: $chatId)';
   }
 
   @override
@@ -336,7 +352,8 @@ class _$_ProductModel implements _ProductModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.chatId, chatId) || other.chatId == chatId));
   }
 
   @JsonKey(ignore: true)
@@ -354,7 +371,8 @@ class _$_ProductModel implements _ProductModel {
       sellerId,
       seller,
       createdAt,
-      updatedAt);
+      updatedAt,
+      chatId);
 
   @JsonKey(ignore: true)
   @override
@@ -383,7 +401,8 @@ abstract class _ProductModel implements ProductModel {
       final String? sellerId,
       final SellerModel? seller,
       final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$_ProductModel;
+      final DateTime? updatedAt,
+      final String? chatId}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$_ProductModel.fromJson;
@@ -412,6 +431,8 @@ abstract class _ProductModel implements ProductModel {
   DateTime? get createdAt;
   @override
   DateTime? get updatedAt;
+  @override
+  String? get chatId;
   @override
   @JsonKey(ignore: true)
   _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>

@@ -22,6 +22,7 @@ class ProductModel with _$ProductModel {
     SellerModel? seller,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? chatId,
   }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, Object?> json) =>

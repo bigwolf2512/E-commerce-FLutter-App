@@ -1,8 +1,8 @@
+import 'package:ecommerceshop/presentation/feature_shared/user_detail/user_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../design/extension/double_extension.dart';
 import '../../../../helper/navigator_helper.dart';
-import '../../../after_auth_buyer/user_detail/user_detail_screen.dart';
 
 class ManageOrderAppBar extends StatelessWidget {
   const ManageOrderAppBar({Key? key}) : super(key: key);

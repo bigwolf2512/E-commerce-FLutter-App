@@ -20,12 +20,12 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MessageModel {
-  String? get chatId => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
   DateTime? get sentAt => throw _privateConstructorUsedError;
   DateTime? get seenAt => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  bool get isUserMessage => throw _privateConstructorUsedError;
+  bool get sendByBuyer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,12 +40,12 @@ abstract class $MessageModelCopyWith<$Res> {
       _$MessageModelCopyWithImpl<$Res, MessageModel>;
   @useResult
   $Res call(
-      {String? chatId,
+      {String? id,
       String? message,
       DateTime? sentAt,
       DateTime? seenAt,
       DateTime? createdAt,
-      bool isUserMessage});
+      bool sendByBuyer});
 }
 
 /// @nodoc
@@ -61,17 +61,17 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chatId = freezed,
+    Object? id = freezed,
     Object? message = freezed,
     Object? sentAt = freezed,
     Object? seenAt = freezed,
     Object? createdAt = freezed,
-    Object? isUserMessage = null,
+    Object? sendByBuyer = null,
   }) {
     return _then(_value.copyWith(
-      chatId: freezed == chatId
-          ? _value.chatId
-          : chatId // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
       message: freezed == message
           ? _value.message
@@ -89,9 +89,9 @@ class _$MessageModelCopyWithImpl<$Res, $Val extends MessageModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      isUserMessage: null == isUserMessage
-          ? _value.isUserMessage
-          : isUserMessage // ignore: cast_nullable_to_non_nullable
+      sendByBuyer: null == sendByBuyer
+          ? _value.sendByBuyer
+          : sendByBuyer // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -106,12 +106,12 @@ abstract class _$$_MessageModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? chatId,
+      {String? id,
       String? message,
       DateTime? sentAt,
       DateTime? seenAt,
       DateTime? createdAt,
-      bool isUserMessage});
+      bool sendByBuyer});
 }
 
 /// @nodoc
@@ -125,17 +125,17 @@ class __$$_MessageModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chatId = freezed,
+    Object? id = freezed,
     Object? message = freezed,
     Object? sentAt = freezed,
     Object? seenAt = freezed,
     Object? createdAt = freezed,
-    Object? isUserMessage = null,
+    Object? sendByBuyer = null,
   }) {
     return _then(_$_MessageModel(
-      chatId: freezed == chatId
-          ? _value.chatId
-          : chatId // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
       message: freezed == message
           ? _value.message
@@ -153,9 +153,9 @@ class __$$_MessageModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      isUserMessage: null == isUserMessage
-          ? _value.isUserMessage
-          : isUserMessage // ignore: cast_nullable_to_non_nullable
+      sendByBuyer: null == sendByBuyer
+          ? _value.sendByBuyer
+          : sendByBuyer // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -165,18 +165,18 @@ class __$$_MessageModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MessageModel implements _MessageModel {
   const _$_MessageModel(
-      {this.chatId,
+      {this.id,
       this.message,
       this.sentAt,
       this.seenAt,
       this.createdAt,
-      this.isUserMessage = false});
+      this.sendByBuyer = false});
 
   factory _$_MessageModel.fromJson(Map<String, dynamic> json) =>
       _$$_MessageModelFromJson(json);
 
   @override
-  final String? chatId;
+  final String? id;
   @override
   final String? message;
   @override
@@ -187,11 +187,11 @@ class _$_MessageModel implements _MessageModel {
   final DateTime? createdAt;
   @override
   @JsonKey()
-  final bool isUserMessage;
+  final bool sendByBuyer;
 
   @override
   String toString() {
-    return 'MessageModel(chatId: $chatId, message: $message, sentAt: $sentAt, seenAt: $seenAt, createdAt: $createdAt, isUserMessage: $isUserMessage)';
+    return 'MessageModel(id: $id, message: $message, sentAt: $sentAt, seenAt: $seenAt, createdAt: $createdAt, sendByBuyer: $sendByBuyer)';
   }
 
   @override
@@ -199,20 +199,20 @@ class _$_MessageModel implements _MessageModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageModel &&
-            (identical(other.chatId, chatId) || other.chatId == chatId) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.sentAt, sentAt) || other.sentAt == sentAt) &&
             (identical(other.seenAt, seenAt) || other.seenAt == seenAt) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.isUserMessage, isUserMessage) ||
-                other.isUserMessage == isUserMessage));
+            (identical(other.sendByBuyer, sendByBuyer) ||
+                other.sendByBuyer == sendByBuyer));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, chatId, message, sentAt, seenAt, createdAt, isUserMessage);
+      runtimeType, id, message, sentAt, seenAt, createdAt, sendByBuyer);
 
   @JsonKey(ignore: true)
   @override
@@ -230,18 +230,18 @@ class _$_MessageModel implements _MessageModel {
 
 abstract class _MessageModel implements MessageModel {
   const factory _MessageModel(
-      {final String? chatId,
+      {final String? id,
       final String? message,
       final DateTime? sentAt,
       final DateTime? seenAt,
       final DateTime? createdAt,
-      final bool isUserMessage}) = _$_MessageModel;
+      final bool sendByBuyer}) = _$_MessageModel;
 
   factory _MessageModel.fromJson(Map<String, dynamic> json) =
       _$_MessageModel.fromJson;
 
   @override
-  String? get chatId;
+  String? get id;
   @override
   String? get message;
   @override
@@ -251,7 +251,7 @@ abstract class _MessageModel implements MessageModel {
   @override
   DateTime? get createdAt;
   @override
-  bool get isUserMessage;
+  bool get sendByBuyer;
   @override
   @JsonKey(ignore: true)
   _$$_MessageModelCopyWith<_$_MessageModel> get copyWith =>
