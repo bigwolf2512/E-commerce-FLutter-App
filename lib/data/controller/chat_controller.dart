@@ -30,13 +30,8 @@ class ChatController extends GetxController {
 
   int get chatTotal => 0;
 
-  Query get getMessageQuery => _messagesRef;
+  Query getMessageQuery(String path) => _messagesRef.child(path);
   Query get getChatQuery => _chatsRef;
-
-  @override
-  void onInit() async {
-    super.onInit();
-  }
 
   Future<void> onSend({
     required String message,
@@ -59,24 +54,26 @@ class ChatController extends GetxController {
             data: productGetOne.copyWith(chatId: _chatId).toJson());
       }
 
-      if (_chatId == _chatIdGenerate) {
+      for (var element in chats.children) {
+        if ((element.value as Map<Object?, Object?>)['chatId'] == _chatId) {}
+      }
+
+      try {
+        final result = chats.children.firstWhere((element) =>
+            (element.value as Map<Object?, Object?>)['chatId'] == _chatId);
+        await _chatsRef.child(result.key.toString()).update(ChatModel(
+              memberId: memberId,
+              userId: prefRepo.getCurrentUserId(),
+              chatId: chatId,
+              lastMessage: message,
+            ).toJson());
+      } catch (e) {
         await _chatsRef.push().set(ChatModel(
               memberId: memberId,
               userId: prefRepo.getCurrentUserId(),
               chatId: _chatId,
               lastMessage: message,
             ).toJson());
-      } else {
-        for (var element in chats.children) {
-          if ((element.value as Map<Object?, Object?>)['chatId'] == _chatId) {
-            await _chatsRef.child(element.key.toString()).update(ChatModel(
-                  memberId: memberId,
-                  userId: prefRepo.getCurrentUserId(),
-                  chatId: chatId,
-                  lastMessage: message,
-                ).toJson());
-          }
-        }
       }
 
       await _messagesRef.child(_chatId).push().set(
@@ -91,17 +88,23 @@ class ChatController extends GetxController {
       return;
     }
 
-    for (var element in chats.children) {
-      if ((element.value as Map<Object?, Object?>)['chatId'] == chatId) {
-        await _chatsRef.child(element.key.toString()).update(ChatModel(
-              memberId: memberId,
-              userId: prefRepo.getCurrentUserId(),
-              chatId: chatId,
-              lastMessage: message,
-            ).toJson());
-      }
+    try {
+      final result = chats.children.firstWhere((element) =>
+          (element.value as Map<Object?, Object?>)['chatId'] == chatId);
+      await _chatsRef.child(result.key.toString()).update(ChatModel(
+            memberId: memberId,
+            userId: prefRepo.getCurrentUserId(),
+            chatId: chatId,
+            lastMessage: message,
+          ).toJson());
+    } catch (e) {
+      await _chatsRef.push().set(ChatModel(
+            memberId: memberId,
+            userId: prefRepo.getCurrentUserId(),
+            chatId: chatId,
+            lastMessage: message,
+          ).toJson());
     }
-
     await _messagesRef.child(chatId!).push().set(
           MessageModel(
             id: Get.find<Uuid>().v1(),

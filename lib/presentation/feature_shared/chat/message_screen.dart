@@ -3,6 +3,7 @@ import 'package:ecommerceshop/data/model/message_model.dart';
 import 'package:ecommerceshop/presentation/feature_shared/chat/message_item_widget.dart';
 import 'package:ecommerceshop/share/constant/constant.dart';
 import 'package:ecommerceshop/share/widget/widget_appbar.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,19 +33,9 @@ class _MessageScreenState extends State<MessageScreen> {
           children: [
             FirebaseAnimatedList(
               controller: _scrollController,
-              query: controller.getMessageQuery,
+              query: controller.getMessageQuery(widget.chatId ?? ''),
               itemBuilder: (context, snapshot, animation, index) {
-                final result = snapshot.value as Map<Object?, Object?>;
-                Map<String, dynamic> map = {};
-                result.forEach((key, value) {
-                  map.putIfAbsent(key.toString(), () => value);
-                });
-                final message = MessageModel.fromJson(map);
-                return Padding(
-                  padding:
-                      const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                  child: MessageWidget(data: message),
-                );
+                return _buildMessageWidget(snapshot);
               },
             ),
             Align(
@@ -71,20 +62,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     ),
                     const SizedBox(width: 20),
                     InkWell(
-                      onTap: () {
-                        Get.find<ChatController>()
-                            .onSend(
-                          message: _tedController.text,
-                          chatId: widget.chatId,
-                          memberId: widget.memberId,
-                          productId: widget.productId,
-                        )
-                            .then((_) {
-                          _tedController.clear();
-                          _scrollController.jumpTo(
-                              _scrollController.position.maxScrollExtent);
-                        });
-                      },
+                      onTap: () => _handleOnSend(),
                       child: Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
@@ -101,5 +79,32 @@ class _MessageScreenState extends State<MessageScreen> {
         ),
       );
     });
+  }
+
+  void _handleOnSend() {
+    Get.find<ChatController>()
+        .onSend(
+      message: _tedController.text,
+      chatId: widget.chatId,
+      memberId: widget.memberId,
+      productId: widget.productId,
+    )
+        .then((_) {
+      _tedController.clear();
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    });
+  }
+
+  Widget _buildMessageWidget(DataSnapshot snapshot) {
+    final result = snapshot.value as Map<Object?, Object?>;
+    Map<String, dynamic> map = {};
+    result.forEach((key, value) {
+      map.putIfAbsent(key.toString(), () => value);
+    });
+    final message = MessageModel.fromJson(map);
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+      child: MessageWidget(data: message),
+    );
   }
 }
